@@ -68,17 +68,19 @@ ASTERISK_FILE_VERSION(__FILE__, "$Revision$")
  * 	"Options:"
 	"  r(...): rx cutoff (dBi, float, default: -35)\n"
 	"  t(...): tx power (dBi, float, default: -28)\n"
-	"  v(...): modem version (default: V23):\n"
+	"  v(...): modem version (default: V22bis):\n"
 	"            V21        - 300/300 baud\n"
 	"            V23        - 1200/75 baud\n"
 	"            Bell103    - 300/300 baud\n"
 	"            V22        - 1200/1200 baud\n"
 	"            V22bis     - 2400/2400 baud\n"
-	"  l or m: least or most significant bit first (default: m)\n"
+	"  l or m: least or most significant bit first (default: l)\n"
 	"  d(...): amount of data bits (5-8, default: 8)\n"
 	"  s(...): amount of stop bits (1-2, default: 1)\n"
 	"  u:      Send ULM header to Telnet server (Btx)\n"
-	"  n:      Send NULL-Byte to modem after carrier detection (Btx)\n" **/
+	"  n:      Send NULL-Byte to modem after carrier detection (Btx)\n" 
+	"  c:      This is the calling modem (default)\n" 
+	"  a:      This is the answering modem\n" **/
 
 static const char app[] = "Softmodem";
 
@@ -92,6 +94,8 @@ enum {
 	OPT_STOPBITS =       (1 << 6),
 	OPT_ULM_HEADER =     (1 << 7),
 	OPT_NULL =           (1 << 8),
+	OPT_CALLER =         (1 << 9),
+	OPT_ANSWERER =       (1 << 10)
 };
 
 enum {
@@ -115,6 +119,8 @@ AST_APP_OPTIONS(additional_options, BEGIN_OPTIONS
 	AST_APP_OPTION_ARG('s', OPT_STOPBITS, OPT_ARG_STOPBITS),
 	AST_APP_OPTION('u', OPT_ULM_HEADER),
 	AST_APP_OPTION('n', OPT_NULL),
+	AST_APP_OPTION('c', OPT_CALLER),
+	AST_APP_OPTION('a', OPT_ANSWERER),
 END_OPTIONS );
 
 
@@ -140,6 +146,7 @@ typedef struct {
 	int stopbits;
 	int ulmheader;
 	int sendnull;
+	int caller;
 	volatile int finished;
 } modem_session;
 
@@ -170,11 +177,22 @@ static void modem_put_bit(void *user_data, int bit) {
 	
 	// modem recognised us and starts responding through sending it's pilot signal
 	if (rx->state->answertone<=0) {
-		if (bit==SIG_STATUS_CARRIER_UP) {
+		if (bit==SIG_STATUS_CARRIER_UP) { 
+			ast_debug(1, "Carrier up, setting answertone = 0\n");
 			rx->state->answertone=0;
 		}
-		else if (bit==1 && rx->state->answertone==0) {
-			rx->state->answertone=1;
+		if (rx->session->version == VERSION_V22 || rx->session->version == VERSION_V22BIS) {
+			if (bit==SIG_STATUS_TRAINING_SUCCEEDED && rx->state->answertone==0) {
+				ast_debug(1, "V22 training succeeded, setting answertone = 1\n");
+				rx->state->answertone=1;
+				if (rx->session->caller) send(rx->sock, "CONNECTED\r\n", 11, 0);
+			}
+		} else {
+			if (bit==1 && rx->state->answertone==0) {
+				ast_debug(1, "Non-V22 started to receive data, setting answertone = 1\n");
+				rx->state->answertone=1;
+				if (rx->session->caller) send(rx->sock, "CONNECTED\r\n", 11, 0);
+			}
 		}
 	}
 	else {
@@ -232,6 +250,9 @@ static void modem_put_bit(void *user_data, int bit) {
 				}
 			}
 		}
+		else {
+			ast_debug(1, "Received a non 1 or 0 bit: %d\n", bit);
+		}
 	}
 	
 	
@@ -285,7 +306,6 @@ static int modem_get_bit(void *user_data) {
 				return 1;
 			}
 			if ( tx->state->answertone>0 ) {
-// 				ast_log(LOG_WARNING,"Got TE's tone, will send null-byte.\n");
 				
 				if (tx->session->sendnull) { // send null byte
 					for (i=0; i<(databits+stopbits); i++) {
@@ -502,22 +522,42 @@ static int softmodem_communicate(modem_session *s) {
 	
 	// initialise spandsp-stuff, give it our callback-functions
 	if (s->version==VERSION_V21) {
-		modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_V21CH2], modem_get_bit, &txdata);
-		modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_V21CH1], TRUE, modem_put_bit, &rxdata);
+		ast_debug(1, "Initializing V21\n");
+		if (s->caller) {
+			modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_V21CH2], modem_get_bit, &txdata);
+			modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_V21CH1], TRUE, modem_put_bit, &rxdata);
+		} else {
+			modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_V21CH1], modem_get_bit, &txdata);
+			modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_V21CH2], TRUE, modem_put_bit, &rxdata);
+		}
 	}
 	else if (s->version==VERSION_V23) {
-		modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_V23CH1], modem_get_bit, &txdata);
-		modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_V23CH2], TRUE, modem_put_bit, &rxdata);
+		ast_debug(1, "Initializing V23\n");
+		if (s->caller) {
+			modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_V23CH2], modem_get_bit, &txdata);
+			modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_V23CH1], TRUE, modem_put_bit, &rxdata);
+		} else {
+			modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_V23CH1], modem_get_bit, &txdata);
+			modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_V23CH2], TRUE, modem_put_bit, &rxdata);
+		}	
 	}
 	else if (s->version==VERSION_BELL103) {
-		modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_BELL103CH1], modem_get_bit, &txdata);
-		modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_BELL103CH2], TRUE, modem_put_bit, &rxdata);
+		ast_debug(1, "Initializing Bell103\n");
+		if (s->caller) {
+			modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_BELL103CH2], modem_get_bit, &txdata);
+			modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_BELL103CH1], FALSE, modem_put_bit, &rxdata);
+		} else {
+			modem_tx = fsk_tx_init(NULL, &preset_fsk_specs[FSK_BELL103CH1], modem_get_bit, &txdata);
+			modem_rx = fsk_rx_init(NULL, &preset_fsk_specs[FSK_BELL103CH2], FALSE, modem_put_bit, &rxdata);
+		}
 	}
 	else if (s->version==VERSION_V22) {
-		v22_modem = v22bis_init(NULL, 1200, 0, FALSE, modem_get_bit, &txdata, modem_put_bit, &rxdata);
+		ast_debug(1, "Initializing V22\n");
+		v22_modem = v22bis_init(NULL, 1200, 0, s->caller, modem_get_bit, &txdata, modem_put_bit, &rxdata);
 	}
 	else if (s->version==VERSION_V22BIS) {
-		v22_modem = v22bis_init(NULL, 2400, 0, FALSE, modem_get_bit, &txdata, modem_put_bit, &rxdata);
+		ast_debug(1, "Initializing V22bis\n");
+		v22_modem = v22bis_init(NULL, 2400, 0, s->caller, modem_get_bit, &txdata, modem_put_bit, &rxdata);
 	}
 	else {
 		ast_log(LOG_ERROR,"Unsupported modem type. Sorry.\n");
@@ -630,12 +670,13 @@ static int softmodem_exec(struct ast_channel *chan, const char *data) {
 	session.finished=0;
 	session.rxcutoff=-35.0f;
 	session.txpower=-28.0f;
-	session.version=VERSION_V23;
-	session.lsb=0;
+	session.version=VERSION_V22BIS;
+	session.lsb=1;
 	session.databits=8;
 	session.stopbits=1;
 	session.ulmheader=0;
 	session.sendnull=0;
+	session.caller=1;
 	
 	parse=ast_strdupa(data);
 	AST_STANDARD_APP_ARGS(args,parse);
@@ -670,6 +711,7 @@ static int softmodem_exec(struct ast_channel *chan, const char *data) {
 		
 		if (ast_test_flag(&options, OPT_MODEM_VERSION)) {
 			if (!ast_strlen_zero(option_args[OPT_ARG_MODEM_VERSION])) {
+				ast_debug(1, "Modem version from args is %s\n", option_args[OPT_ARG_MODEM_VERSION]);
 				if (strcmp(option_args[OPT_ARG_MODEM_VERSION],"V21")==0)
 					session.version=VERSION_V21;
 				else if (strcmp(option_args[OPT_ARG_MODEM_VERSION],"V23")==0)
@@ -718,6 +760,14 @@ static int softmodem_exec(struct ast_channel *chan, const char *data) {
 		if (ast_test_flag(&options, OPT_NULL)) {
 			session.sendnull = 1;
 		}
+		if (ast_test_flag(&options, OPT_ANSWERER)) {
+			if (ast_test_flag(&options, OPT_CALLER)) {
+				ast_log(LOG_ERROR, "Please only set c or a flag, not both.\n");
+				return -1;
+			}
+			session.caller = 0;
+		}
+		
 	}
 	
 	res=softmodem_communicate(&session);

@@ -15,7 +15,7 @@
 	app_softmodem.c depends on the spandsp library
 	(http://www.soft-switch.org/).
 	
-	It is tested and working with Asterisk 13t.
+	It is tested and working with Asterisk 13.
 	
 	To compile put app_softmodem.c in the apps/ dir of your Asterisk source.
 	Compile with 'make apps'.
@@ -32,19 +32,19 @@
 	exten => btx,n,Softmodem(host, port, options)
 	exten => btx,n,Hangup()
 	
-	Without any arguments the application acts as a V.23 modem and connects to a
+	Without any arguments the application acts as a V.22bis modem and connects to a
 	Telnet server (port 23) on localhost.
 	
 	Options are:
 		r(...): rx cutoff (dBi, float, default: -35)
 		t(...): tx power (dBi, float, default: -28)
-		v(...): modem version (default: V23):
+		v(...): modem version (default: V22bis):
 				V21        - 300/300 baud
 				V23        - 1200/75 baud
 				Bell103    - 300/300 baud
 				V22        - 1200/1200 baud
 				V22bis     - 2400/2400 baud
-		l or m: least or most significant bit first (default: m)
+		l or m: least or most significant bit first (default: l)
 		d(...): amount of data bits (5-8, default: 8)
 		s(...): amount of stop bits (1-2, default: 1)
 		u:      Send Ulm Relay Protocol header to Telnet server
@@ -98,6 +98,9 @@
 -------------------------------------------------------------------------------
 
 	Christian Groeger <code@proquari.at>
+
+	Modified by Bill Simon <bill@simonics.com> for USA-based defaults and
+	options to be the calling or receiving modem
 	
 	Based on code by:
 	Dmitry Andrianov <asterisk@dima.spb.ru>
