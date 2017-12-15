@@ -36,6 +36,8 @@
 	Telnet server (port 23) on localhost.
 	
 	Options are:
+	        c: This is the calling modem (default).
+		a: This is the answering modem.
 		r(...): rx cutoff (dBi, float, default: -35)
 		t(...): tx power (dBi, float, default: -28)
 		v(...): modem version (default: V22bis):
