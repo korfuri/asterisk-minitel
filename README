@@ -4,9 +4,12 @@
 
 	This Asterisk application provides a softmodem for Asterisk. It supports
 	the FSK standards V.23, V.21 and Bell 103, but also V.22 and V.22bis.
-	Byte-size, number of stopbits and bitordering is configurable.
-	A TCP connection comparable to a Telnet session is established to the
+	Byte-size, number of stopbits and bitordering are configurable.
+	
+	Two ways are possible to connect to the backend code:
+	- A TCP connection comparable to a Telnet session is established to the
 	host specified.
+	- An executable is forked on the pbx, and communicates via STDIN/STDOUT.
 
 
  Dependencies and Installation
@@ -28,9 +31,15 @@
  Dialplan
 -------------------------------------------------------------------------------
 
-	exten => btx,1,Answer()
-	exten => btx,n,Softmodem(host, port, options)
-	exten => btx,n,Hangup()
+	Application 'Softmodem' with TCP backend
+		exten => btx,1,Answer()
+		exten => btx,n,Softmodem(host, port, options)
+		exten => btx,n,Hangup()
+
+	Application 'SoftmodemExec' with forked binary backend
+		exten => btx,1,Answer()
+		exten => btx,n,Softmodem(executable, options)
+		exten => btx,n,Hangup()
 
 	Without any arguments the application acts as a V.23 modem and connects to a
 	Telnet server (port 23) on localhost.
@@ -39,27 +48,34 @@
 		r(...): rx cutoff (dBi, float, default: -35)
 		t(...): tx power (dBi, float, default: -28)
 		v(...): modem version (default: V23):
-				V21        - 300/300 baud
-				V23        - 1200/75 baud
-				Bell103    - 300/300 baud
-				V22        - 1200/1200 baud
-				V22bis     - 2400/2400 baud
+		   	V21        - 300/300 baud
+    			V23        - 1200/75 baud
+			Bell103    - 300/300 baud
+			V22        - 1200/1200 baud
+			V22bis     - 2400/2400 baud
 		l or m: least or most significant bit first (default: m)
 		d(...): amount of data bits (5-8, default: 8)
 		s(...): amount of stop bits (1-2, default: 1)
-		e or o: add even or odd parity bit
-		u:      Send Ulm Relay Protocol header to Telnet server
-		n:      Send NULL-Byte to modem after carrier detection (Btx specific)
+		e or o: add even or odd parity bit (default, none)
+		u:      Send ULM header to TCP socket server (Btx, default: false)
+		g:      Send generic headers to application (TCP socket or executable, default: false)
+		n:      Send NULL-Byte to modem after carrier detection (Btx, default: false)
 
-	To act as a "Btx Vermittlungsstelle" (German videotex system) using V.23, 8 data bits, 1 stop bit and sending a NULL byte upon carrier detection and connecting to a "twistedUlm" server on port 8289 (thus sending the ULM header):
+	To act as a "Btx Vermittlungsstelle" (German videotex system) using V.23, 8 data
+	bits, 1 stop bit and sending a NULL byte upon carrier detection and connecting to
+	a "twistedUlm" server on port 8289 (thus sending the ULM header):
 
 	exten => 190,1,Softmodem(localhost, 8289, v(V23)ld(8)s(1)un)
 
-	To accept calls fom UK Prestel terminals, using V.23, 7 data bits, Even parity, 1 stop bit -
+	To accept calls from UK Prestel terminals, using V.23, 7 data bits, Even parity,
+	1 stop bit:
 
-	exten => 618,n,Softmodem(localhost, 6502, v(V23),ld(7)es(1)t(-8))
+	exten => 618,n,Softmodem(localhost, 6502, v(V23)ld(7)es(1)t(-8))
 
+	To accept calls from Minitel terminals, using V.23, 7 data bits, Even parity, 1
+	stop bit, and Executable backend:
 
+	exten => 3611,n,SoftmodemExec("/srv/minitel/annuaire.php", v(V23)ld(7)es(1)t(-8)g)
 
 	The modem seems to work fine with VOIP as long as you use a codec like G.711
 	(alaw/ulaw). Please deactivate any echo cancellation you might use.
@@ -72,10 +88,13 @@
 	After the softmodem picks up the line a TCP connection to the specified host
 	and port is established, the call is dropped when this wasn't successfull.
 
-	When the "n" option is specified a NULL byte is send to the caller upon the detection of a carrier signal from the caller. The Btx system in Germany did this to request the caller's identification.
+	When the "n" option is specified a NULL byte is send to the caller upon the
+	detection of a carrier signal from the caller. The Btx system in Germany did
+	this to request the caller's identification.
 
 	With the "u" option specified a header is send to the TCP server at this
-	point. The header consists of some "name: value" pairs, separated by a CR+LF newline, terminated	by a double newline.
+	point. The header consists of some "name: value" pairs, separated by a CR+LF
+	newline, terminated by a double newline.
 
 	At the moment this header looks like (for V.23):
 		Version: 1
@@ -84,7 +103,7 @@
 	Speeds are in bytes-per-second and may be used by the server to estimate
 	the length of the transmission.
 
-	After the header all data received from the terminal is put onto the socket
+	After the header, all data received from the terminal is put onto the socket
 	and all data received from the socket is put on the line.
 
 	The line is hung up when the server drops the connection, just as the
@@ -96,9 +115,9 @@
 	to the terminal and provides the characteristic BTX look-and-feel.
 
 	You may also be interested in:
-		http://runningserver.com/?page=runningserver.content.thelab.bildschirmtrix
+	  http://runningserver.com/?page=runningserver.content.thelab.bildschirmtrix
 	And you find a description of BTX MarkupLanguage here:
-		http://runningserver.com/?page=runningserver.content.thelab.mikropad
+	  http://runningserver.com/?page=runningserver.content.thelab.mikropad
 
 
  Authors
@@ -109,7 +128,6 @@
 	Based on code by:
 	Dmitry Andrianov <asterisk@dima.spb.ru>
 	Steve Underwood <steveu@coppice.org>
-
 
 
 
