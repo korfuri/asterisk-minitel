@@ -8,6 +8,7 @@
       let pkgs = nixpkgs.legacyPackages.${system};
       in rec {
         devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [ sox twinkle ];
           shellHook = ''
 buildserver() {
   nixos-rebuild --flake .#server build-vm
