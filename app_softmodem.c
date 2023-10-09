@@ -101,7 +101,7 @@ enum {
 	OPT_ULM_HEADER =     (1 << 7),
 	OPT_NULL =           (1 << 8),
 	OPT_CALLER =         (1 << 9),
-	OPT_ANSWERER =       (1 << 10)
+	OPT_ANSWERER =       (1 << 10),
 	OPT_EVEN_PARITY =    (1 << 11),
 	OPT_ODD_PARITY =     (1 << 12)
 };
