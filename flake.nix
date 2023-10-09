@@ -9,9 +9,11 @@
       in rec {
         devShells.default = pkgs.mkShell {
           shellHook = ''
-runserver() {
+buildserver() {
   nixos-rebuild --flake .#server build-vm
-  env QEMU_NET_OPTS="hostfwd=tcp::2222-:22" ./result/bin/run-server-vm &
+}
+runserver() {
+  env QEMU_NET_OPTS="hostfwd=tcp::2222-:22,hostfwd=tcp::5060-:5060,hostfwd=tcp::5061-:5061,hostfwd=udp::5060-:5060,hostfwd=udp::5061-:5061" ./result/bin/run-server-vm &
 }
 sshserver() {
   ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -i ./server-ssh -p 2222 root@localhost

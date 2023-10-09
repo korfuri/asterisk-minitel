@@ -12,13 +12,25 @@
   services.asterisk = {
     enable = true;
     package = self.packages."x86_64-linux".asterisk-softmodem;
+    confFiles = {
+      "users.conf" = (builtins.readFile ./server/users.conf);
+      "extensions.conf" = (builtins.readFile ./server/extensions.conf);
+      "sip.conf" = (builtins.readFile ./server/sip.conf);
+      "pjsip.conf" = (builtins.readFile ./server/pjsip.conf);      
+    };
+    useTheseDefaultConfFiles = [
+      
+    ];
   };
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "without-password";
   };
-  users.users.root.openssh.authorizedKeys.keys = [
-    (builtins.readFile ./server-ssh.pub)
-  ];
+  users.users.root = {
+    initialPassword = "server";
+    openssh.authorizedKeys.keys = [
+      (builtins.readFile ./server-ssh.pub)
+    ];
+  };
   system.stateVersion = "23.11";
 }
