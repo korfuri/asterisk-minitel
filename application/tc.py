@@ -47,6 +47,8 @@ tCursorOff = abytes(chr(20))
 tBlinkOn = abytes(chr(72))
 tBlinkOff = abytes(chr(73))
 tBell = abytes(chr(7))
+tKeyboardLower = b'\x1b\x3a\x69\x45'
+tKeyboardUpper = b'\x1b\x3a\x6a\x45'
 
 # Colors
 clBlack = 0
@@ -95,6 +97,8 @@ class InputField:
 
     def handleChar(self, c):
         """Handles a key event from the user."""
+        if c == b'\n' or c == b'\r':
+            return tBell
         if len(self.contents) + len(c) >= self.maxlength:
             return tBell
         self.contents = self.contents + c.decode('ascii')
@@ -114,6 +118,7 @@ class MinitelTerminal:
         self.socket = socket
         self.inputFields = []
         self.resetKeyHandlers()
+        self.HandleCharacter = self.handleCharacterToTextInput
 
     #  ##############################################
     #  Connectioon management
@@ -150,7 +155,21 @@ class MinitelTerminal:
         logging.debug("read< %s", repr(r))
         return r
 
+    def _consume(self, length):
+        """Read exactly this much data from the underlying socket.
+
+        Unlinke _read, this will retry until enough bytes have been
+        received.
+        """
+        data = bytes(0)
+        while length > 0:
+            r = self._read(length)
+            data = data + r
+            length = length - len(r)
+        return data
+
     def read_ulm_header(self):
+
         """Read the ULM header and consume the kConnexionfin event."""
         # ignore the actual contents of the ULM header, they're irrelevant
         # we could take the transmission speed into consideration, but
@@ -199,15 +218,17 @@ class MinitelTerminal:
             self._write(tMoveCursor + tLine(l) + tCol(c))
 
     def clear(self):
-        """Clears the screen."""
+        """Clears the screen and resets terminal state."""
         self.pos(0, 1)
-        self._write(b'\x24\x12\x20\x0c')
+        self._write(b'\x24\x12\x20\x0c')  # 0c is clearscreen, TODO: what's the rest of this magic?
+        self._write(tKeyboardUpper)
 
     def reset(self):
         """Resets all terminal state."""
         self.resetInputFields()
         self.resetKeyHandlers()
         self.clear()
+        self.HandleCharacter = self.handleCharacterToTextInput
 
     #  ##############################################
     #  Input field management
@@ -223,6 +244,7 @@ class MinitelTerminal:
 
         Parameters are passed direclty to the InputField class.
         The new input field becomes the active input field.
+
         """
         i = InputField(*args, **kwargs)
         self.inputFields.append(i)
@@ -251,27 +273,40 @@ class MinitelTerminal:
             kSuite: self.nextInputField,
         }
 
-    def handleInputs(self):
+    def handleCharacterToTextInput(self, c):
+        """Receive a character as input and dispatch it to the active
+        input field.
+
+        This is intended to be used as a receiver for self.HandleCharacter.
+        """
+        if self.activeInputField:
+            r = self.activeInputField.handleChar(c)
+            self._write(r)
+
+    def handleInputsUntilBreak(self):
         while True:
+            if self.handleNextInput() is Break:
+                return
+
+    def handleNextInput(self):
+        c = self._read(1)
+        if c == b'\x13':  # This is a minitel key
+            logging.debug("Minitel key pressed")
             c = self._read(1)
-            if c == b'\x13':  # This is a minitel key
-                logging.debug("Minitel key pressed")
-                c = self._read(1)
-                if c in self.keyHandlers:
-                    if self.keyHandlers[c] == Break:
-                        return
-                    else:
-                        self.keyHandlers[c]()
+            if c in self.keyHandlers:
+                if self.keyHandlers[c] == Break:
+                    return Break
                 else:
-                    logging.debug("No handler for key %s", c)
-            elif c == b'\x1b':  # Protocol acknowledgements
-                self.handleAcknowledgement()
+                    self.keyHandlers[c]()
             else:
-                if self.activeInputField:
-                    r = self.activeInputField.handleChar(c)
-                    self._write(r)
+                logging.debug("No handler for key %s", c)
+        elif c == b'\x1b':  # Protocol acknowledgements
+            self.handleAcknowledgement()
+        else:
+            self.HandleCharacter(c)
 
     def handleAcknowledgement(self):
+
         """Called after a \x1B byte, indicating protocol control events.
 
         This function consumes the (variable length) message. Perhaps
@@ -284,21 +319,21 @@ class MinitelTerminal:
         """
         c = self._read(1)
         if c == b'\x23':
-            self._read(2)  # Masquage/demasquage ecran
+            self._consume(2)  # Masquage/demasquage ecran
         elif c == b'\x25':
-            pass           # Mode transparent ecran
+            pass              # Mode transparent ecran
         elif c == b'\x2f':
-            self._read(1)  # Fin mode precedent
+            self._consume(1)  # Fin mode precedent
         elif c == b'\x61':
-            pass           # Demande position du curseur
+            pass              # Demande position du curseur
         elif c == b'\x01':
-            self._read(1)  # Commande d'un peripherique
+            self._consume(1)  # Commande d'un peripherique
         elif c == b'\x39':
-            self._read(1)  # PRO1
+            self._consume(1)  # PRO1
         elif c == b'\x3a':
-            self._read(2)  # PRO2
+            self._consume(2)  # PRO2
         elif c == b'\x3b':
-            self._read(3)  # PRO3
+            self._consume(3)  # PRO3
         else:
             log.error("Unknown protocol command %s, flushing read buffer", c)
             self._read(1000)
