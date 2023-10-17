@@ -13,9 +13,7 @@
     enable = true;
     package = self.packages."x86_64-linux".asterisk-softmodem;
     confFiles = {
-      "users.conf" = (builtins.readFile ./server/users.conf);
       "extensions.conf" = (builtins.readFile ./server/extensions.conf);
-      "sip.conf" = (builtins.readFile ./server/sip.conf);
       "pjsip.conf" = (builtins.readFile ./server/pjsip.conf);      
     };
     useTheseDefaultConfFiles = [
