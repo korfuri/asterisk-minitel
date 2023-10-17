@@ -62,8 +62,8 @@ clWhite = 7
 
 # Minitel key codes
 kEnvoi = b'\x41'         # A
-kRepetition = b'\x42'    # B
-kRetour = b'\x43'        # C
+kRetour = b'\x42'        # B
+kRepetition = b'\x43'    # C
 kGuide = b'\x44'         # D
 kAnnulation = b'\x45'    # E
 kSommaire = b'\x46'      # F
@@ -93,7 +93,11 @@ class InputField:
         self.color = color
 
     def display(self):
-        return tMoveCursor + tLine(self.line) + tCol(self.col) + abytes(self.contents)
+        return (tMoveCursor + tLine(self.line) + tCol(self.col) +
+                (abytes('.') * self.maxlength) +
+                tMoveCursor + tLine(self.line) + tCol(self.col) +
+                abytes(self.contents)
+                )
 
     def handleChar(self, c):
         """Handles a key event from the user."""
@@ -103,6 +107,14 @@ class InputField:
             return tBell
         self.contents = self.contents + c.decode('ascii')
         return c
+
+    def correct(self):
+        self.contents = self.contents[:-1]
+        return self.display()
+
+    def erase(self):
+        self.contents = ""
+        return self.display()
 
 
 class MinitelTerminal:
@@ -119,9 +131,10 @@ class MinitelTerminal:
         self.inputFields = []
         self.resetKeyHandlers()
         self.HandleCharacter = self.handleCharacterToTextInput
+        self._lastControlKey = None
 
     #  ##############################################
-    #  Connectioon management
+    #  Connection management
     #  ##############################################
 
     def _write(self, data):
@@ -180,7 +193,12 @@ class MinitelTerminal:
         data = bytes(0)
         while True:
             data = data + self._read(200)  # Read enough bytes to eat anything pending
-            if b'\x13S' in data:
+
+            # \x13S is a Modem Connect event, which is sent
+            # automatically as the user pressed CxFin.
+            # If for any reason this isn't received successfully, the
+            # user can press Sommaire and send \x13F to proceed.
+            if b'\x13S' in data or b'\x13F':
                 break
 
     def print(self, text):
@@ -220,7 +238,9 @@ class MinitelTerminal:
     def clear(self):
         """Clears the screen and resets terminal state."""
         self.pos(0, 1)
-        self._write(b'\x24\x12\x20\x0c')  # 0c is clearscreen, TODO: what's the rest of this magic?
+        self._write(b'\x24\x12\x20') # What are these?
+        self._write(b'\x0c') # Clear screen
+        self._write(b'\x1f\x40\x41\x18\x0a') # Clear home row
         self._write(tKeyboardUpper)
 
     def reset(self):
@@ -263,6 +283,16 @@ class MinitelTerminal:
         self.activeInputField = self.inputFields[(i + 1) % len(self.inputFields)]
         self._write(self.activeInputField.display())
 
+    def correctInputField(self):
+        if self.activeInputField is None:
+            return
+        self._write(self.activeInputField.correct())
+
+    def eraseInputField(self):
+        if self.activeInputField is None:
+            return
+        self._write(self.activeInputField.erase())
+
     #  ##############################################
     #  Key event handler management and input dispatch
     #  ##############################################
@@ -271,6 +301,12 @@ class MinitelTerminal:
         self.keyHandlers = {
             kConnexionfin: self.disconnect,
             kSuite: self.nextInputField,
+            kCorrection: self.correctInputField,
+            kAnnulation: self.eraseInputField,
+            kSommaire: Break,
+            kGuide: Break,
+            kRepetition: Break,
+            kRetour: Break,
         }
 
     def handleCharacterToTextInput(self, c):
@@ -291,19 +327,23 @@ class MinitelTerminal:
     def handleNextInput(self):
         c = self._read(1)
         if c == b'\x13':  # This is a minitel key
-            logging.debug("Minitel key pressed")
             c = self._read(1)
             if c in self.keyHandlers:
-                if self.keyHandlers[c] == Break:
+                self._lastControlKey = c
+                if self.keyHandlers[c] is Break:
                     return Break
                 else:
-                    self.keyHandlers[c]()
+                    if self.keyHandlers[c]() is Break:
+                        return Break
             else:
                 logging.debug("No handler for key %s", c)
         elif c == b'\x1b':  # Protocol acknowledgements
             self.handleAcknowledgement()
         else:
             self.HandleCharacter(c)
+
+    def lastControlKey(self):
+        return self._lastControlKey
 
     def handleAcknowledgement(self):
 

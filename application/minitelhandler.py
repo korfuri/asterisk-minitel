@@ -6,6 +6,7 @@ from apps import appForCode
 # Dummy imports to register application handlers
 import apps_annuaire
 import apps_forking
+import apps_elections
 
 class MinitelHandler(socketserver.BaseRequestHandler):
     def handle(self):

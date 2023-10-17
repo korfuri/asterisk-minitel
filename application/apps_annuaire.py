@@ -1,13 +1,23 @@
 import logging
 import tc
-from apps import BaseApp, register
+from apps import BaseApp, register, appForCode
 
 @register("annu", ["annuaire", "3611"])
 class AnnuaireApp(BaseApp):
     def interact(self):
-        self.m.sendfile("assets/3611.vtx")
+        self.m.sendfile("assets/3611.vdt")
         quoi = self.m.addInputField(5, 13, 28, "Une pomme", tc.clWhite)
         ou = self.m.addInputField(10, 13, 28, "Un verger", tc.clWhite)
-        self.m.keyHandlers[tc.kEnvoi] = tc.Break
+
+        def do_search():
+            logging.debug("Searching for %s in %s", quoi.contents, ou.contents)
+            return tc.Break
+        self.m.keyHandlers[tc.kEnvoi] = do_search
+
+        def do_sommaire():
+            self.nextApp = appForCode("index")
+            return tc.Break
+        self.m.keyHandlers[tc.kSommaire] = do_sommaire
+        self.m.keyHandlers[tc.kGuide] = do_sommaire
+
         self.m.handleInputsUntilBreak()
-        logging.debug("Searching for %s in %s", quoi.contents, ou.contents)

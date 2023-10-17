@@ -11,6 +11,10 @@ class BaseApp(object):
 
     def begin(self):
         self.m.reset()
+        def repeat():
+            self.nextApp = type(self)
+            return tc.Break
+        self.m.keyHandlers[tc.kRepetition] = repeat
 
 class ForkingApp(BaseApp):
     def spawn(self, cmd):
@@ -80,12 +84,8 @@ def appForCode(code):
 class Index3615App(BaseApp):
     def interact(self):
         global apps_directory
-        # self.m.sendfile("res/index3615.vtx")
-        self.m.pos(1, 1)
-        self.m.print("Code: .....................\r\n")
-        for a in apps_directory:
-            self.m.print("> %s\r\n" % a)
-        code = self.m.addInputField(1, 7, 12, "", tc.clWhite)
+        self.m.sendfile("assets/3615.vdt")
+        code = self.m.addInputField(4, 9, 12, "", tc.clWhite)
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()
         logging.debug("Code: %s", code.contents)
