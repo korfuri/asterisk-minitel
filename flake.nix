@@ -9,10 +9,13 @@
       in rec {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
+            cowsay
+            lolcat
             sox
             twinkle
-            python
+            python3
             bash
+            nethack
           ];
           shellHook = ''
 buildserver() {
