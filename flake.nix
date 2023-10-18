@@ -40,7 +40,7 @@ PS1="(asterisk-minitel)"$PS1
             pkgs.spandsp
           ];
           postPatch = o.postPatch + ''
-cp ${./app_softmodem.c} ./apps/app_softmodem.c
+cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
 '';
           enableParallelBuilding = true;
         });
