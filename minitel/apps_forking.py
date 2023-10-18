@@ -6,17 +6,23 @@ from apps import ForkingApp, register
 class NethackApp(ForkingApp):
     def interact(self):
         self.m._write(tKeyboardLower)
-        self.spawn(["nethack"])
+        self.spawn("nethack")
 
 
 @register("demo", ["cacademo", "caca"])
 class DemokApp(ForkingApp):
     def interact(self):
-        self.spawn(["cacademo"])
+        self.spawn("cacademo")
 
 
 @register("env")
 class EnvApp(ForkingApp):
     def interact(self):
-        self.spawn(["env"])
+        self.spawn("env")
         self.m.handleInputsUntilBreak()
+
+
+@register("clock")
+class ClockApp(ForkingApp):
+    def interact(self):
+        self.spawn("watch -n 1 date")

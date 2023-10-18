@@ -173,7 +173,10 @@ class MinitelTerminal:
             # automatically as the user pressed CxFin.  If for any
             # reason this isn't received successfully, the user can
             # press Sommaire instead.
-            if (SEP + kConnexionfin) in data or (SEP + kSommaire) in data:
+            logging.debug("Expecting: %s or %s", (SEP+kModemConnect), (SEP + kSommaire))
+            logging.debug("data is: %s", data)
+            if (SEP + kModemConnect) in data or (SEP + kSommaire) in data:
+                logging.debug("breaking successfully")
                 break
         self.query_capabilities()
 
