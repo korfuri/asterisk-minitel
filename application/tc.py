@@ -1,11 +1,16 @@
+from constants import *
 import logging
 
+
 class ConnectionError(Exception):
+    """Generic exception type for connection errors. Subclass me."""
     pass
+
 
 class ConnectionInterruptedError(ConnectionError):
     """Connection was interrupted, and reading/writing is impossible."""
     pass
+
 
 class NotAllDataSentError(ConnectionError):
     """Not all data was successfully sent to the socket.
@@ -17,16 +22,20 @@ class NotAllDataSentError(ConnectionError):
     """
     pass
 
+
 class UserDisconnected(ConnectionError):
     """User requested to disconnect, terminating the session."""
     pass
 
+
 class ProtocolError(ConnectionError):
     """We couldn't make sense of a message we received."""
+
 
 def abytes(str):
     """Handy shortcut to convert an ascrii string to bytes."""
     return bytes(str, encoding='ascii')
+
 
 class Break:
     """A symbol for `stop handling input`.
@@ -37,47 +46,6 @@ class Break:
     dispatch or processing.
     """
     pass
-
-# Termcaps
-tHome = abytes(chr(30))
-tMoveCursor = abytes(chr(31))
-tLine = lambda l: abytes(chr(64+l))
-tCol = lambda c: abytes(chr(64+c))
-tBgColor = lambda c: abytes(chr(80+c))
-tFgColor = lambda c: abytes(chr(64+c))
-tCursorOn = abytes(chr(17))
-tCursorOff = abytes(chr(20))
-tBlinkOn = abytes(chr(72))
-tBlinkOff = abytes(chr(73))
-tBell = abytes(chr(7))
-tKeyboardLower = b'\x1b\x3a\x69\x45'
-tKeyboardUpper = b'\x1b\x3a\x6a\x45'
-tPRO1 = b'\x1b\x39'
-tPRO2 = b'\x1b\x3a'
-tPRO3 = b'\x1b\x3b'
-tENQROM = b'\x7b'
-
-# Colors
-clBlack = 0
-clRed = 1
-clGreen = 2
-clYellow = 3
-clBlue = 4
-clMagenta = 5
-clCyan = 6
-clWhite = 7
-
-# Minitel key codes
-kEnvoi = b'\x41'         # A
-kRetour = b'\x42'        # B
-kRepetition = b'\x43'    # C
-kGuide = b'\x44'         # D
-kAnnulation = b'\x45'    # E
-kSommaire = b'\x46'      # F
-kCorrection = b'\x47'    # G
-kSuite = b'\x48'         # H
-kConnexionfin = b'\x49'  # I
-kModemConnect = b'\x53'  # S
 
 
 class InputField:
@@ -200,11 +168,11 @@ class MinitelTerminal:
         # we could take the transmission speed into consideration, but
         # it's so laughably slow in all scenarios that we just don't
         # care
-        # typical = b'Version: 1\r\nTXspeed: 133.33\r\nRXspeed: 8.33\r\n\r\n\x13'
-        # len(typical) == 47
+        # ex = b'Version: 1\r\nTXspeed: 133.33\r\nRXspeed: 8.33\r\n\r\n\x13'
+        # len(ex) == 47
         data = bytes(0)
         while True:
-            data = data + self._read(200)  # Read enough bytes to eat anything pending
+            data = data + self._read(200)
 
             # \x13S is a Modem Connect event, which is sent
             # automatically as the user pressed CxFin.
@@ -260,9 +228,9 @@ class MinitelTerminal:
     def clear(self):
         """Clears the screen and resets terminal state."""
         self.pos(0, 1)
-        self._write(b'\x24\x12\x20') # What are these?
-        self._write(b'\x0c') # Clear screen
-        self._write(b'\x1f\x40\x41\x18\x0a') # Clear home row
+        self._write(b'\x24\x12\x20')          # What are these?
+        self._write(b'\x0c')                  # Clear screen
+        self._write(b'\x1f\x40\x41\x18\x0a')  # Clear home row
         self._write(tKeyboardUpper)
 
     def reset(self):
@@ -302,7 +270,8 @@ class MinitelTerminal:
         if self.activeInputField is None:
             return
         i = self.inputFields.index(self.activeInputField)
-        self.activeInputField = self.inputFields[(i + 1) % len(self.inputFields)]
+        self.activeInputField = (
+            self.inputFields[(i + 1) % len(self.inputFields)])
         self._write(self.activeInputField.display())
 
     def correctInputField(self):

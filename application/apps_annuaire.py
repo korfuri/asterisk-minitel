@@ -2,12 +2,13 @@ import logging
 import tc
 from apps import BaseApp, register, appForCode
 
+
 @register("annu", ["annuaire", "3611"])
 class AnnuaireApp(BaseApp):
     def interact(self):
         self.m.sendfile("assets/3611.vdt")
-        quoi = self.m.addInputField(5, 13, 28, "Une pomme", tc.clWhite)
-        ou = self.m.addInputField(10, 13, 28, "Un verger", tc.clWhite)
+        quoi = self.m.addInputField(5, 13, 28, "", tc.clWhite)
+        ou = self.m.addInputField(10, 13, 28, "", tc.clWhite)
 
         def do_search():
             logging.debug("Searching for %s in %s", quoi.contents, ou.contents)

@@ -5,22 +5,25 @@ import tc
 import select
 import subprocess
 
+
 class BaseApp(object):
     def __init__(self, m):
         self.m = m
 
     def begin(self):
         self.m.reset()
+
         def repeat():
             self.nextApp = type(self)
             return tc.Break
         self.m.keyHandlers[tc.kRepetition] = repeat
 
+
 class ForkingApp(BaseApp):
     def spawn(self, cmd):
         self._input = bytes(0)
         self._break = False
-        (master,slave) = pty.openpty()
+        (master, slave) = pty.openpty()
         with subprocess.Popen(cmd,
                               stdin=slave,
                               stdout=slave,
@@ -63,9 +66,17 @@ class ForkingApp(BaseApp):
 
 apps_directory = {}
 
+
 def register(name, aliases=None):
+    """Registers an App to the main directory.
+
+    Users can then call this app by name from the 3615 home.
+
+    """
     global apps_directory
+
     def decorate(cls):
+        assert(isinstance(cls, type))
         apps_directory[name] = cls
         if aliases is not None:
             for a in aliases:
@@ -73,12 +84,22 @@ def register(name, aliases=None):
         return cls
     return decorate
 
+
 def appForCode(code):
+    """Returns the app class corresponding to the given code.
+
+    This is used by the 3615 app to get the next app to execute. This
+    can also be invoked with code "index" to get back to the home
+    page.
+
+    """
     global apps_directory
     code = code.lower().strip()
+    logging.info("Dispatching for %s", code)
     if code not in apps_directory:
         code = "index"
     return apps_directory.get(code)
+
 
 @register("index", ["3615"])
 class Index3615App(BaseApp):

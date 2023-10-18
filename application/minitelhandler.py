@@ -8,6 +8,7 @@ import apps_annuaire
 import apps_forking
 import apps_elections
 
+
 class MinitelHandler(socketserver.BaseRequestHandler):
     def handle(self):
         logging.info("Accepting a connection")
