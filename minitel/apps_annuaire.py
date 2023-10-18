@@ -22,3 +22,9 @@ class AnnuaireApp(BaseApp):
         self.m.keyHandlers[tc.kGuide] = do_sommaire
 
         self.m.handleInputsUntilBreak()
+
+@register("clubmed")
+class ClubMedApp(BaseApp):
+    def interact(self):
+        self.m.sendfile("assets/clubmed.vdt")
+        self.m.handleInputsUntilBreak()

@@ -5,7 +5,7 @@ from minitel.apps import ForkingApp, register
 @register("nethack")
 class NethackApp(ForkingApp):
     def interact(self):
-        self.m._write(tKeyboardLower)
+        self.m._write(tc.tKeyboardLower)
         self.spawn("nethack")
 
 
