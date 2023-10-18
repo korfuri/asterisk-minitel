@@ -10,6 +10,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             cowsay
+            libcaca
             lolcat
             sox
             twinkle

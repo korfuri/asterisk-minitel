@@ -21,6 +21,9 @@ class UserDisconnected(ConnectionError):
     """User requested to disconnect, terminating the session."""
     pass
 
+class ProtocolError(ConnectionError):
+    """We couldn't make sense of a message we received."""
+
 def abytes(str):
     """Handy shortcut to convert an ascrii string to bytes."""
     return bytes(str, encoding='ascii')
@@ -49,6 +52,10 @@ tBlinkOff = abytes(chr(73))
 tBell = abytes(chr(7))
 tKeyboardLower = b'\x1b\x3a\x69\x45'
 tKeyboardUpper = b'\x1b\x3a\x6a\x45'
+tPRO1 = b'\x1b\x39'
+tPRO2 = b'\x1b\x3a'
+tPRO3 = b'\x1b\x3b'
+tENQROM = b'\x7b'
 
 # Colors
 clBlack = 0
@@ -71,6 +78,7 @@ kCorrection = b'\x47'    # G
 kSuite = b'\x48'         # H
 kConnexionfin = b'\x49'  # I
 kModemConnect = b'\x53'  # S
+
 
 class InputField:
     """Logic to handle an input field on a Minitel screen.
@@ -181,9 +189,13 @@ class MinitelTerminal:
             length = length - len(r)
         return data
 
-    def read_ulm_header(self):
+    def start(self):
+        """Handle the initital exchange with the Minitel.
 
-        """Read the ULM header and consume the kConnexionfin event."""
+        We wait for an UML header and a CxFin event, then immediately
+        query the minitel's capabilities and store them.
+
+        """
         # ignore the actual contents of the ULM header, they're irrelevant
         # we could take the transmission speed into consideration, but
         # it's so laughably slow in all scenarios that we just don't
@@ -198,8 +210,9 @@ class MinitelTerminal:
             # automatically as the user pressed CxFin.
             # If for any reason this isn't received successfully, the
             # user can press Sommaire and send \x13F to proceed.
-            if b'\x13S' in data or b'\x13F':
+            if b'\x13S' in data or b'\x13F' in data:
                 break
+        self.query_capabilities()
 
     def print(self, text):
         """Display raw text."""
@@ -234,6 +247,15 @@ class MinitelTerminal:
             self._write(tHome)
         else:
             self._write(tMoveCursor + tLine(l) + tCol(c))
+
+    def query_capabilities(self):
+        self._write(tPRO1 + tENQROM)
+        data = self._consume(5)
+        # if len(data) != 5 or data[0] != b'\x01' or data[4] != b'\x04':
+        #     logging.error("data was: %s", data)
+        #     raise ProtocolError()
+        # self.terminfo = termInfos.get(data[2], "minitel")
+        self.terminfo = "minitel1-nb"
 
     def clear(self):
         """Clears the screen and resets terminal state."""
@@ -368,12 +390,12 @@ class MinitelTerminal:
             pass              # Demande position du curseur
         elif c == b'\x01':
             self._consume(1)  # Commande d'un peripherique
-        elif c == b'\x39':
-            self._consume(1)  # PRO1
-        elif c == b'\x3a':
-            self._consume(2)  # PRO2
-        elif c == b'\x3b':
-            self._consume(3)  # PRO3
+        elif c == b'\x39':    # PRO1
+            self._consume(1)
+        elif c == b'\x3a':    # PRO2
+            self._consume(2)
+        elif c == b'\x3b':    # PRO3
+            self._consume(3)
         else:
             log.error("Unknown protocol command %s, flushing read buffer", c)
             self._read(1000)

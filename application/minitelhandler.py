@@ -13,7 +13,7 @@ class MinitelHandler(socketserver.BaseRequestHandler):
         logging.info("Accepting a connection")
         m = tc.MinitelTerminal(self.request)
         try:
-            m.read_ulm_header()
+            m.start()
             m.reset()
             app = appForCode("index")
             while True:

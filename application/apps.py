@@ -29,7 +29,7 @@ class ForkingApp(BaseApp):
                               shell=True,
                               env={
                                   "PATH": os.getenv("PATH"),
-                                  "TERM": "minitel",
+                                  "TERM": self.m.terminfo,
                                   "LINES": "24",
                                   "COLUMNS": "40",
                               }) as process:
