@@ -26,3 +26,9 @@ class EnvApp(ForkingApp):
 class ClockApp(ForkingApp):
     def interact(self):
         self.spawn("watch -n 1 date")
+
+
+@register("web")
+class ClockApp(ForkingApp):
+    def interact(self):
+        self.spawn("lynx")

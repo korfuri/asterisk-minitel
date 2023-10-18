@@ -56,17 +56,18 @@ class InputField:
     TODO: consider multi-line fields
 
     """
-    def __init__(self, line, col, maxlength, contents, color):
+    def __init__(self, line, col, maxlength, contents, color = b''):
         self.line = line
         self.col = col
         self.maxlength = maxlength
         self.contents = contents
+        assert(isinstance(color, bytes))
         self.color = color
 
     def display(self):
-        return (tMoveCursor + tLine(self.line) + tCol(self.col) +
+        return (tMoveCursor + tLine(self.line) + tCol(self.col) + self.color +
                 (abytes('.') * self.maxlength) +
-                tMoveCursor + tLine(self.line) + tCol(self.col) +
+                tMoveCursor + tLine(self.line) + tCol(self.col) + self.color +
                 abytes(self.contents)
                 )
 

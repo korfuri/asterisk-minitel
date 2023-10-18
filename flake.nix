@@ -12,6 +12,7 @@
             cowsay
             libcaca
             lolcat
+            lynx
             sox
             twinkle
             python3

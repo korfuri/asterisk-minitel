@@ -1,14 +1,16 @@
 import logging
 import minitel.tc as tc
 from minitel.apps import BaseApp, register, appForCode
+import os
+from PIL import Image
 
 
 @register("annu", ["annuaire", "3611"])
 class AnnuaireApp(BaseApp):
     def interact(self):
         self.m.sendfile("assets/3611.vdt")
-        quoi = self.m.addInputField(5, 13, 28, "", tc.clWhite)
-        ou = self.m.addInputField(10, 13, 28, "", tc.clWhite)
+        ou = self.m.addInputField(10, 13, 28, "", tc.tFgColor(tc.clRed))
+        quoi = self.m.addInputField(5, 13, 28, "")
 
         def do_search():
             logging.debug("Searching for %s in %s", quoi.contents, ou.contents)
@@ -27,4 +29,24 @@ class AnnuaireApp(BaseApp):
 class ClubMedApp(BaseApp):
     def interact(self):
         self.m.sendfile("assets/clubmed.vdt")
+        self.m.handleInputsUntilBreak()
+
+@register("slides")
+class SlideshowApp(BaseApp):
+    def interact(self):
+        files = os.listdir("assets/slideshow")
+        for f in files:
+            logging.info("Next slide: %s", f)
+            self.m.sendfile("assets/slideshow/" + f)
+            self.m.handleInputsUntilBreak()
+
+@register("testpil")
+class ImageApp(BaseApp):
+    def interact(self):
+        image = Image.open("/home/korfuri/Code/PyMinitel/test/testimage1.jpg")
+        image = image.resize((38, 22), Image.LANCZOS)
+        import minitel.ImageMinitel
+        imi = minitel.ImageMinitel.ImageMinitel(self.m)
+        imi.importer(image)
+        imi.envoyer(1,1)
         self.m.handleInputsUntilBreak()

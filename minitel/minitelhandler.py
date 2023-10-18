@@ -7,6 +7,7 @@ from minitel.apps import appForCode
 import minitel.apps_annuaire
 import minitel.apps_forking
 import minitel.apps_elections
+import minitel.apps_annonces
 
 
 class MinitelHandler(socketserver.BaseRequestHandler):

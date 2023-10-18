@@ -106,7 +106,7 @@ class Index3615App(BaseApp):
     def interact(self):
         global apps_directory
         self.m.sendfile("assets/3615.vdt")
-        code = self.m.addInputField(4, 9, 12, "", tc.clWhite)
+        code = self.m.addInputField(4, 9, 12, "")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()
         logging.debug("Code: %s", code.contents)

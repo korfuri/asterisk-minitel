@@ -5,6 +5,6 @@
     sleep 0.2  # wait for the capabilities query
     printf "\x01aaa\x04"  # pretend to be the dumbest minitel
     sleep 0.5
-    printf "TEST\x13\x41"  # TEST, ENVOI
+    printf "TESTPIL\x13\x41"  # TEST, ENVOI
     sleep 0.2
 ) | nc -v 127.0.0.1 3615 | cat -e
