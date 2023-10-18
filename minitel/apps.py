@@ -1,7 +1,7 @@
 import logging
 import os
 import pty
-import tc
+import minitel.tc as tc
 import select
 import subprocess
 

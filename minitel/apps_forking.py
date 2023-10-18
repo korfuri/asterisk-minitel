@@ -1,5 +1,5 @@
-import tc
-from apps import ForkingApp, register
+import minitel.tc as tc
+from minitel.apps import ForkingApp, register
 
 
 @register("nethack")

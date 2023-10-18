@@ -1,6 +1,6 @@
 import unittest
 
-from minitel import InputField
+from minitel.tc import InputField
 from minitel.constants import clWhite
 
 class InputFieldTest(unittest.TestCase):

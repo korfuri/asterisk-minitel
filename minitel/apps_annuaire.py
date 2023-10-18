@@ -1,6 +1,6 @@
 import logging
-import tc
-from apps import BaseApp, register, appForCode
+import minitel.tc as tc
+from minitel.apps import BaseApp, register, appForCode
 
 
 @register("annu", ["annuaire", "3611"])

@@ -1,6 +1,6 @@
-import tc
+import minitel.tc as tc
 import random
-from apps import BaseApp, register
+from minitel.apps import BaseApp, register
 
 
 @register('elec', ['elections'])

@@ -1,4 +1,4 @@
-from constants import *
+from minitel.constants import *
 import logging
 
 

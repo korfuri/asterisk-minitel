@@ -1,4 +1,4 @@
-from minitelhandler import MinitelHandler
+from minitel.minitelhandler import MinitelHandler
 import logging
 import socketserver
 
