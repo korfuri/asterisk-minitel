@@ -26,7 +26,7 @@ runserver() {
   env QEMU_NET_OPTS="hostfwd=tcp::2222-:22,hostfwd=tcp::5060-:5060,hostfwd=tcp::5061-:5061,hostfwd=udp::5060-:5060,hostfwd=udp::5061-:5061" ./result/bin/run-server-vm &
 }
 sshserver() {
-  ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -i ./server-ssh -p 2222 root@localhost
+  ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -i ./vm/server-ssh -p 2222 root@localhost
 }
 cleanserver() {
   rm server.qcow2
@@ -48,7 +48,7 @@ cp ${./app_softmodem.c} ./apps/app_softmodem.c
         nixosConfigurations.server = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = attrs;
-          modules = [ ./server.nix ];
+          modules = [ ./vm/server.nix ];
         };
       };
 }
