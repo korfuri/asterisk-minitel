@@ -1,3 +1,10 @@
+"""Constants used by the Minitel protocol."""
+
+def abytes(str):
+    """Handy shortcut to convert an ascrii string to bytes."""
+    return bytes(str, encoding='ascii')
+
+
 # Termcaps
 tHome = b'\x1e'
 tMoveCursor = b'\x1f'
@@ -7,15 +14,30 @@ tBgColor = lambda c: abytes(chr(0x50+c))
 tFgColor = lambda c: abytes(chr(0x40+c))
 tCursorOn = b'\x11'
 tCursorOff = b'\x14'
+tRepeatNext = lambda count: b'\x12' + abytes(chr(0x40+count))
 tBlinkOn = b'\x48'
 tBlinkOff = b'\x73'
 tBell = b'\x07'
+tClearScreen = b'\x0c'
 tKeyboardLower = b'\x1b\x3a\x69\x45'
 tKeyboardUpper = b'\x1b\x3a\x6a\x45'
-tPRO1 = b'\x1b\x39'
-tPRO2 = b'\x1b\x3a'
-tPRO3 = b'\x1b\x3b'
+tPRO1 = b'\x39'
+tPRO2 = b'\x3a'
+tPRO3 = b'\x3b'
 tENQROM = b'\x7b'
+
+# Control codes
+SEP = b'\x13'
+ESC = b'\x1b'
+SOH = b'\x01'
+EOT = b'\x04'
+
+# Protocol specifiers
+pModeMask = b'\x23'          # Mode masquage ecran
+pModeTransparent = b'\x25'   # Mode transparent ecran
+pModeEnd = b'\x2f'           # Fin de mode
+pCursorRequest = b'\x61'     # Requete position curseur
+pPeripheralCommand = b'\x01' # Commande d'un peripherique
 
 # Colors
 clBlack = 0x0

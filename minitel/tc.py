@@ -32,11 +32,6 @@ class ProtocolError(ConnectionError):
     """We couldn't make sense of a message we received."""
 
 
-def abytes(str):
-    """Handy shortcut to convert an ascrii string to bytes."""
-    return bytes(str, encoding='ascii')
-
-
 class Break:
     """A symbol for `stop handling input`.
 
@@ -174,11 +169,11 @@ class MinitelTerminal:
         while True:
             data = data + self._read(200)
 
-            # \x13S is a Modem Connect event, which is sent
-            # automatically as the user pressed CxFin.
-            # If for any reason this isn't received successfully, the
-            # user can press Sommaire and send \x13F to proceed.
-            if b'\x13S' in data or b'\x13F' in data:
+            # Wait for a Modem Connect event, which is sent
+            # automatically as the user pressed CxFin.  If for any
+            # reason this isn't received successfully, the user can
+            # press Sommaire instead.
+            if (SEP + kConnexionfin) in data or (SEP + kSommaire) in data:
                 break
         self.query_capabilities()
 
@@ -217,9 +212,9 @@ class MinitelTerminal:
             self._write(tMoveCursor + tLine(l) + tCol(c))
 
     def query_capabilities(self):
-        self._write(tPRO1 + tENQROM)
+        self._write(ESC + tPRO1 + tENQROM)
         data = self._consume(5)
-        # if len(data) != 5 or data[0] != b'\x01' or data[4] != b'\x04':
+        # if len(data) != 5 or data[0] != SOH or data[4] != EOT:
         #     logging.error("data was: %s", data)
         #     raise ProtocolError()
         # self.terminfo = termInfos.get(data[2], "minitel")
@@ -228,9 +223,8 @@ class MinitelTerminal:
     def clear(self):
         """Clears the screen and resets terminal state."""
         self.pos(0, 1)
-        self._write(b'\x24\x12\x20')          # What are these?
-        self._write(b'\x0c')                  # Clear screen
-        self._write(b'\x1f\x40\x41\x18\x0a')  # Clear home row
+        self._write(tClearScreen)
+        self._write(tMoveCursor + tLine(0) + tCol(1) + b'\x18\x0a') # Go to home row, clear it
         self._write(tKeyboardUpper)
 
     def reset(self):
@@ -317,7 +311,7 @@ class MinitelTerminal:
 
     def handleNextInput(self):
         c = self._read(1)
-        if c == b'\x13':  # This is a minitel key
+        if c == SEP:  # This is a minitel key
             c = self._read(1)
             if c in self.keyHandlers:
                 self._lastControlKey = c
@@ -328,7 +322,7 @@ class MinitelTerminal:
                         return Break
             else:
                 logging.debug("No handler for key %s", c)
-        elif c == b'\x1b':  # Protocol acknowledgements
+        elif c == ESC:  # Protocol acknowledgements
             self.handleAcknowledgement()
         else:
             self.HandleCharacter(c)
@@ -349,21 +343,21 @@ class MinitelTerminal:
 
         """
         c = self._read(1)
-        if c == b'\x23':
+        if c == pModeMask:
             self._consume(2)  # Masquage/demasquage ecran
-        elif c == b'\x25':
-            pass              # Mode transparent ecran
-        elif c == b'\x2f':
-            self._consume(1)  # Fin mode precedent
-        elif c == b'\x61':
-            pass              # Demande position du curseur
-        elif c == b'\x01':
-            self._consume(1)  # Commande d'un peripherique
-        elif c == b'\x39':    # PRO1
+        elif c == pModeTransparent:
+            pass
+        elif c == pModeEnd:
             self._consume(1)
-        elif c == b'\x3a':    # PRO2
+        elif c == pCursorRequest:
+            pass
+        elif c == pPeripheralCommand:        # Commande d'un peripherique
+            self._consume(1)
+        elif c == tPRO1:
+            self._consume(1)
+        elif c == tPRO2:
             self._consume(2)
-        elif c == b'\x3b':    # PRO3
+        elif c == tPRO3:
             self._consume(3)
         else:
             log.error("Unknown protocol command %s, flushing read buffer", c)
