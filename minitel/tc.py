@@ -118,6 +118,8 @@ class MinitelTerminal:
 
         """
         l = len(data)
+        if l == 0:
+            return
         logging.debug("send> %s", repr(data))
         sent = self.socket.send(data)
         if sent == 0:
@@ -216,6 +218,11 @@ class MinitelTerminal:
             self._write(tMoveCursor + tLine(l) + tCol(c))
 
     def query_capabilities(self):
+        """Queries the capabilities of the Minitel.
+
+        TODO: implement this properly.
+        """
+ 
         self._write(ESC + tPRO1 + tENQROM)
         data = self._consume(5)
         # if len(data) != 5 or data[0] != SOH or data[4] != EOT:
@@ -234,6 +241,25 @@ class MinitelTerminal:
     def setMode(self, mode):
         self._write(ESC + tPRO2 + mode)
 
+    def textBox(self, line, col, width, height, text, effects=b''):
+        textwidth = width - 2
+        for l in range(height):
+            self.pos(line + l, col)
+            self._write(effects)
+            # Write a leading space, to pick up the bgcolor
+            self.print(' ')
+            text_this_line = text[:textwidth]
+            text = text[textwidth:]
+            padding = width - len(text_this_line) - 1
+            self.print(text_this_line)
+            if padding > 0:
+                self._write(tSemiGraphicalMode)
+                self.print(' ' * padding)
+                # if padding < 3:
+                #     self._write(b' ' * padding)
+                # else:
+                #     self._write(b' ' + tRepeatPrev(padding))
+            
     def reset(self):
         """Resets all terminal state."""
         self.resetInputFields()

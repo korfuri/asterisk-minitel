@@ -10,11 +10,13 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             # Toosl to run stuff
-            python3
             bash
+            python3
+            sqlite
 
             # Python deps
             python3Packages.pillow
+            python3Packages.sqlalchemy
 
             # Development tools/testing utils
             sox

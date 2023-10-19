@@ -4,17 +4,22 @@ def abytes(str):
     """Handy shortcut to convert an ascrii string to bytes."""
     return bytes(str, encoding='ascii')
 
+# Control codes
+SEP = b'\x13'
+ESC = b'\x1b'
+SOH = b'\x01'
+EOT = b'\x04'
 
 # Termcaps
 tHome = b'\x1e'
 tMoveCursor = b'\x1f'
 tLine = lambda l: abytes(chr(0x40+l))
 tCol = lambda c: abytes(chr(0x40+c))
-tBgColor = lambda c: abytes(chr(0x50+c))
-tFgColor = lambda c: abytes(chr(0x40+c))
+tBgColor = lambda c: ESC + abytes(chr(0x50+c))
+tFgColor = lambda c: ESC+ abytes(chr(0x40+c))
 tCursorOn = b'\x11'
 tCursorOff = b'\x14'
-tRepeatNext = lambda count: b'\x12' + abytes(chr(0x40+count))
+tRepeatPrev = lambda count: b'\x12' + abytes(chr(0x40+count))
 tBlinkOn = b'\x48'
 tBlinkOff = b'\x73'
 tBell = b'\x07'
@@ -27,12 +32,12 @@ tPRO3 = b'\x3b'
 tENQROM = b'\x7b'
 tVideotexToMixte = b'\x32\x7d'
 tMixteToVideotex = b'\x32\x7e'
-
-# Control codes
-SEP = b'\x13'
-ESC = b'\x1b'
-SOH = b'\x01'
-EOT = b'\x04'
+tSemiGraphicalMode = b'\x0e'
+tTextMode = b'\x0f'
+tMoveLeft = b'\x08'
+tMoveRight = b'\x09'
+tMoveDown = b'\x0a'
+tMoveUp = b'\x0b'
 
 # Protocol specifiers
 pModeMask = b'\x23'          # Mode masquage ecran
