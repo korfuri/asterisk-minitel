@@ -25,6 +25,8 @@ tPRO1 = b'\x39'
 tPRO2 = b'\x3a'
 tPRO3 = b'\x3b'
 tENQROM = b'\x7b'
+tVideotexToMixte = b'\x32\x7d'
+tMixteToVideotex = b'\x32\x7e'
 
 # Control codes
 SEP = b'\x13'

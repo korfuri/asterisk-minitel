@@ -9,14 +9,22 @@
       in rec {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            cowsay
-            libcaca
-            lolcat
-            lynx
-            sox
-            twinkle
+            # Toosl to run stuff
             python3
             bash
+
+            # Python deps
+            python3Packages.pillow
+
+            # Development tools/testing utils
+            sox
+            twinkle
+
+            # Gadgets for forking apps
+            cowsay
+            figlet
+            libcaca
+            lynx
             nethack
           ];
           shellHook = ''

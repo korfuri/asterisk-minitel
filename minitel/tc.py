@@ -231,10 +231,14 @@ class MinitelTerminal:
         self._write(tMoveCursor + tLine(0) + tCol(1) + b'\x18\x0a') # Go to home row, clear it
         self._write(tKeyboardUpper)
 
+    def setMode(self, mode):
+        self._write(ESC + tPRO2 + mode)
+
     def reset(self):
         """Resets all terminal state."""
         self.resetInputFields()
         self.resetKeyHandlers()
+        self.setMode(tMixteToVideotex)
         self.clear()
         self.HandleCharacter = self.handleCharacterToTextInput
 

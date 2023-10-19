@@ -20,7 +20,7 @@ class BaseApp(object):
 
 
 class ForkingApp(BaseApp):
-    def spawn(self, cmd):
+    def spawn(self, cmd, env={}):
         self._input = bytes(0)
         self._break = False
         (master, slave) = pty.openpty()
@@ -35,7 +35,7 @@ class ForkingApp(BaseApp):
                                   "TERM": self.m.terminfo,
                                   "LINES": "24",
                                   "COLUMNS": "40",
-                              }) as process:
+                              } | env) as process:
             while process.poll() is None:
                 rs, _, _ = select.select([master, self.m.socket], [], [])
                 for r in rs:
@@ -46,10 +46,11 @@ class ForkingApp(BaseApp):
                         self.m.handleNextInput()
                         os.write(master, self._input)
                         self._input = bytes(0)
-                        if self._break:
-                            process.kill()
-                            _, _ = process.communicate()
-
+                    if self._break:
+                        process.terminate()
+                        _, _ = process.communicate()
+            logging.debug("exited the process loop")
+                        
     def handleCharacter(self, c):
         self._input = self._input + c
 

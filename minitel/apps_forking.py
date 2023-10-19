@@ -1,25 +1,21 @@
 import minitel.tc as tc
-from minitel.apps import ForkingApp, register
+from minitel.apps import ForkingApp, register, BaseApp
+import minitel.constants as constants
+
+
+ENV_MIXTE = {
+    # Environment for a Mixte mode terminal
+    "TERM": "vt100",
+    "COLUMNS": "80",
+    "LINES": "25",
+}
 
 
 @register("nethack")
 class NethackApp(ForkingApp):
     def interact(self):
-        self.m._write(tc.tKeyboardLower)
-        self.spawn("nethack")
-
-
-@register("demo", ["cacademo", "caca"])
-class DemokApp(ForkingApp):
-    def interact(self):
-        self.spawn("cacademo")
-
-
-@register("env")
-class EnvApp(ForkingApp):
-    def interact(self):
-        self.spawn("env")
-        self.m.handleInputsUntilBreak()
+        self.m.setMode(constants.tVideotexToMixte)
+        self.spawn("nethack", env=ENV_MIXTE)
 
 
 @register("clock")
@@ -31,4 +27,5 @@ class ClockApp(ForkingApp):
 @register("web")
 class ClockApp(ForkingApp):
     def interact(self):
-        self.spawn("lynx")
+        self.m.setMode(constants.tVideotexToMixte)
+        self.spawn("lynx", env=ENV_MIXTE)
