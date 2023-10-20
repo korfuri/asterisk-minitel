@@ -10,7 +10,7 @@ in {
       description = lib.mdDoc "Listen port for minitel-server";
     };
 
-    ip = mkOption {
+    address = mkOption {
       type = types.str;
       default = "127.0.0.1";
       description = lib.mdDoc "IP address to listen on for minitel-server";
@@ -76,7 +76,7 @@ in {
         StateDirectory = cfg.dataDir;
 
         # TODO ip, port, dbPath
-        ExecStart = "${cfg.package}/bin/main.py";
+        ExecStart = "${cfg.package}/bin/main.py --address ${cfg.address} --port ${toString cfg.port} --db_path ${cfg.dbPath}";
 
         Restart = "on-failure";
       };

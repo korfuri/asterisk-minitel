@@ -1,6 +1,11 @@
 import logging
 from sqlalchemy import create_engine, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from absl import flags
+
+
+flags.DEFINE_string("db_path", "sqlite://", "Path to a database file.")
+
 
 class Base(DeclarativeBase):
     pass
@@ -22,9 +27,8 @@ engine = None
     
 def GetEngine():
     global engine
-    # TODO get the DB path from env?
     if engine is None:
-        engine = create_engine("sqlite:///test.db")
+        engine = create_engine(flags.FLAGS.db_path)
     return engine
 
 

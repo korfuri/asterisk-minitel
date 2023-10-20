@@ -3,15 +3,22 @@ from minitel.minitelhandler import MinitelHandler
 from minitel.database import Migrate
 import logging
 import socketserver
+from absl import flags, app
 
 
-def main():
+flags.DEFINE_string("address", "127.0.0.1", "Address to listen on")
+flags.DEFINE_integer("port", 3615, "Port to listen on")
+
+
+
+def main(argv):
     logging.basicConfig(level=logging.DEBUG)
     logging.info("Starting")
     socketserver.ThreadingTCPServer.allow_reuse_address = True
     Migrate()
-    with socketserver.ThreadingTCPServer(("127.0.0.1", 3615), MinitelHandler) as server:
-        logging.info("Listening on port 3615")
+    listen = (flags.FLAGS.address, flags.FLAGS.port)
+    with socketserver.ThreadingTCPServer(listen, MinitelHandler) as server:
+        logging.info("Listening on %s:%s", *listen)
         try:
             server.serve_forever()
         except KeyboardInterrupt:
@@ -23,4 +30,4 @@ def main():
         logging.info("Exited cleanly")
 
 if __name__ == "__main__":
-    main()
+    app.run(main)

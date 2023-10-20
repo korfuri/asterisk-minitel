@@ -7,6 +7,7 @@
     (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
           pythonInputs = with pkgs; [
+            python3Packages.absl-py
             python3Packages.pillow
             python3Packages.sqlalchemy
           ];
