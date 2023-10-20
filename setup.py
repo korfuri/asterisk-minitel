@@ -8,7 +8,10 @@ setup(
     url="https://github.com/korfuri/asterisk-minitel",
     description="Python application layer for a minitel-over-VoIP setup",
     version="0.0.1",
-    packages=find_packages(where=".", exclude=["tests"]),
+    packages=find_packages(where=".", exclude=["tests", "minitel.assets"]),
+    package_data={
+        "minitel": ["assets/**"],
+    },
     install_requires=[
         "setuptools>=45.0",
     ],

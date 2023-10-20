@@ -9,5 +9,5 @@ class ElectionsApp(BaseApp):
         # candidats = ('giscard', 'mitterrand', 'coluche', 'macron')
         candidats = ('mitterrand', 'macron')
         elu = random.choice(candidats)
-        self.m.sendfile('assets/election_%s.vdt' % elu)
+        self.m.sendfile(asset('election_%s.vdt' % elu))
         self.m.handleInputsUntilBreak()

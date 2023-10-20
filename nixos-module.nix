@@ -76,7 +76,7 @@ in {
         StateDirectory = cfg.dataDir;
 
         # TODO ip, port, dbPath
-        ExecStart = "${cfg.package}/bin/main.py --address ${cfg.address} --port ${toString cfg.port} --db_path ${cfg.dbPath}";
+        ExecStart = "${cfg.package}/bin/main.py --address ${cfg.address} --port ${toString cfg.port} --db_path ${cfg.dbPath} --assets_path ${cfg.package}/assets";
 
         Restart = "on-failure";
       };

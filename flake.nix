@@ -18,6 +18,7 @@
             bash
             python3
             sqlite
+            python3Packages.setuptools
 
             # Development tools/testing utils
             sox
@@ -61,6 +62,9 @@ cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
           version = "0.0.1";
           propagatedBuildInputs = pythonInputs;
           src = ./.;
+          postInstall =''
+            ln -s $out/lib/python3*/site-packages/minitel/assets $out/assets
+          '';
         };
       }) // {
         overlays.default = final: prev: {

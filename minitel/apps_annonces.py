@@ -1,6 +1,7 @@
 import logging
 import minitel.tc as tc
 from minitel.apps import BaseApp, register, appForCode
+from minitel.assets import asset
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from minitel.database import Classified, GetEngine
@@ -35,13 +36,13 @@ class AnnoncesApp(BaseApp):
         self.showPage()
 
     def showPage(self):
-        self.m.sendfile("assets/petitesannonces_header.vdt")
+        self.m.sendfile(asset("petitesannonces_header.vdt"))
         for i, a in enumerate(self.getPage(self.page)):
             self.m.textBox(line=5 + i * 4, col=2, width=38, height=3, text=a, effects=(tc.tFgColor(tc.clWhite) + tc.tBgColor(tc.clBlue)))
         self.m.handleInputsUntilBreak()
 
     def compose(self):
-        self.m.sendfile("assets/petitesannonces_compose.vdt")
+        self.m.sendfile(asset("petitesannonces_compose.vdt"))
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         annonce = self.m.addInputField(7, 2, 37, "")
         self.m.handleInputsUntilBreak()

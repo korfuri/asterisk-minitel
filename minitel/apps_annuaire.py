@@ -1,6 +1,7 @@
 import logging
 import minitel.tc as tc
 from minitel.apps import BaseApp, register, appForCode
+from minitel.assets import asset
 import os
 from PIL import Image
 
@@ -8,7 +9,7 @@ from PIL import Image
 @register("annu", ["annuaire", "3611"])
 class AnnuaireApp(BaseApp):
     def interact(self):
-        self.m.sendfile("assets/3611.vdt")
+        self.m.sendfile(asset("3611.vdt"))
         ou = self.m.addInputField(10, 13, 28, "", tc.tFgColor(tc.clRed))
         quoi = self.m.addInputField(5, 13, 28, "")
 
@@ -28,16 +29,16 @@ class AnnuaireApp(BaseApp):
 @register("clubmed")
 class ClubMedApp(BaseApp):
     def interact(self):
-        self.m.sendfile("assets/clubmed.vdt")
+        self.m.sendfile(asset("clubmed.vdt"))
         self.m.handleInputsUntilBreak()
 
 @register("slides")
 class SlideshowApp(BaseApp):
     def interact(self):
-        files = os.listdir("assets/slideshow")
+        files = os.listdir(asset("slideshow"))
         for f in files:
             logging.info("Next slide: %s", f)
-            self.m.sendfile("assets/slideshow/" + f)
+            self.m.sendfile(asset("slideshow/" + f))
             self.m.handleInputsUntilBreak()
 
 @register("testpil")

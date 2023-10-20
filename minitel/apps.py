@@ -2,6 +2,7 @@ import logging
 import os
 import pty
 import minitel.tc as tc
+from minitel.assets import asset
 import select
 import subprocess
 
@@ -106,7 +107,7 @@ def appForCode(code):
 class Index3615App(BaseApp):
     def interact(self):
         global apps_directory
-        self.m.sendfile("assets/3615.vdt")
+        self.m.sendfile(asset("3615.vdt"))
         code = self.m.addInputField(4, 9, 12, "")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()
