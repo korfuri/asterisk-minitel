@@ -150,6 +150,7 @@ class MinitelTerminal:
         """
         data = bytes(0)
         while length > 0:
+            logging.debug("Still need to consume %d bytes...", length)
             r = self._read(length)
             data = data + r
             length = length - len(r)
@@ -223,8 +224,8 @@ class MinitelTerminal:
         TODO: implement this properly.
         """
  
-        self._write(ESC + tPRO1 + tENQROM)
-        data = self._consume(5)
+        # self._write(ESC + tPRO1 + tENQROM)
+        # data = self._consume(5)
         # if len(data) != 5 or data[0] != SOH or data[4] != EOT:
         #     logging.error("data was: %s", data)
         #     raise ProtocolError()
@@ -234,11 +235,17 @@ class MinitelTerminal:
     def clear(self):
         """Clears the screen and resets terminal state."""
         self.pos(0, 1)
+        logging.debug("clear screen")
         self._write(tClearScreen)
+        logging.debug("clear home row")
         self._write(tMoveCursor + tLine(0) + tCol(1) + b'\x18\x0a') # Go to home row, clear it
+        logging.debug("set mode page")
+        self._write(tModePage)
+        logging.debug("set kbd upper")
         self._write(tKeyboardUpper)
-
+        
     def setMode(self, mode):
+        logging.debug("Set mode: %s", mode)
         self._write(ESC + tPRO2 + mode)
 
     def textBox(self, line, col, width, height, text, effects=b''):

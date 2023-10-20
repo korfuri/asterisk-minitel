@@ -13,7 +13,7 @@ flags.DEFINE_integer("port", 3615, "Port to listen on")
 
 def main(argv):
     logging.basicConfig(level=logging.DEBUG)
-    logging.info("Starting")
+    logging.debug("Starting, debug logging is enabled")
     socketserver.ThreadingTCPServer.allow_reuse_address = True
     Migrate()
     listen = (flags.FLAGS.address, flags.FLAGS.port)
