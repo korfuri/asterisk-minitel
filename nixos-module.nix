@@ -44,7 +44,7 @@ in {
 
     openFirewall = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = lib.mdDoc ''
           Open ports in the firewall for minitel-server.
         '';
