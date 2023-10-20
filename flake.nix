@@ -4,8 +4,12 @@
     flake-utils.url = "github:numtide/flake-utils/main";
   };
   outputs = { self, nixpkgs, flake-utils, ... }@attrs:
-    flake-utils.lib.eachDefaultSystem (system:
+    (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
+          pythonInputs = with pkgs; [
+            python3Packages.pillow
+            python3Packages.sqlalchemy
+          ];
       in rec {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
@@ -13,10 +17,6 @@
             bash
             python3
             sqlite
-
-            # Python deps
-            python3Packages.pillow
-            python3Packages.sqlalchemy
 
             # Development tools/testing utils
             sox
@@ -28,7 +28,7 @@
             libcaca
             lynx
             nethack
-          ];
+          ] ++ pythonInputs;
           shellHook = ''
 buildserver() {
   nixos-rebuild --flake .#server build-vm
@@ -55,11 +55,23 @@ cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
 '';
           enableParallelBuilding = true;
         });
+        packages.minitel-server = pkgs.python3Packages.buildPythonApplication {
+          pname = "minitel-server";
+          version = "0.0.1";
+          propagatedBuildInputs = pythonInputs;
+          src = ./.;
+        };
       }) // {
+        overlays.default = final: prev: {
+          minitel-server = self.packages."${final.system}".minitel-server;
+        };
+        nixosModules.minitel-server = import ./nixos-module.nix;
         nixosConfigurations.server = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = attrs;
-          modules = [ ./vm/server.nix ];
+          modules = [
+            ./vm/server.nix
+          ];
         };
-      };
+      });
 }

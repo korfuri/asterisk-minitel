@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, config, ... }:
 {
   # This is a demo config using asterisk-softmodem.
   #
@@ -9,17 +9,22 @@
   # Convenience aliases for 
   networking.hostName = "server";
 
+  imports = [
+    self.nixosModules.minitel-server
+  ];
+  
   services.asterisk = {
     enable = true;
     package = self.packages."x86_64-linux".asterisk-softmodem;
     confFiles = {
       "extensions.conf" = (builtins.readFile ./asterisk/extensions.conf);
-      "pjsip.conf" = (builtins.readFile ./asterisk/pjsip.conf);      
+      "pjsip.conf" = (builtins.readFile ./asterisk/pjsip.conf);
     };
     useTheseDefaultConfFiles = [
       
     ];
   };
+  services.minitel-server.enable = true;
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "without-password";

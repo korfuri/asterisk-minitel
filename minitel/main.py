@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from minitel.minitelhandler import MinitelHandler
 from minitel.database import Migrate
 import logging

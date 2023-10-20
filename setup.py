@@ -18,4 +18,5 @@ setup(
         "Environment :: Console",
         "Environment :: Other Environment",
     ],
+    scripts=["minitel/main.py"],
 )

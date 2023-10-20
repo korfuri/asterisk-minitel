@@ -63,5 +63,5 @@ def image2minitel(img):
     for h in range(0, charHeight):
         output = output + b'\x0e'  # mode semi graphique
         for w in range(0, charWidth):
-            pixels = [img.getpixel((2*w + x, h*3 + y)) for x in range(2) for y in range 3]
+            pixels = [img.getpixel((2*w + x, h*3 + y)) for x in range(2) for y in range(3)]
             
