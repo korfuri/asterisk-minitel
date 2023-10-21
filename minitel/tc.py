@@ -170,19 +170,30 @@ class MinitelTerminal:
         # ex = b'Version: 1\r\nTXspeed: 133.33\r\nRXspeed: 8.33\r\n\r\n\x13'
         # len(ex) == 47
         data = bytes(0)
-        while True:
+        started = False
+        while not started:
             data = data + self._read(200)
 
             # Wait for a Modem Connect event, which is sent
             # automatically as the user pressed CxFin.  If for any
             # reason this isn't received successfully, the user can
             # press Sommaire instead.
-            logging.debug("Expecting: %s or %s", (SEP+kModemConnect), (SEP + kSommaire))
+            VALID_STARTS = [
+                (SEP + kModemConnect),  # Normally sent when a modem connects
+                b'\x7e32',              # When resuming from Mixte mode and connecting at the same time
+                (SEP + kSommaire),
+
+            ]
+            logging.debug("Expecting: one of %s", VALID_STARTS)
             logging.debug("data is: %s", data)
-            if (SEP + kModemConnect) in data or (SEP + kSommaire) in data:
-                logging.debug("breaking successfully")
-                break
+
+            for s in VALID_STARTS:
+                if s in data:
+                    logging.debug("breaking successfully, we got %s", s)
+                    started = True
+                    break
         self.query_capabilities()
+        #  self.switch(swOFF, swFromKeyboard, swToModem)  # TODO test this with Zaz's minitel
 
     def print(self, text):
         """Display raw text."""
@@ -223,7 +234,7 @@ class MinitelTerminal:
 
         TODO: implement this properly.
         """
- 
+
         # self._write(ESC + tPRO1 + tENQROM)
         # data = self._consume(5)
         # if len(data) != 5 or data[0] != SOH or data[4] != EOT:
@@ -231,6 +242,10 @@ class MinitelTerminal:
         #     raise ProtocolError()
         # self.terminfo = termInfos.get(data[2], "minitel")
         self.terminfo = "minitel1-nb"
+
+    def switch(self, onoff, devfrom, devto):
+        """Switches (sets the "aiguillage") on/off between components."""
+        self._write(ESC + tPRO3 + onoff + devfrom + devto)
 
     def clear(self):
         """Clears the screen and resets terminal state."""
@@ -243,7 +258,7 @@ class MinitelTerminal:
         self._write(tModePage)
         logging.debug("set kbd upper")
         self._write(tKeyboardUpper)
-        
+
     def setMode(self, mode):
         logging.debug("Set mode: %s", mode)
         self._write(ESC + tPRO2 + mode)
@@ -266,7 +281,7 @@ class MinitelTerminal:
                 #     self._write(b' ' * padding)
                 # else:
                 #     self._write(b' ' + tRepeatPrev(padding))
-            
+
     def reset(self):
         """Resets all terminal state."""
         self.resetInputFields()
@@ -401,5 +416,5 @@ class MinitelTerminal:
         elif c == tPRO3:
             self._consume(3)
         else:
-            log.error("Unknown protocol command %s, flushing read buffer", c)
+            loging.error("Unknown protocol command %s, flushing read buffer", c)
             self._read(1000)

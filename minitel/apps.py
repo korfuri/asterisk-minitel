@@ -48,7 +48,8 @@ class ForkingApp(BaseApp):
                         os.write(master, self._input)
                         self._input = bytes(0)
                     if self._break:
-                        process.terminate()
+                        logging.debug("terminating the process")
+                        process.kill()
                         _, _ = process.communicate()
             logging.debug("exited the process loop")
                         
@@ -57,6 +58,7 @@ class ForkingApp(BaseApp):
 
     def stopProcess(self):
         self._break = True
+        return tc.Break
 
     def begin(self):
         super().begin()

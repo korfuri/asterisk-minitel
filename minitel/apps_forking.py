@@ -25,7 +25,14 @@ class ClockApp(ForkingApp):
 
 
 @register("web")
-class ClockApp(ForkingApp):
+class BrowserApp(ForkingApp):
     def interact(self):
         self.m.setMode(constants.tVideotexToMixte)
         self.spawn("lynx", env=ENV_MIXTE)
+
+
+@register("sh")
+class ShellApp(ForkingApp):
+    def interact(self):
+        self.m.setMode(constants.tVideotexToMixte)
+        self.spawn("sh", env=ENV_MIXTE)

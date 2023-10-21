@@ -1,6 +1,7 @@
 import minitel.tc as tc
 import random
 from minitel.apps import BaseApp, register
+from minitel.assets import asset
 
 
 @register('elec', ['elections'])
