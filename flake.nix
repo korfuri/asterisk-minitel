@@ -69,6 +69,7 @@ cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
       }) // {
         overlays.default = final: prev: {
           minitel-server = self.packages."${final.system}".minitel-server;
+          asterisk-softmodem = self.packages."${final.system}".asterisk-softmodem;
         };
         nixosModules.minitel-server = import ./nixos-module.nix;
         nixosConfigurations.server = nixpkgs.lib.nixosSystem {
