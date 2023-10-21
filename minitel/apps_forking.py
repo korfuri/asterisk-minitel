@@ -1,6 +1,10 @@
 import minitel.tc as tc
 from minitel.apps import ForkingApp, register, BaseApp
 import minitel.constants as constants
+from absl import flags
+
+
+flags.DEFINE_bool("debug_apps", False, "Enable debug-only apps that may be dangerous when publicly available")
 
 
 ENV_MIXTE = {
@@ -27,6 +31,8 @@ class ClockApp(ForkingApp):
 @register("web")
 class BrowserApp(ForkingApp):
     def interact(self):
+        if not flags.FLAGS.debug_apps:
+            return
         self.m.setMode(constants.tVideotexToMixte)
         self.spawn("lynx", env=ENV_MIXTE)
 
@@ -34,5 +40,7 @@ class BrowserApp(ForkingApp):
 @register("sh")
 class ShellApp(ForkingApp):
     def interact(self):
+        if not flags.FLAGS.debug_apps:
+            return
         self.m.setMode(constants.tVideotexToMixte)
         self.spawn("sh", env=ENV_MIXTE)

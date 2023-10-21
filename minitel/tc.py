@@ -180,7 +180,7 @@ class MinitelTerminal:
             # press Sommaire instead.
             VALID_STARTS = [
                 (SEP + kModemConnect),  # Normally sent when a modem connects
-                b'\x7e32',              # When resuming from Mixte mode and connecting at the same time
+                b'\x7e2',              # When resuming from Mixte mode and connecting at the same time
                 (SEP + kSommaire),
 
             ]
