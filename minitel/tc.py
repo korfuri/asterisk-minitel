@@ -416,5 +416,5 @@ class MinitelTerminal:
         elif c == tPRO3:
             self._consume(3)
         else:
-            loging.error("Unknown protocol command %s, flushing read buffer", c)
+            logging.error("Unknown protocol command %s, flushing read buffer", c)
             self._read(1000)
