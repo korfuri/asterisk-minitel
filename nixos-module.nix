@@ -56,6 +56,12 @@ in {
       defaultText = literalExpression "pkgs.minitel-server";
       description = lib.mdDoc "minitel-server derivation to use";
     };
+
+    extraFlags = mkOption {
+      type = types.str;
+      default = "";
+      description = lib.mdDoc "extra flags to pass to minitel-server";
+    };
   };
 
   config = with lib; mkIf cfg.enable {
@@ -76,7 +82,7 @@ in {
         StateDirectory = cfg.dataDir;
 
         # TODO ip, port, dbPath
-        ExecStart = "${cfg.package}/bin/main.py --address ${cfg.address} --port ${toString cfg.port} --db_path ${cfg.dbPath} --assets_path ${cfg.package}/assets";
+        ExecStart = "${cfg.package}/bin/main.py --address ${cfg.address} --port ${toString cfg.port} --db_path ${cfg.dbPath} --assets_path ${cfg.package}/assets ${cfg.extraFlags}";
 
         Restart = "on-failure";
       };
