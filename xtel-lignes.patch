@@ -1,0 +1,33 @@
+From e859fd174623e77743a3b97edad9b50313a80c3e Mon Sep 17 00:00:00 2001
+From: Uriel Corfa <korfuri@gmail.com>
+Date: Mon, 23 Oct 2023 15:39:25 +0200
+Subject: [PATCH] test: custom lignes
+
+---
+ xtel.lignes | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/xtel.lignes b/xtel.lignes
+index d637670..d239225 100644
+--- a/xtel.lignes
++++ b/xtel.lignes
+@@ -2,7 +2,7 @@
+ # Fichier xtel.lignes
+ #
+ # Config V.23, modem HAYES generique
+-modem0,/dev/modem,1200,7,E,\dat\r OK atm1b2\r OK atdt\T\r CONNECT,30
++#modem0,/dev/modem,1200,7,E,\dat\r OK atm1b2\r OK atdt\T\r CONNECT,30
+ 
+ # Config TVR, Djinn-Flash 9600
+ #le_tvr,/dev/modem,9600,8,N,\dat&fm1e0&k3+xm3\r OK atdt\T\r CONNECT,30
+@@ -24,3 +24,7 @@ modem0,/dev/modem,1200,7,E,\dat\r OK atm1b2\r OK atdt\T\r CONNECT,30
+ 
+ # Minitel 1
+ #modem0,/dev/modem,1200,7,E,minitel1,30
++
++
++# A simple socket instead
++modem0,/tmp/minitel-socket,1200,7,E,minitel1,30
+-- 
+2.42.0
+
