@@ -40,8 +40,7 @@ stdenv.mkDerivation rec {
   ];
 
   patches = [
-    ./xtel-build.patch
-    ./xtel-lignes.patch
+    ./xtel-nixos.patch
   ];
 
    configurePhase = ''

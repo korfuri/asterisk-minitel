@@ -1,0 +1,169 @@
+From 6a985e0997f745f6200a98a8c0a48985ea88cf7c Mon Sep 17 00:00:00 2001
+From: Uriel Corfa <korfuri@gmail.com>
+Date: Mon, 23 Oct 2023 14:33:35 +0200
+Subject: [PATCH] Build system and code changes to support Nix builds
+
+Modems are not as common nowadays, so this also includes a default
+change to xtel.lignes, making the default modem a pty. You can create
+it with e.g. socat, and point it to e.g. an application server running
+over TCP or a UDS. This makes testing easier and hardware-free.
+
+TODO: this commit also temporarily removes modem locking, as i have
+not figured out why locking failures make xteld crash yet. This should
+be avoided, and locking should be restored.
+---
+ Config.tmpl |  5 ++++-
+ Imakefile   | 16 ++++++++++++----
+ dial.c      | 34 +++++++++++++++++-----------------
+ xtel.lignes |  6 +++++-
+ 4 files changed, 38 insertions(+), 23 deletions(-)
+
+diff --git a/Config.tmpl b/Config.tmpl
+index 5c52b5c..5b4fa15 100644
+--- a/Config.tmpl
++++ b/Config.tmpl
+@@ -50,7 +50,10 @@
+ /*#define REDHAT*/
+ 
+ /* Pour la distribution Debian/GNU-Linux */
+-#define DEBIAN
++/*#define DEBIAN*/
++
++/* Pour la distribution NixOS Linux */
++#define NIXOS
+ 
+ /* Pas de popup-menu (pb LessTif) */
+ #define DONT_USE_POPUP
+diff --git a/Imakefile b/Imakefile
+index 93fb5ac..7919d95 100644
+--- a/Imakefile
++++ b/Imakefile
+@@ -17,7 +17,7 @@ XCOMM Modified for Debian GNU/Linux by Guillaume Morin and Eric Delaunay
+ 
+ BITMAPSDIR= bitmaps
+ PIXMAPSDIR= pixmaps
+-XTELDIR=$(LIBDIR)/xtel
++XTELDIR=$(out)
+ WIDGETS=Widgets
+ LWIDGETS=-L$(WIDGETS) -l$(WIDGETS)
+ XSRA=Xsra
+@@ -82,9 +82,9 @@ SYSLOGCFLAGS= -DUSE_SYSLOG
+ WINCFLAGS= -DWINDAUBE
+ #endif
+ 
+-#ifdef DEBUG_XTELD
++/*#ifdef DEBUG_XTELD*/
+ XTELDFLAGS= -DDEBUG_XTELD
+-#endif
++/*#endif*/
+ 
+ #ifdef DONT_USE_POPUP
+ POPUPFLAGS= -DDONT_USE_POPUP
+@@ -105,6 +105,13 @@ SVR4CFLAGS= -DSVR4
+       XTELCFGDIR = /etc/xtel
+       XTELLOGDIR = /var/log
+          SBINDIR = /usr/sbin
++#else
++#ifdef NIXOS
++      XTELLIGNES = xtel.lignes
++    XTELSERVICES = xtel.services
++      XTELCFGDIR = /etc/xtel
++      XTELLOGDIR = /var/run/xtel
++         SBINDIR = $(BINDIR)
+ #else
+       XTELLIGNES = xtel.lignes
+     XTELSERVICES = xtel.services
+@@ -112,6 +119,7 @@ SVR4CFLAGS= -DSVR4
+       XTELLOGDIR = $(XTELDIR)
+          SBINDIR = $(BINDIR)
+ #endif
++#endif
+ 
+ CONF_DEFINES  = '-DFICHIER_DEFINITION_LIGNES="$(XTELCFGDIR)/$(XTELLIGNES)"' \
+ 		  '-DFICHIER_DEFINITION_SERVICES="$(XTELCFGDIR)/$(XTELSERVICES)"'
+@@ -136,7 +144,7 @@ EXTRA_LOAD_FLAGS = -L/usr/ucblib -lucb -lgen
+ #endif /* lectra */
+ #else
+ #ifdef LinuxArchitecture
+-#if defined(REDHAT) || defined(DEBIAN)
++#if defined(REDHAT) || defined(DEBIAN) || defined(NIXOS)
+ DIAL_DEFINES = '-DFICHIER_LCK="/var/lock/LCK..%s"' 
+ #else
+ DIAL_DEFINES = '-DFICHIER_LCK="/usr/spool/uucp/LCK..%s"' 
+diff --git a/dial.c b/dial.c
+index 6b4d35c..ff59b23 100644
+--- a/dial.c
++++ b/dial.c
+@@ -125,13 +125,13 @@ char *telno, *device;
+ 		continue;
+ 	    }
+ 	    /* Si c'est le bon device, on tente du poser le lock */
+-	    if (try_lock( nom_lck ) < 0) {
+-		/* le modem est occupé... on passe au suivant */
+-		numero_ligne++;
+-	    }
+-	    else {
++	    /* if (try_lock( nom_lck ) < 0) { */
++	    /* 	/\* le modem est occupé... on passe au suivant *\/ */
++	    /* 	numero_ligne++; */
++	    /* } */
++	    /* else { */
+ 		break;
+-	    }
++	    /* } */
+ 	}
+ 	if (numero_ligne >= nb_lignes) {
+ 	    /* Dommage, c'etait la derniere :-( */
+@@ -143,17 +143,17 @@ char *telno, *device;
+ 	log_debug ("Ouverture de la ligne %s", definition_lignes[numero_ligne].nom);
+ #endif
+ 	/* ouvre la ligne */
+-	if (definition_lignes[numero_ligne].tempo > 0) {
+-	    /*
+-	     * Pour les vieux modems, dans certains cas, il faut réinitialiser le
+-	     * port série avant de pouvoir communiquer avec le modem.
+-	     * Ceci est effectué en ouvrant puis refermant le device avec un certain
+-	     * délai entre chaque opération.
+-	     */
+-	    fd = open (definition_lignes[numero_ligne].nom, O_RDWR|O_NDELAY);
+-	    usleep(definition_lignes[numero_ligne].tempo);
+-	    close(fd);
+-	}
++	/* if (definition_lignes[numero_ligne].tempo > 0) { */
++	/*     /\* */
++	/*      * Pour les vieux modems, dans certains cas, il faut réinitialiser le */
++	/*      * port série avant de pouvoir communiquer avec le modem. */
++	/*      * Ceci est effectué en ouvrant puis refermant le device avec un certain */
++	/*      * délai entre chaque opération. */
++	/*      *\/ */
++	/*     fd = open (definition_lignes[numero_ligne].nom, O_RDWR|O_NDELAY); */
++	/*     usleep(definition_lignes[numero_ligne].tempo); */
++	/*     close(fd); */
++	/* } */
+ 	if ((fd = open (definition_lignes[numero_ligne].nom, O_RDWR|O_NDELAY)) < 0) {
+ 	    /* Derniere ligne, on passe l'erreur */
+ 	    if (numero_ligne == nb_lignes-1) {
+diff --git a/xtel.lignes b/xtel.lignes
+index d637670..b519e2b 100644
+--- a/xtel.lignes
++++ b/xtel.lignes
+@@ -2,7 +2,7 @@
+ # Fichier xtel.lignes
+ #
+ # Config V.23, modem HAYES generique
+-modem0,/dev/modem,1200,7,E,\dat\r OK atm1b2\r OK atdt\T\r CONNECT,30
++#modem0,/dev/modem,1200,7,E,\dat\r OK atm1b2\r OK atdt\T\r CONNECT,30
+ 
+ # Config TVR, Djinn-Flash 9600
+ #le_tvr,/dev/modem,9600,8,N,\dat&fm1e0&k3+xm3\r OK atdt\T\r CONNECT,30
+@@ -24,3 +24,7 @@ modem0,/dev/modem,1200,7,E,\dat\r OK atm1b2\r OK atdt\T\r CONNECT,30
+ 
+ # Minitel 1
+ #modem0,/dev/modem,1200,7,E,minitel1,30
++
++# Un pty cree par exemple par socat, qui se connecte directement a
++# un serveur applicatif
++modem0,/var/run/xtel/socket,1200,7,E,\T\x13\x53,10
+-- 
+2.42.0
+

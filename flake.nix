@@ -21,6 +21,7 @@
             python3Packages.setuptools
 
             # Development tools/testing utils
+            socat
             sox
             twinkle
 
@@ -43,6 +44,13 @@ sshserver() {
 }
 cleanserver() {
   rm server.qcow2
+}
+xtelsocket() {
+  sudo socat -ls -lh -x TCP4:127.0.0.1:3615  PTY,link=/var/run/xtel/socket,user=xtel,group=xtel
+}
+runxtel() {
+  # port 1313 is "bmc-patroldb" in /etc/services, let's go with that
+  xtel -serveur localhost -service bmc-patroldb
 }
 PS1="(asterisk-minitel)"$PS1
 '';
@@ -68,11 +76,22 @@ cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
         };
         packages.xtel = pkgs.callPackage ./xtel.nix {};
       }) // {
-        overlays.default = final: prev: {
-          minitel-server = self.packages."${final.system}".minitel-server;
-          asterisk-softmodem = self.packages."${final.system}".asterisk-softmodem;
+        overlays = {
+          default = final: prev: {
+            minitel-server = self.packages."${final.system}".minitel-server;
+            asterisk-softmodem = self.packages."${final.system}".asterisk-softmodem;
+            xtel = self.packages."${final.system}".xtel;
+          };
+          minitel-server = final: prev: {
+            minitel-server = self.packages."${final.system}".minitel-server;
+            asterisk-softmodem = self.packages."${final.system}".asterisk-softmodem;
+          };
+          xtel = final: prev: {
+            xtel = self.packages."${final.system}".xtel;
+          };
         };
-        nixosModules.minitel-server = import ./nixos-module.nix;
+        nixosModules.minitel-server = import ./minitel-server-module.nix;
+        nixosModules.xtel = import ./xtel-module.nix;
         nixosConfigurations.server = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = attrs;

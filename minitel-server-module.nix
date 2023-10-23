@@ -66,7 +66,7 @@ in {
 
   config = with lib; mkIf cfg.enable {
     nixpkgs.overlays = [
-      self.overlays.default
+      self.overlays.minitel-server
     ];
 
     systemd.services.minitel-server = {
