@@ -66,6 +66,7 @@ cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
             ln -s $out/lib/python3*/site-packages/minitel/assets $out/assets
           '';
         };
+        packages.xtel = pkgs.callPackage ./xtel.nix {};
       }) // {
         overlays.default = final: prev: {
           minitel-server = self.packages."${final.system}".minitel-server;

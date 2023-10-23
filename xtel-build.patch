@@ -1,0 +1,48 @@
+From a47278121eee7c54d00bc58a916245fc4c344929 Mon Sep 17 00:00:00 2001
+From: Uriel Corfa <korfuri@gmail.com>
+Date: Mon, 23 Oct 2023 14:33:35 +0200
+Subject: [PATCH] Build system changes to support Nix builds
+
+---
+ Config.tmpl | 2 +-
+ Imakefile   | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Config.tmpl b/Config.tmpl
+index 5c52b5c..7b4214a 100644
+--- a/Config.tmpl
++++ b/Config.tmpl
+@@ -50,7 +50,7 @@
+ /*#define REDHAT*/
+ 
+ /* Pour la distribution Debian/GNU-Linux */
+-#define DEBIAN
++/*#define DEBIAN*/
+ 
+ /* Pas de popup-menu (pb LessTif) */
+ #define DONT_USE_POPUP
+diff --git a/Imakefile b/Imakefile
+index 93fb5ac..8d55b22 100644
+--- a/Imakefile
++++ b/Imakefile
+@@ -17,7 +17,7 @@ XCOMM Modified for Debian GNU/Linux by Guillaume Morin and Eric Delaunay
+ 
+ BITMAPSDIR= bitmaps
+ PIXMAPSDIR= pixmaps
+-XTELDIR=$(LIBDIR)/xtel
++XTELDIR=$(out)
+ WIDGETS=Widgets
+ LWIDGETS=-L$(WIDGETS) -l$(WIDGETS)
+ XSRA=Xsra
+@@ -108,7 +108,7 @@ SVR4CFLAGS= -DSVR4
+ #else
+       XTELLIGNES = xtel.lignes
+     XTELSERVICES = xtel.services
+-      XTELCFGDIR = $(XTELDIR)
++      XTELCFGDIR = $(XTELDIR)/etc
+       XTELLOGDIR = $(XTELDIR)
+          SBINDIR = $(BINDIR)
+ #endif
+-- 
+2.42.0
+
