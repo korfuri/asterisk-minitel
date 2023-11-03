@@ -3,7 +3,6 @@ import minitel.tc as tc
 from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 import os
-from PIL import Image
 
 
 @register("annu", ["annuaire", "3611"])
@@ -40,14 +39,3 @@ class SlideshowApp(BaseApp):
             logging.info("Next slide: %s", f)
             self.m.sendfile(asset("slideshow/" + f))
             self.m.handleInputsUntilBreak()
-
-@register("testpil")
-class ImageApp(BaseApp):
-    def interact(self):
-        image = Image.open("/home/korfuri/Code/PyMinitel/test/testimage1.jpg")
-        image = image.resize((38, 22), Image.LANCZOS)
-        import minitel.ImageMinitel
-        imi = minitel.ImageMinitel.ImageMinitel(self.m)
-        imi.importer(image)
-        imi.envoyer(1,1)
-        self.m.handleInputsUntilBreak()
