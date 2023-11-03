@@ -81,10 +81,10 @@ def register(name, aliases=None):
 
     def decorate(cls):
         assert(isinstance(cls, type))
-        apps_directory[name] = cls
+        apps_directory[name.lower().strip()] = cls
         if aliases is not None:
             for a in aliases:
-                apps_directory[a] = cls
+                apps_directory[a.lower().strip()] = cls
         return cls
     return decorate
 
@@ -101,6 +101,7 @@ def appForCode(code):
     code = code.lower().strip()
     logging.info("Dispatching for %s", code)
     if code not in apps_directory:
+        logging.info("Unknown code %s, known codes are: %s", code, apps_directory)
         code = "index"
     return apps_directory.get(code)
 
