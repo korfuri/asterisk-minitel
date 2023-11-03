@@ -40,10 +40,12 @@ class QuestEntry(Base):
     
 engine = None
 
-def GetEngine():
+def GetEngine(db_path=None):
     global engine
     if engine is None:
-        engine = create_engine(flags.FLAGS.db_path)
+        if db_path is None:
+            db_path = flags.FLAGS.db_path
+        engine = create_engine(db_path)
     return engine
 
 

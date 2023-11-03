@@ -40,6 +40,8 @@ class QuestsSlideshowApp(BaseApp):
             logging.info("Next slide: %s", f)
             self.m.sendfile(asset("quests/" + f))
             self.m.handleInputsUntilBreak()
+            if self.m.lastControlKey() == tc.kSommaire:
+                break
 
 # Todo: can i find a way to generate those iteratively?
 # Wrapping the class declaration in a loop leads to re-declaration
