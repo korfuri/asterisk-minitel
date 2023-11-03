@@ -24,18 +24,3 @@ class AnnuaireApp(BaseApp):
         self.m.keyHandlers[tc.kGuide] = do_sommaire
 
         self.m.handleInputsUntilBreak()
-
-@register("clubmed")
-class ClubMedApp(BaseApp):
-    def interact(self):
-        self.m.sendfile(asset("clubmed.vdt"))
-        self.m.handleInputsUntilBreak()
-
-@register("slides")
-class SlideshowApp(BaseApp):
-    def interact(self):
-        files = os.listdir(asset("slideshow"))
-        for f in files:
-            logging.info("Next slide: %s", f)
-            self.m.sendfile(asset("slideshow/" + f))
-            self.m.handleInputsUntilBreak()
