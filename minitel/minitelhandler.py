@@ -8,20 +8,25 @@ import minitel.apps_annuaire
 import minitel.apps_forking
 import minitel.apps_elections
 import minitel.apps_annonces
+import minitel.apps_system
 
 
 class MinitelHandler(socketserver.BaseRequestHandler):
     def handle(self):
         logging.info("Accepting a connection")
         m = minitel.tc.MinitelTerminal(self.request)
-        try:
-            m.start()
-            m.reset()
-            app = appForCode("index")
-            while True:
+        m.start()
+        m.reset()
+        app = appForCode("index")
+        while True:
+            try:
                 h = app(m)
                 h.begin()
                 h.interact()
                 app = h.nextApp
-        except minitel.tc.UserDisconnected:
-            logging.info("User disconnected")
+            except minitel.tc.UserDisconnected:
+                logging.info("User disconnected")
+                break
+            except Exception as e:
+                logging.info("Triggered error page, error was: %s", e)
+                app = apps_system.ErrorApp
