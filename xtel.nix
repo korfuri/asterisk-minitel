@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
   ];
 
    configurePhase = ''
-    imake -DUseInstalled -I/nix/store/lzq8ly43klcnvfiqcsc7770cvzr773s6-imake-1.0.9/lib/X11/config
+    imake -DUseInstalled -I${imake}/lib/X11/config
   '';
   
   buildPhase = ''
