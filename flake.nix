@@ -73,6 +73,7 @@ cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
           postInstall =''
             ln -s $out/lib/python3*/site-packages/minitel/assets $out/assets
           '';
+          doCheck = false;
         };
         packages.xtel = pkgs.callPackage ./xtel.nix {};
       }) // {

@@ -23,6 +23,8 @@ class FakeSocket(object):
 
 class AppsCanInteractTest(absltest.TestCase):
     def setUp(self):
+        # Apps that rely on the database need it to be setup first.
+        # `sqlite://` is an in-memory database path.
         engine = minitel.database.GetEngine(db_path='sqlite://')
         minitel.database.Migrate()
 
@@ -32,6 +34,7 @@ class AppsCanInteractTest(absltest.TestCase):
                 socket = FakeSocket(minitel.tc.SEP + minitel.tc.kModemConnect)
                 m = minitel.tc.MinitelTerminal(socket)
                 m.start()
+                # Pretend the user hit the Sommaire key immediately
                 socket.toReceive = (minitel.tc.SEP + minitel.tc.kSommaire)
                 m.reset()
                 app = appclass(m)
