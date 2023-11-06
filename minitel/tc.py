@@ -219,7 +219,7 @@ class MinitelTerminal:
 
     #  ##############################################
     #  Termcap facilities and visual effects.
-    #  See also termcap constants above in the file.
+    #  See also termcap constants in constants.py
     #  ##############################################
 
     def pos(self, l, c=1):
@@ -250,17 +250,12 @@ class MinitelTerminal:
     def clear(self):
         """Clears the screen and resets terminal state."""
         self.pos(0, 1)
-        logging.debug("clear screen")
         self._write(tClearScreen)
-        logging.debug("clear home row")
         self._write(tMoveCursor + tLine(0) + tCol(1) + b'\x18\x0a') # Go to home row, clear it
-        logging.debug("set mode page")
         self._write(tModePage)
-        logging.debug("set kbd upper")
         self._write(tKeyboardUpper)
 
     def setMode(self, mode):
-        logging.debug("Set mode: %s", mode)
         self._write(ESC + tPRO2 + mode)
 
     def textBox(self, line, col, width, height, text, effects=b''):

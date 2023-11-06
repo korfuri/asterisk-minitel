@@ -8,6 +8,8 @@ import subprocess
 
 
 class BaseApp(object):
+    nextApp = 'index'
+
     def __init__(self, m):
         self.m = m
 
@@ -98,6 +100,8 @@ def appForCode(code):
 
     """
     global apps_directory
+    if type(code) == type:
+        return code
     code = code.lower().strip()
     logging.info("Dispatching for %s", code)
     if code not in apps_directory:
@@ -106,7 +110,7 @@ def appForCode(code):
     return apps_directory.get(code)
 
 
-@register("index", ["3615"])
+@register("3615")
 class Index3615App(BaseApp):
     def interact(self):
         global apps_directory
@@ -116,5 +120,3 @@ class Index3615App(BaseApp):
         self.m.handleInputsUntilBreak()
         logging.debug("Code: %s", code.contents)
         self.nextApp = appForCode(code.contents)
-
-BaseApp.nextApp = Index3615App
