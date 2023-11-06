@@ -10,6 +10,8 @@
             python3Packages.absl-py
             python3Packages.pillow
             python3Packages.sqlalchemy
+            python3Packages.flask
+            python3Packages.flask-admin
           ];
       in rec {
         devShells.default = pkgs.mkShell {
