@@ -2,7 +2,7 @@ import logging
 import minitel.tc as tc
 from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
-from sqlalchemy import select, func
+from sqlalchemy import select, func, desc
 from sqlalchemy.orm import Session
 from minitel.database import GetEngine, QuestEntry
 
@@ -11,7 +11,7 @@ from minitel.database import GetEngine, QuestEntry
 class FessteHome(BaseApp):
     def getLeaderboard(self):
         with Session(GetEngine()) as session:
-            stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by("count")
+            stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by(desc("count")).limit(9)
             return [(x.count, x.nick) for x in session.execute(stmt)]
 
     def interact(self):
