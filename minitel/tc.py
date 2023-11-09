@@ -249,7 +249,7 @@ class MinitelTerminal:
 
     def clear(self):
         """Clears the screen and resets terminal state."""
-        self.pos(0, 1)
+        self.pos(1, 1)
         self._write(tClearScreen)
         self._write(tMoveCursor + tLine(0) + tCol(1) + b'\x18\x0a') # Go to home row, clear it
         self._write(tModePage)
@@ -281,7 +281,7 @@ class MinitelTerminal:
         """Resets all terminal state."""
         self.resetInputFields()
         self.resetKeyHandlers()
-        self.setMode(tMixteToVideotex)
+        # self.setMode(tMixteToVideotex)
         self.clear()
         self.HandleCharacter = self.handleCharacterToTextInput
 

@@ -11,7 +11,8 @@
             python3Packages.pillow
             python3Packages.sqlalchemy
             python3Packages.flask
-            python3Packages.flask-admin
+            # python3Packages.flask-admin
+            python3Packages.websockets
           ];
       in rec {
         devShells.default = pkgs.mkShell {
