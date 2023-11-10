@@ -1,14 +1,14 @@
 {
   inputs = {
+    # Pin nixpkgs at this version as flask-admin is currently broken (well, its dependencies are)
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils/main";
   };
   outputs = { self, nixpkgs, flake-utils, ... }@attrs:
     (flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
+      let pkgs = nixpkgs.legacyPackages.${system}.extend self.overlays.default;
           pythonInputs = with pkgs; [
             python3Packages.absl-py
-            python3Packages.pillow
             python3Packages.sqlalchemy
             python3Packages.flask
             # python3Packages.flask-admin

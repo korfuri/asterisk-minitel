@@ -3,12 +3,12 @@ import minitel.tc as tc
 import socketserver
 from minitel.apps import appForCode
 from absl import flags
-import websockets
 
 flags.DEFINE_bool("debug_reload_apps", False, "Debug only: reload apps dynamically on each interaction")
 
 import minitel.all_apps
 
+# TODO deduplicate these
 
 class MinitelHandler(socketserver.BaseRequestHandler):
     def handle(self):
@@ -56,9 +56,6 @@ class WebsocketHandler():
                 break
             except IOError as e:
                 logging.info("Socket error: %s", e)
-                break
-            except websockets.exceptions.ConnectionClosed as e:
-                logging.info("Websocket closed: %s", e)
                 break
             except Exception as e:
                 logging.info("Triggered error page, error was: %s", e)

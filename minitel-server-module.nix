@@ -10,6 +10,18 @@ in {
       description = lib.mdDoc "Listen port for minitel-server";
     };
 
+    webPort = mkOption {
+      type = types.port;
+      default = 3680;
+      description = lib.mdDoc "Listen port for minitel-server's web app";
+    };
+
+    webSocketPort = mkOption {
+      type = types.port;
+      default = 3611;
+      description = lib.mdDoc "Listen port for minitel-server's websocket service";
+    };
+
     address = mkOption {
       type = types.str;
       default = "127.0.0.1";
@@ -82,7 +94,18 @@ in {
         StateDirectory = cfg.dataDir;
 
         # TODO ip, port, dbPath
-        ExecStart = "${cfg.package}/bin/main.py --address ${cfg.address} --port ${toString cfg.port} --db_path ${cfg.dbPath} --assets_path ${cfg.package}/assets ${cfg.extraFlags}";
+        ExecStart = ''
+          ${cfg.package}/bin/main.py \
+            --tty_address ${cfg.address} \
+            --tty_port ${toString cfg.port} \
+            --web_address ${cfg.address} \
+            --web_port ${toString cfg.webPort} \
+            --ws_address ${cfg.address} \
+            --ws_port ${toString cfg.webSocketPort} \
+            --db_path ${cfg.dbPath} \
+            --assets_path ${cfg.package}/assets \
+            ${cfg.extraFlags}
+        '';
 
         Restart = "on-failure";
       };

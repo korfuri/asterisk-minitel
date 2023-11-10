@@ -12,37 +12,46 @@ class SocketAdapter(object):
         self.buffer = ''
 
     def send(self, data):
-        if data.find(b'\xff') > 0:
-            data = data[:data.find(b'\xff')-1]
-        d = data.decode()
-        self.ws.send(d)
-        return len(d)
+        try:
+            if data.find(b'\xff') > 0:
+                data = data[:data.find(b'\xff')-1]
+            d = data.decode()
+            self.ws.send(d)
+            return len(d)
+        except websockets.exceptions.ConnectionClosed as e:
+            raise IOError(e)
 
     def recv(self, maxlen=1):
-        if len(self.buffer) < maxlen:
-            data = self.ws.recv()
-            self.buffer = self.buffer + data
-        if len(self.buffer) >= maxlen:
-            data = self.buffer[:maxlen]
-            self.buffer = self.buffer[maxlen:]
-        else:
-            data = ''
-        return data.encode()
+        try:
+            if len(self.buffer) < maxlen:
+                data = self.ws.recv()
+                self.buffer = self.buffer + data
+            if len(self.buffer) >= maxlen:
+                data = self.buffer[:maxlen]
+                self.buffer = self.buffer[maxlen:]
+            else:
+                data = ''
+            return data.encode()
+        except websockets.exceptions.ConnectionClosed as e:
+            raise IOError(e)
 
 
 def handler(ws):
     mh = WebsocketHandler()
     mh.handle(SocketAdapter(ws))
 
+def startWebsocketHandler(*listener):
+    with websockets.sync.server.serve(handler, *listener) as server:
+        logging.info("Websockets listening on ws://%s:%s", *listener)
+        server.serve_forever()
+
+
 def main(argv):
     logging.basicConfig(level=logging.DEBUG)
     logging.debug("Starting, debug logging is enabled")
     Migrate()
-    # TODO ws_port flag
-    with websockets.sync.server.serve(handler, 'localhost', 3611) as server:
-        logging.info("Listening on ws://%s:%s", 'localhost', 3611)
-        server.serve_forever()
-    
+    startWebsocketHandler()
+
 
 if __name__ == '__main__':
     app.run(main)

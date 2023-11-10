@@ -37,8 +37,8 @@ function minitel(screenCanvasId, color, speed, keyboardId, bipId, webSocketURL) 
 minitel(
     "minitel-screen",
     true,
-    1200,
+    9600,
     "miedit",
     "minitel-bip",
-    "ws://localhost:3611/ws"
+    "ws://localhost:3611/"
 )
