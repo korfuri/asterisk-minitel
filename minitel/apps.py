@@ -110,13 +110,6 @@ def appForCode(code):
     return apps_directory.get(code)
 
 
-@register("3615")
-class Index3615App(BaseApp):
-    def interact(self):
-        global apps_directory
-        self.m.sendfile(asset("3615.vdt"))
-        code = self.m.addInputField(4, 9, 12, "")
-        self.m.keyHandlers[tc.kEnvoi] = tc.Break
-        self.m.handleInputsUntilBreak()
-        logging.debug("Code: %s", code.contents)
-        self.nextApp = appForCode(code.contents)
+def reset_directory():
+    global apps_directory
+    apps_directory = {}

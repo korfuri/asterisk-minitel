@@ -37,8 +37,8 @@ class SocketAdapter(object):
 
 
 def handler(ws):
-    mh = WebsocketHandler()
-    mh.handle(SocketAdapter(ws))
+    mh = WebsocketHandler(SocketAdapter(ws))
+    mh.handle()
 
 def startWebsocketHandler(*listener):
     with websockets.sync.server.serve(handler, *listener) as server:

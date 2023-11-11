@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from minitel.minitelhandler import MinitelHandler
+from minitel.minitelhandler import TCPHandler
 from minitel.database import Migrate
 from minitel.websockets import startWebsocketHandler
 from minitel.web import startWebServer
@@ -34,7 +34,7 @@ def main(argv):
         web_thread.start()
     
     listen = (flags.FLAGS.tty_address, flags.FLAGS.tty_port)
-    with socketserver.ThreadingTCPServer(listen, MinitelHandler) as server:
+    with socketserver.ThreadingTCPServer(listen, TCPHandler) as server:
         logging.info("Listening on %s:%s", *listen)
         try:
             server.serve_forever()
