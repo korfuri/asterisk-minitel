@@ -13,7 +13,7 @@ class BaseQuestApp(BaseApp):
         self.m.sendfile(asset("quests/%s.vdt" % self.name))
         self.m.pos(24, 1)
         self.m.print("Ton nom pour la gloire: ........ > ")
-        self.m._write(tc.tVideoInverseStart)
+        self.m._write(tc.ESC + tc.tVideoInverseStart)
         self.m.print("ENVOI")
         nick = self.m.addInputField(24, 24, 8, "")
 
@@ -27,12 +27,13 @@ class BaseQuestApp(BaseApp):
                     self.nextApp = appForCode("index")  # Should this be a confirmation screen?
             except:
                 self.nextApp = appForCode("index")  # This happens when someone tries to submit twice. Fun error page instead?
+            return tc.Break
 
         self.m.keyHandlers[tc.kEnvoi] = do_save
         self.m.handleInputsUntilBreak()
 
 
-@register("sys/quests")
+# @register("sys/quests")
 class QuestsSlideshowApp(BaseApp):
     def interact(self):
         files = os.listdir(asset("quests"))

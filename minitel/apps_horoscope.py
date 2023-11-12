@@ -17,14 +17,20 @@ class HoroscopeApp(BaseApp):
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()
         self.show_results()
-    
+
     def show_results(self):
         self.m.reset()
+        for i in range(4):
+            self.m.sendfile(asset("fesste/HOROSCOPEANIM.vdt"))
         fortune = random.choice(self.fortunes)
         self.m.clear()
         self.m.pos(3, 1)
         self.m._write(tc.tFgColor(tc.clYellow))
         self.m.print(fortune)
+        self.m.pos(24, 24)
+        self.m.print("Retour ")
+        self.m._write(tc.ESC + tc.tVideoInverseStart)
+        self.m.print("SOMMAIRE")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()
 
