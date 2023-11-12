@@ -34,9 +34,11 @@ function minitel(screenCanvasId, color, speed, keyboardId, bipId, webSocketURL) 
         })
 }
 
-var wsHost = location.host
+var wsHost = location.host;
+var wsProto = "wss";
 if (wsHost == "127.0.0.1:8080") {
     wsHost = "127.0.0.1:3611";
+    wsProto = "ws";
 }
 
 minitel(
@@ -45,5 +47,5 @@ minitel(
     9600,
     "miedit",
     "minitel-bip",
-    "ws://" + wsHost + "/ws"
+    wsProto + "://" + wsHost + "/ws"
 )
