@@ -30,7 +30,7 @@ in {
 
     dbPath = mkOption {
       type = types.str;
-      default = "sqlite:///${cfg.dataDir}/db.sqlite";
+      default = "sqlite:///var/lib/${cfg.dataDir}/db.sqlite";
       description = lib.mdDoc "Database path to connect to, in SQLAlchemy engine path format.";
     };
 
