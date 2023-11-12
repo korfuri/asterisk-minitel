@@ -75,7 +75,7 @@ class InputField:
         """Handles a key event from the user."""
         if c == b'\n' or c == b'\r':
             return tBell
-        if len(self.contents) + len(c) >= self.maxlength:
+        if len(self.contents) + len(c) > self.maxlength:
             return tBell
         self.contents = self.contents + c.decode('ascii')
         return c
