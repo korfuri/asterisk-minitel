@@ -1,6 +1,5 @@
 {
   inputs = {
-    # Pin nixpkgs at this version as flask-admin is currently broken (well, its dependencies are)
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils/main";
   };
@@ -12,6 +11,7 @@
             python3Packages.sqlalchemy
             python3Packages.flask
             # python3Packages.flask-admin
+            python3Packages.waitress
             python3Packages.websockets
           ];
       in rec {
