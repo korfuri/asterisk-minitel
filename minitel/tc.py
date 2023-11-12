@@ -56,20 +56,28 @@ class InputField:
     TODO: consider multi-line fields
 
     """
-    def __init__(self, line, col, maxlength, contents, color = b''):
+    def __init__(self, line, col, columns, contents, color = b'', lines=1):
         self.line = line
         self.col = col
-        self.maxlength = maxlength
+        self.maxlength = columns*lines
+        self.columns = columns
+        self.lines = lines
         self.contents = contents
         assert(isinstance(color, bytes))
         self.color = color
 
     def display(self):
-        return (tMoveCursor + tLine(self.line) + tCol(self.col) + self.color +
-                (abytes('.') * self.maxlength) +
-                tMoveCursor + tLine(self.line) + tCol(self.col) + self.color +
-                abytes(self.contents)
-                )
+        r = bytes()
+        for l in range(self.lines):
+            r = r + tMoveCursor + tLine(self.line + l) + tCol(self.col) + self.color
+            r = r + (abytes('.') * self.columns)
+        r = r + tMoveCursor + tLine(self.line) + tCol(self.col) + self.color
+        for l in range(self.lines):
+            lineText = self.contents[(l*self.columns):((l+1)*self.columns)]
+            if lineText != '':
+                r = r + tMoveCursor + tLine(self.line + l) + tCol(self.col) + self.color
+                r = r + abytes(lineText)
+        return r
 
     def handleChar(self, c):
         """Handles a key event from the user."""
@@ -78,7 +86,11 @@ class InputField:
         if len(self.contents) + len(c) > self.maxlength:
             return tBell
         self.contents = self.contents + c.decode('ascii')
-        return c
+        idx = len(self.contents) - 1
+        return (tMoveCursor +
+                tLine(self.line + (idx // self.columns)) +
+                tCol(self.col + (idx % self.columns)) +
+                c)
 
     def correct(self):
         self.contents = self.contents[:-1]

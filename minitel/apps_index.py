@@ -34,6 +34,6 @@ class GuideApp(BaseApp):
         self.m.sendfile(asset("GUIDE.vdt"))
         self.m.pos(7, 3)
         for name, desc in guide_directory.items():
-            self.m.print(name)
-            self.m.print('\r\n  ')
+            self.m._write(tc.tESC + tc.tVideoInverseStart + name + tc.ESC + tc.tVideoInverseEnd)
+            self.m.print(" %s\r\n " % desc[:(35-len(name))])
         self.m.handleInputsUntilBreak()

@@ -43,8 +43,9 @@ class AnnoncesApp(BaseApp):
 
     def compose(self):
         self.m.sendfile(asset("petitesannonces_compose.vdt"))
+        self.m.sendfile(asset("coeur.vdt"))
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
-        annonce = self.m.addInputField(7, 2, 37, "")
+        annonce = self.m.addInputField(7, 3, 36, "", lines=3)
         self.m.handleInputsUntilBreak()
         if self.m.lastControlKey() == tc.kEnvoi:
             data = annonce.contents.strip()

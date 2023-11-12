@@ -30,7 +30,7 @@ in {
 
     dbPath = mkOption {
       type = types.str;
-      default = "sqlite://";
+      default = "sqlite:///./db.sqlite";
       description = lib.mdDoc "Database path to connect to, in SQLAlchemy engine path format.";
     };
 
@@ -93,7 +93,6 @@ in {
 
         StateDirectory = cfg.dataDir;
 
-        # TODO ip, port, dbPath
         ExecStart = ''
           ${cfg.package}/bin/main.py \
             --tty_address ${cfg.address} \
