@@ -18,7 +18,7 @@ class BaseQuestApp(BaseApp):
         nick = self.m.addInputField(24, 24, 8, "")
 
         def do_save():
-            q = QuestEntry(nick=nick.contents.strip(), quest=self.name)
+            q = QuestEntry(nick=nick.contents.strip().upper(), quest=self.name)
             logging.debug("Saving quest record %s", q)
             try:
                 with Session(GetEngine()) as session:
