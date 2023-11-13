@@ -38,3 +38,9 @@ class FessteHome(BaseApp):
                 c = 'horoscope'
         logging.debug("Code: %s", c)
         self.nextApp = appForCode(c)
+
+@register("consentement")
+class ConsentementApp(BaseApp):
+    def interact(self):
+        self.m.sendfile(asset("fesste/consentement.vdt"))
+        self.m.handleInputsUntilBreak()
