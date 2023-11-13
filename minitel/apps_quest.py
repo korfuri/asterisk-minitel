@@ -13,7 +13,7 @@ class BaseQuestApp(BaseApp):
         self.m.sendfile(asset("quests/%s.vdt" % self.name))
         self.m.pos(24, 1)
         self.m.print("Ton nom pour la gloire: ........ > ")
-        self.m._write(tc.ESC + tc.tVideoInverseStart)
+        self.m.setInverse()
         self.m.print("ENVOI")
         nick = self.m.addInputField(24, 24, 8, "")
 

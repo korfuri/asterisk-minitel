@@ -11,7 +11,7 @@ class HoroscopeApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("fesste/HOROSCOPE.vdt"))
         self.m.pos(24, 31)
-        self.m._write(tc.ESC + tc.tVideoInverseStart)
+        self.m.setInverse()
         self.m.print("ENVOI")
         signe = self.m.addInputField(24, 28, 2, "")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
@@ -29,7 +29,7 @@ class HoroscopeApp(BaseApp):
         self.m.print(fortune)
         self.m.pos(24, 24)
         self.m.print("Retour ")
-        self.m._write(tc.ESC + tc.tVideoInverseStart)
+        self.m.setInverse()
         self.m.print("SOMMAIRE")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()

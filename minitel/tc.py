@@ -294,6 +294,18 @@ class MinitelTerminal:
                 # else:
                 #     self._write(b' ' + tRepeatPrev(padding))
 
+    def setInverse(self):
+        self._write(ESC + tVideoInverseStart)
+
+    def setNotInverse(self):
+        self._write(ESC + tVideoInverseEnd)
+
+    def cursorOn(self):
+        self._write(tCursorOn)
+
+    def cursorOff(self):
+        self._write(tCursorOff)
+
     def reset(self):
         """Resets all terminal state."""
         self.resetInputFields()

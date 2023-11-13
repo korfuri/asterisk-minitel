@@ -1,6 +1,6 @@
 import logging
 import minitel.tc as tc
-from minitel.apps import BaseApp, register
+from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 
 @register("3615")
@@ -34,6 +34,8 @@ class GuideApp(BaseApp):
         self.m.sendfile(asset("GUIDE.vdt"))
         self.m.pos(7, 3)
         for name, desc in guide_directory.items():
-            self.m._write(tc.tESC + tc.tVideoInverseStart + name + tc.ESC + tc.tVideoInverseEnd)
+            self.m.setInverse()
+            self.m.print(name)
+            self.m.setNotInverse()
             self.m.print(" %s\r\n " % desc[:(35-len(name))])
         self.m.handleInputsUntilBreak()
