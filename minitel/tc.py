@@ -9,7 +9,8 @@ class ConnectionError(Exception):
 
 class ConnectionInterruptedError(ConnectionError):
     """Connection was interrupted, and reading/writing is impossible."""
-    pass
+    def __init__(self):
+        super().__init__("Connection interrupted")
 
 
 class NotAllDataSentError(ConnectionError):
@@ -20,16 +21,20 @@ class NotAllDataSentError(ConnectionError):
     ConnectionInterruptederror). But it's HIGHLY unlikely we'll run
     into this.
     """
-    pass
+    def __init__(self):
+        super().__init__("Not all data sent")
 
 
 class UserDisconnected(ConnectionError):
     """User requested to disconnect, terminating the session."""
-    pass
+    def __init__(self):
+        super().__init__("User disconnected")
 
 
 class ProtocolError(ConnectionError):
     """We couldn't make sense of a message we received."""
+    def __init__(self):
+        super().__init__("Protocol error")
 
 
 class Break:

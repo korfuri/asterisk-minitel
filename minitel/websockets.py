@@ -22,15 +22,20 @@ class SocketAdapter(object):
             raise IOError(e)
 
     def recv(self, maxlen=1):
+        """Read from the websocket.
+
+        If more than `maxlen` bytes are available to read (or are
+        already in the read buffer), store the remainder in the read
+        buffer. Only actually read from the websocket when the read
+        buffer is empty, i.e. make no attempt to read exactly `maxlen`
+        bytes.
+        """
         try:
-            if len(self.buffer) < maxlen:
-                data = self.ws.recv()
-                self.buffer = self.buffer + data
-            if len(self.buffer) >= maxlen:
-                data = self.buffer[:maxlen]
-                self.buffer = self.buffer[maxlen:]
+            if len(self.buffer) > 0:
+                data, self.buffer = self.buffer[:maxlen], self.buffer[maxlen:]
             else:
-                data = ''
+                data = self.ws.recv()
+                data, self.buffer = data[:maxlen], data[maxlen:]
             return data.encode()
         except websockets.exceptions.ConnectionClosed as e:
             raise IOError(e)
