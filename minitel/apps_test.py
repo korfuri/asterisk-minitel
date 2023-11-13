@@ -41,5 +41,33 @@ class AppsCanInteractTest(absltest.TestCase):
                 app.begin()
                 app.interact()
 
+class ClassType(object):
+    pass
+
+class AppDispatchTest(absltest.TestCase):
+    def setUp(self):
+        minitel.apps.apps_directory = {
+            "one": 1,
+            "two": 2,
+            "three": 3,
+            "four": 4,
+            "class": ClassType,
+            "index": 42,
+        }
+
+    def testAcceptsTypes(self):
+        self.assertEqual(ClassType, minitel.apps.appForCode("CLASS"))
+        self.assertEqual(ClassType, minitel.apps.appForCode(ClassType))
+        class UnlistedApp(object):
+            pass
+        self.assertEqual(UnlistedApp, minitel.apps.appForCode(UnlistedApp))
+
+    def testLevenshtein(self):
+        self.assertEqual(1, minitel.apps.appForCode("ONE"))
+        self.assertEqual(1, minitel.apps.appForCode("ONe"))
+        self.assertEqual(1, minitel.apps.appForCode("ONEE"))
+        self.assertEqual(1, minitel.apps.appForCode("OME"))
+        self.assertEqual(42, minitel.apps.appForCode("OMF"))
+
 if __name__ == '__main__':
     absltest.main()

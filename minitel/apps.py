@@ -3,6 +3,7 @@ import os
 import pty
 import minitel.tc as tc
 from minitel.assets import asset
+import pylev
 import select
 import subprocess
 
@@ -98,15 +99,27 @@ def appForCode(code):
     can also be invoked with code "index" to get back to the home
     page.
 
+    If a class is passed, then return this as the next app. If a
+    string is passed, do a best match using Levenshtein distance with
+    a max distance of 2, which allows for some typos.
     """
     global apps_directory
     if type(code) == type:
         return code
     code = code.lower().strip()
     logging.info("Dispatching for %s", code)
-    if code not in apps_directory:
+    best = (999, None)
+    for entry in apps_directory:
+        d = pylev.levenshtein(entry, code)
+        if d == 0:
+            return apps_directory.get(code)
+        if d < best[0]:
+            best = d, entry
+    if best[0] > 1:
         logging.info("Unknown code %s, known codes are: %s", code, apps_directory)
         code = "index"
+    else:
+        code = best[1]
     return apps_directory.get(code)
 
 
