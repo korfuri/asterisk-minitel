@@ -48,3 +48,9 @@ class ConsentementApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("fesste/consentement.vdt"))
         self.m.handleInputsUntilBreak()
+
+@register("fern")
+class FERNApp(BaseApp):
+    def interact(self):
+        self.m.sendfile(asset("fesste/FERN.vdt"))
+        self.m.handleInputsUntilBreak()
