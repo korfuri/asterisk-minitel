@@ -25,6 +25,10 @@ class FessteHome(BaseApp):
             self.m.print(' %8s' % nick)
         code = self.m.addInputField(24, 2, 12, "")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
+        def goGuide():
+            code.contents = 'guide'
+            return tc.Break
+        self.m.keyHandlers[tc.kGuide] = goGuide
         self.m.handleInputsUntilBreak()
         c = code.contents
         match c:

@@ -15,11 +15,13 @@ class Index3615App(BaseApp):
         self.nextApp = appForCode(code.contents)
 
 guide_directory = {
-    'ELECTIONS': 'Résultats des élections nationales',
-    'GISCORP': 'Informations et services de la GISCORP',
-    'ASTRO': 'Votre futur est dans les étoiles',
-    'ANNONCES': 'Faites la rencontre de votre vie, ou de votre nuit',
-    # regles
+    # Max length: ------------------------------|xxxx
+    'CONSENTEMENT': 'Commencez par ici',
+    'ELECTIONS': 'Resultats des elections',
+    'GISCORP': 'Entreprise innovante',
+    'ASTRO': 'Votre futur est dans les etoiles',
+    'ANNONCES': 'Faites de belles rencontres et ',
+    'FERN': 'La recherche fondamentale',
     # menus
     # lineup
     # ateliers
@@ -32,10 +34,10 @@ class GuideApp(BaseApp):
     def interact(self):
         global guide_directory
         self.m.sendfile(asset("GUIDE.vdt"))
-        self.m.pos(7, 3)
-        for name, desc in guide_directory.items():
+        for i, (name, desc) in enumerate(guide_directory.items()):
+            self.m.pos(7+i, 1)
             self.m.setInverse()
             self.m.print(name)
             self.m.setNotInverse()
-            self.m.print(" %s\r\n " % desc[:(35-len(name))])
+            self.m.print(" %s\r\n " % desc[:(39-len(name))])
         self.m.handleInputsUntilBreak()
