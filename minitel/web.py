@@ -2,8 +2,8 @@
 import minitel.database as db
 from absl import flags, app
 from flask import Flask, send_from_directory, redirect
-# from flask_admin import Admin
-# from flask_admin.contrib.sqla import ModelView
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.orm import Session
 import logging
 from minitel.assets import asset
@@ -23,7 +23,7 @@ def startWebServer(*listener):
     webapp.secret_key = secrets.token_hex()  # we don't care about persisting cookies across restarts
     webapp.config['SESSION_TYPE'] = 'filesystem'
     webapp.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
-    # setup_admin(webapp)
+    setup_admin(webapp)
 
     @webapp.route('/e/<path:path>')
     def send_report(path):
