@@ -14,20 +14,16 @@ class AnnoncesApp(BaseApp):
             stmt = select(Classified).order_by(Classified.id.desc()).offset(5*page).limit(5)
             return [x.contents for x in session.scalars(stmt)]
 
+    def getPageCount(self):
+        with Session(GetEngine()) as session:
+            return session.query(Classified.id).count() / 5
+
     def nextPage(self):
         self.page = self.page + 1
+        if self.page > self.getPageCount():
+            self.page = 0
         self.showPage()
         return tc.Break
-
-    def populateDummyData(self):  # TODO remove me
-        with Session(GetEngine()) as session:
-            objs = [Classified(contents=x) for x in [
-                "Si tu aimes les mecs chauds appelle moi au 45 24 7000",
-                "JH cherche F ou cpl dans le 75",
-                "je vends une mob peugeot, contactez la boulangerie Sanzot si interesse",
-            ]]
-            session.add_all(objs)
-            session.commit()
 
     def interact(self):
         self.page = 0
@@ -39,6 +35,13 @@ class AnnoncesApp(BaseApp):
         self.m.sendfile(asset("petitesannonces_header.vdt"))
         for i, a in enumerate(self.getPage(self.page)):
             self.m.textBox(line=5 + i * 4, col=2, width=38, height=3, text=a, effects=(tc.tFgColor(tc.clWhite) + tc.tBgColor(tc.clBlue)))
+        pageStr = 'page %2d/%2d' % (self.page + 1, self.getPageCount() + 1)
+        if len(pageStr) > 10:
+            pageStr = 'page %3d' % (self.page + 1)
+        if len(pageStr) > 10:
+            pageStr = ''
+        self.m.pos(2, 30)
+        self.m.print(pageStr)
         self.m.handleInputsUntilBreak()
 
     def compose(self):
