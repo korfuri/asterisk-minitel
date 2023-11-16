@@ -102,6 +102,8 @@ def appForCode(code):
     global apps_directory
     if type(code) == type:
         return code
+    if code.startswith("3615"):
+        code = code[4:]
     code = code.lower().strip()
     logging.info("Dispatching for %s", code)
     if code not in apps_directory:
