@@ -126,3 +126,19 @@ class TIMY(BaseQuestApp):
 @register("VITESSE")
 class VITESSE(BaseQuestApp):
     name = "VITESSE"
+
+@register("CHATPSYCHE")
+class CHATPSYCHE(BaseQuestApp):
+    name = "CHATPSYCHE"
+
+@register("DEFONCE")
+class DEFONCE(BaseQuestApp):
+    name = "DEFONCE"
+
+@register("DISCO")
+class DISCO(BaseQuestApp):
+    name = "DISCO"
+
+@register("RADIO")
+class RADIO(BaseQuestApp):
+    name = "RADIO"
