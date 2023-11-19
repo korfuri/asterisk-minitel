@@ -51,6 +51,8 @@ substitutions = {
     'Û': b'U',
     'Ü': b'U',
     'Ç': b'C',
+    '’': b'\'',
+    '•': b'*',
 }
 
 minitel_partial_encode_table = (
