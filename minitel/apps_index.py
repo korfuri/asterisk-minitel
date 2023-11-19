@@ -3,7 +3,7 @@ import minitel.tc as tc
 from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 
-@register("3615")
+# @register("3615")
 class Index3615App(BaseApp):
     def interact(self):
         global apps_directory

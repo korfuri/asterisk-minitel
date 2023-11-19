@@ -5,7 +5,7 @@ from minitel.assets import asset
 import os
 
 
-@register("annu", ["annuaire", "3611"])
+# @register("annu", ["annuaire", "3611"])
 class AnnuaireApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("3611.vdt"))
