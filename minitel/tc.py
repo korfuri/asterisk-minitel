@@ -58,8 +58,6 @@ class InputField:
     instead they return bytes to send to the Minitel socket. I/O
     remains the responsibility of the MinitelTerminal class.
 
-    TODO: consider multi-line fields
-
     """
     def __init__(self, line, col, columns, contents, color = b'', lines=1):
         self.line = line

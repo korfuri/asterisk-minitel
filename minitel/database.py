@@ -1,6 +1,8 @@
+import datetime
 import logging
-from sqlalchemy import create_engine, String, UniqueConstraint
+from sqlalchemy import create_engine, String, DateTime, UniqueConstraint
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.sql import func
 from absl import flags
 
 
@@ -13,6 +15,7 @@ class Base(DeclarativeBase):
 # 1 classified can use 3 lines of 36 chars each, i.e. 108 chars
 CLASSIFIED_MAXLEN = 108
 NICK_MAXLEN = 8
+CHATMSG_MAXLEN = 30
 
 class Classified(Base):
     __tablename__ = "classifieds"
@@ -37,7 +40,20 @@ class QuestEntry(Base):
     def __repr__(self) -> str:
         return f"QuestEntry(id={self.id!r}, nick={self.nick!r}), quest={self.quest!r}"
 
-    
+
+class ChatMessage(Base):
+    __tablename__ = "chats"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    nick: Mapped[str] = mapped_column(String(NICK_MAXLEN))
+    channel: Mapped[str] = mapped_column(String)
+    message: Mapped[str] = mapped_column(String(CHATMSG_MAXLEN))
+
+    def __repr__(self) -> str:
+        return f"ChatMessage(id={self.id!r}, created_at={self.created_at!r}, nick={self.nick!r}), channel={self.channel!r}, message={self.message!r}"
+
+
 engine = None
 
 def GetEngine(db_path=None):
