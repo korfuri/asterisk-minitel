@@ -107,3 +107,13 @@ class InfosApp(BaseApp):
             "La centrale de Creteil qui marquait le debut du \"plein d'emplois\" en resolvant le probleme du \"non-emploi\", \"feignage\" ou encore \"rienbranlage\", a explose aujourd'hui lors de son inauguration. Les equipes de la GISOS, le service de secours et aide aux victimes de catastrophes d'ampleur a ce qu'on en parle au 20h et qui touchent des populations utiles, s'est rendue sur place pour constater qu'il serait rentable de leur venir en aide.",
              ),
         ]
+
+@register("meteo")
+class MeteoApp(BaseApp):
+    def interact(self):
+        self.m.sendfile(asset('meteo.vdt'))
+        self.m.pos(3, 5)
+        d = date.today()
+        d.replace(year = 1982)
+        self.m.print("%d/%d/%d" %(d.day, d.month, d.year))
+        self.m.handleInputsUntilBreak()
