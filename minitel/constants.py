@@ -1,7 +1,7 @@
 """Constants used by the Minitel protocol."""
 
 def abytes(str):
-    """Handy shortcut to convert an ascrii string to bytes."""
+    """Handy shortcut to convert an ascii string to bytes."""
     return bytes(str, encoding='ascii')
 
 # Control codes
@@ -43,6 +43,10 @@ tMoveLeft = b'\x08'
 tMoveRight = b'\x09'
 tMoveDown = b'\x0a'
 tMoveUp = b'\x0b'
+tSetNormalHeight = b'\x4c'            # L
+tSetDoubleHeight = b'\x4d'            # M
+tSetDoubleWidth = b'\x4e'             # N
+tSetDoubleSize = b'\x4f'              # O
 
 # Protocol specifiers
 pModeMask = b'\x23'          # # Mode masquage ecran
