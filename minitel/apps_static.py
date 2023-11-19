@@ -54,3 +54,8 @@ class StaticApp(BaseApp):
 class GiscorpApp(StaticApp):
     def get_slides(self):
         return [asset("fesste/giscorp_%d.vdt") % x for x in range(10)]
+
+@register("jeu", ["jeux", "rocher", "roche", "rochers", "roches"])
+class JeuRochersApp(StaticApp):
+    def get_slides(self):
+        return [asset("fesste/jeu_%d.vdt") % x for x in range(4)]
