@@ -17,6 +17,7 @@ def setup_admin(webapp):
     session = Session(engine)
     admin.add_view(ModelView(db.Classified, session))
     admin.add_view(ModelView(db.QuestEntry, session))
+    admin.add_view(ModelView(db.ChatMessage, session))
 
 def startWebServer(*listener):
     webapp = Flask("maxitel")
