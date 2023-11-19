@@ -1,8 +1,87 @@
 """Constants used by the Minitel protocol."""
 
+import codecs
+import string
+
+special_chars = {
+    'à': b'\x19\x41a',
+    'â': b'\x19\x43a',
+    'ä': b'\x19\x48a',
+    'è': b'\x19\x41e',
+    'é': b'\x19\x42e',
+    'ê': b'\x19\x43e',
+    'ë': b'\x19\x48e',
+    'î': b'\x19\x43i',
+    'ï': b'\x19\x48i',
+    'ô': b'\x19\x43o',
+    'ö': b'\x19\x48o',
+    'ù': b'\x19\x43u',
+    'û': b'\x19\x43u',
+    'ü': b'\x19\x48u',
+    'ç': b'\x19\x4Bc',
+    '°': b'\x19\x30',
+    '£': b'\x19\x23',
+    'Œ': b'\x19\x6A',
+    'œ': b'\x19\x7A',
+    'ß': b'\x19\x7B',
+    '¼': b'\x19\x3C',
+    '½': b'\x19\x3D',
+    '¾': b'\x19\x3E',
+    '←': b'\x19\x2C',
+    '↑': b'\x19\x2D',
+    '→': b'\x19\x2E',
+    '↓': b'\x19\x2F',
+    '̶': b'\x60',
+    '|': b'\x7C',
+}
+
+substitutions = {
+    'À': b'A',
+    'Â': b'A',
+    'Ä': b'A',
+    'È': b'E',
+    'É': b'E',
+    'Ê': b'E',
+    'Ë': b'E',
+    'Ï': b'I',
+    'Î': b'I',
+    'Ô': b'O',
+    'Ö': b'O',
+    'Ù': b'U',
+    'Û': b'U',
+    'Ü': b'U',
+    'Ç': b'C',
+}
+
+minitel_partial_encode_table = (
+    {letter: bytes(letter, 'ascii') for letter in string.printable} |
+    {ucode: byteval for ucode, byteval in special_chars.items()}
+)
+
+minitel_encode_table = (
+    minitel_partial_encode_table |
+    {ucode: byteval for ucode, byteval in substitutions.items()}
+)
+
+minitel_decode_table = (
+    {int.from_bytes(v, "big"): k for k, v in minitel_partial_encode_table.items()}
+)
+
+def minitel_encode(text: str) -> tuple[bytes, int]:
+    return b''.join(minitel_encode_table[chr(x) if type(x) is int else x] for x in text), len(text)
+
+def minitel_decode(binary: bytes) -> tuple[str, int]:
+    return ''.join(minitel_decode_table[x] for x in binary), len(binary)
+
+
+def minitel_search_function(encoding_name):
+    return codecs.CodecInfo(minitel_encode, minitel_decode, name='minitel')
+
+codecs.register(minitel_search_function)
+
 def abytes(str):
-    """Handy shortcut to convert an ascii string to bytes."""
-    return bytes(str, encoding='ascii')
+    """Handy shortcut to convert a string to minitel-compatible bytes."""
+    return bytes(str, encoding='minitel')
 
 # Control codes
 SEP = b'\x13'
@@ -47,6 +126,9 @@ tSetNormalHeight = b'\x4c'            # L
 tSetDoubleHeight = b'\x4d'            # M
 tSetDoubleWidth = b'\x4e'             # N
 tSetDoubleSize = b'\x4f'              # O
+tStartUnderline = b'\x5a'             # Z
+tEndUnderline = b'\x59'               # Y
+
 
 # Protocol specifiers
 pModeMask = b'\x23'          # # Mode masquage ecran

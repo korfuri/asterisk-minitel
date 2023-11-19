@@ -88,7 +88,7 @@ class InputField:
             return tBell
         if len(self.contents) + len(c) > self.maxlength:
             return tBell
-        self.contents = self.contents + c.decode('ascii')
+        self.contents = self.contents + c.decode('minitel')
         idx = len(self.contents) - 1
         return (tMoveCursor +
                 tLine(self.line + (idx // self.columns)) +
