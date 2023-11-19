@@ -35,17 +35,19 @@ class FessteHome(BaseApp):
         c = code.contents
         match c:
             case '1':
-                c = 'regles'
+                c = 'consentement'
             case '2':
-                c = 'programme'
+                c = 'fstx'
             case '3':
                 c = 'annonces'
             case '4':
                 c = 'horoscope'
+            case '5':
+                c = 'guide'
         logging.debug("Code: %s", c)
         self.nextApp = appForCode(c)
 
-@register("consentement")
+@register("consentement", ["consent", "regles", "cons", "regle"])
 class ConsentementApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("fesste/consentement.vdt"))
@@ -116,4 +118,11 @@ class MeteoApp(BaseApp):
         d = date.today()
         d.replace(year = 1982)
         self.m.print("%d/%d/%d" %(d.day, d.month, d.year))
+        self.m.keyHandlers[tc.kSuite] = tc.Break
+        self.m.handleInputsUntilBreak()
+
+@register("fstx", ["seminaire", "fesstex", "fesstx", "festx"])
+class FstxApp(BaseApp):
+    def interact(self):
+        self.m.sendfile(asset("fesste/fstx.vdt"))
         self.m.handleInputsUntilBreak()

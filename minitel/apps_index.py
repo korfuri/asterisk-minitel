@@ -17,16 +17,17 @@ class Index3615App(BaseApp):
 guide_directory = {
     # Max length: ------------------------------|xxxx
     'CONSENTEMENT': 'Commencez par ici',
+    'INFOS': 'L\'info en continu',
+    'METEO': 'Informations meteorologiques',
     'ELECTIONS': 'Resultats des elections',
     'GISCORP': 'Entreprise innovante',
+    'ANNONCES': 'Achetez, vendez, donnez',
     'ASTRO': 'Votre futur est dans les etoiles',
-    'ANNONCES': 'Faites de belles rencontres et ',
+    'ULLA': 'Faites de belles rencontres !',
+    'TF1': 'Premiere chaine d\'info nationale',
     'FERN': 'La recherche fondamentale',
-    # menus
-    # lineup
-    # ateliers
-    # aide
-    
+    'MEETIC': 'L\'amour de votre vie, ici',
+    'FSTX': 'Le seminaire de la GISCORP',
 }
 
 @register("guide")
