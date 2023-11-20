@@ -1,3 +1,4 @@
+import datetime
 import logging
 import minitel.tc as tc
 from minitel.apps import BaseApp, register, appForCode
@@ -5,9 +6,12 @@ from minitel.assets import asset
 
 
 class StaticApp(BaseApp):
+    def get_start_idx(self):
+        return 0
+
     def interact(self):
         slides = self.get_slides()
-        idx = 0
+        idx = self.get_start_idx()
         while True:
             self.m.sendfile(slides[idx])
 
@@ -59,3 +63,17 @@ class GiscorpApp(StaticApp):
 class JeuRochersApp(StaticApp):
     def get_slides(self):
         return [asset("fesste/jeu_%d.vdt") % x for x in range(4)]
+
+@register("lineup", ["dj", "djs", "music", "musique", "line up"])
+class JeuRochersApp(StaticApp):
+    def get_slides(self):
+        return [asset("fesste/dj-%s.vdt") % x for x in ["vendredi", "samedi", "dimanche"]]
+
+    def get_start_idx(self):
+        now = datetime.datetime.now()
+        if now < datetime.datetime(2023, 11, 25, 8, 0):  # 08AM samedi
+            return 0
+        elif now > datetime.datetime(2023, 11, 26, 8, 0):  # 08AM dimanche
+            return 2
+        else:
+            return 1
