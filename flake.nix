@@ -11,6 +11,7 @@
             python3Packages.sqlalchemy
             python3Packages.flask
             python3Packages.flask-admin
+            python3Packages.pillow
             python3Packages.waitress
             python3Packages.websockets
           ];
