@@ -43,7 +43,7 @@ if (wsHost == "127.0.0.1:8080") {
 
 minitel(
     "minitel-screen",
-    true,
+    false,
     9600,
     "miedit",
     "minitel-bip",
