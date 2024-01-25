@@ -152,3 +152,11 @@ Interactions physiques sans intention sexuelle / Sensualité (sans génitalité)
         self.m.pos(3, 1)
         self.m.print(slug.replace('\n', '\r\n'))
         self.m.handleInputsUntilBreak()
+
+
+@register("legends", ["legendes"])
+class LegendsApp(BaseApp):
+    """A tribute to winners of previous quest games."""
+    def interact(self):
+        self.m.sendfile(asset("legends.vdt"))
+        self.m.handleInputsUntilBreak()
