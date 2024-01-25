@@ -262,11 +262,10 @@ class MinitelTerminal:
             self.print(text_this_line)
             if padding > 0:
                 self._write(tSemiGraphicalMode)
-                self.print(' ' * padding)
-                # if padding < 3:
-                #     self._write(b' ' * padding)
-                # else:
-                #     self._write(b' ' + tRepeatPrev(padding))
+                if padding < 3:
+                    self._write(b' ' * padding)
+                else:
+                    self._write(b' ' + tRepeatPrev(padding))
 
     def setInverse(self):
         self._write(ESC + tVideoInverseStart)
