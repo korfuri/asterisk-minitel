@@ -298,6 +298,12 @@ class MinitelTerminal:
     def setNotInverse(self):
         self._write(ESC + tVideoInverseEnd)
 
+    def setTextMode(self):
+        self._write(ESC + tTextMode)
+
+    def setSemiGraphicalMode(self):
+        self._write(ESC + tSemiGraphicalMode)
+
     def cursorOn(self):
         self._write(tCursorOn)
 
