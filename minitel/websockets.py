@@ -19,7 +19,7 @@ class SocketAdapter(object):
             self.ws.send(d)
             return len(d)
         except websockets.exceptions.ConnectionClosed as e:
-            raise IOError(e)
+            raise IOError from e
 
     def recv(self, maxlen=1):
         """Read from the websocket.
@@ -38,7 +38,7 @@ class SocketAdapter(object):
                 data, self.buffer = data[:maxlen], data[maxlen:]
             return data.encode()
         except websockets.exceptions.ConnectionClosed as e:
-            raise IOError(e)
+            raise IOError from e
 
 
 def handler(ws):

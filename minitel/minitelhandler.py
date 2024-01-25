@@ -4,6 +4,7 @@ import minitel.tc as tc
 import socketserver
 from minitel.apps import appForCode
 import time
+import traceback
 
 
 import minitel.all_apps
@@ -22,13 +23,13 @@ class MinitelHandler(object):
                 h.interact()
                 app = appForCode(h.nextApp)
             except tc.UserDisconnected:
-                logging.info("User disconnected")
+                logging.info("User disconnected, %s", traceback.format_exc())
                 break
-            except IOError as e:
-                logging.info("Socket error: %s", e)
+            except IOError:
+                logging.info("Socket error: %s", traceback.format_exc())
                 break
-            except Exception as e:
-                logging.info("Triggered error page, error was: %s", e)
+            except Exception:
+                logging.info("Triggered error page, error was: %s", traceback.format_exc())
                 app = appForCode("sys/error")
 
 
