@@ -9,3 +9,4 @@ import minitel.apps_index
 import minitel.apps_quest
 import minitel.apps_static
 import minitel.apps_system
+import minitel.apps_trombinet
