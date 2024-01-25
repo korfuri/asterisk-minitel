@@ -3,7 +3,6 @@ import logging
 import minitel.tc as tc
 import socketserver
 from minitel.apps import appForCode
-import time
 import traceback
 
 

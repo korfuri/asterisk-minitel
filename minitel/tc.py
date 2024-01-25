@@ -1,5 +1,6 @@
 from minitel.constants import *
 import logging
+import time
 
 
 class ConnectionError(Exception):
@@ -174,39 +175,14 @@ class MinitelTerminal:
     def start(self):
         """Handle the initital exchange with the Minitel.
 
-        We wait for an UML header and a CxFin event, then immediately
-        query the minitel's capabilities and store them.
-
+        The Minitel might send some initial keypresses (usually a
+        CxFin, as the user hit that to establish the connection). Some
+        minitels (e.g. emulated ones) may not send these. So we wait
+        for a fraction of a second, flush any read buffers, and
+        finally query the minitel's capabilities and store them.
         """
-        # ignore the actual contents of the ULM header, they're irrelevant
-        # we could take the transmission speed into consideration, but
-        # it's so laughably slow in all scenarios that we just don't
-        # care
-        # ex = b'Version: 1\r\nTXspeed: 133.33\r\nRXspeed: 8.33\r\n\r\n\x13'
-        # len(ex) == 47
-        data = bytes(0)
-        started = False
-        while not started:
-            data = data + self._read(200)
-
-            # Wait for a Modem Connect event, which is sent
-            # automatically as the user pressed CxFin.  If for any
-            # reason this isn't received successfully, the user can
-            # press Sommaire instead.
-            VALID_STARTS = [
-                (SEP + kModemConnect),  # Normally sent when a modem connects
-                b'\x7e2',              # When resuming from Mixte mode and connecting at the same time
-                (SEP + kSommaire),
-
-            ]
-            logging.debug("Expecting: one of %s", VALID_STARTS)
-            logging.debug("data is: %s", data)
-
-            for s in VALID_STARTS:
-                if s in data:
-                    logging.debug("breaking successfully, we got %s", s)
-                    started = True
-                    break
+        time.sleep(0.2)
+        self._read(200)
         self.query_capabilities()
         #  self.switch(swOFF, swFromKeyboard, swToModem)  # TODO test this with Zaz's minitel
 
