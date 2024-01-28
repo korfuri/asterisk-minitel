@@ -1,6 +1,6 @@
 import minitel.apps_annonces
 import minitel.apps_chat
-# import minitel.apps_elections
+import minitel.apps_elections
 import minitel.apps_fesste
 import minitel.apps_forking
 import minitel.apps_horoscope

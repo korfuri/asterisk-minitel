@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from minitel.database import Classified, GetEngine
 
 
-@register("annonces", ["ulla", "meetic"])
+@register("annonces", ["ulla", "meetic", "leboncoin"])
 class AnnoncesApp(BaseApp):
     def getPage(self, page=0):
         with Session(GetEngine()) as session:

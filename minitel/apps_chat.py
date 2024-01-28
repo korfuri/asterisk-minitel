@@ -45,7 +45,7 @@ class ChatApp(BaseApp):
 
     def chat(self):
         self.refresh()
-        msg = self.m.addInputField(23, 6, 30, "")
+        msg = self.m.addInputField(23, 6, 29, "")
         def post_msg():
             m = msg.contents.strip()
             if len(m) == 0:

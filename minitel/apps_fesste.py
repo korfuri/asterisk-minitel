@@ -1,7 +1,7 @@
 import logging
 import minitel.tc as tc
 import random
-from datetime import date
+import datetime
 from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 from sqlalchemy import select, func, desc
@@ -9,22 +9,30 @@ from sqlalchemy.orm import Session
 from minitel.database import GetEngine, QuestEntry
 
 
+def today():
+    d = datetime.date.today()
+    if d == datetime.date(2024, 2, 9):
+        return datetime.date(1989, 12, 31)
+    elif d == datetime.date(2024, 2, 10):
+        return datetime.date(1999, 12, 31)
+    elif d == datetime.date(2024, 2, 11):
+        return datetime.date(2000, 1, 1)
+    else:
+        return d
+    
 @register("index")
 class FessteHome(BaseApp):
-    def getLeaderboard(self):
-        with Session(GetEngine()) as session:
-            stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by(desc("count")).limit(9)
-            return [(x.count, x.nick) for x in session.execute(stmt)]
+    # def getLeaderboard(self):
+    #     with Session(GetEngine()) as session:
+    #         stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by(desc("count")).limit(9)
+    #         return [(x.count, x.nick) for x in session.execute(stmt)]
 
     def interact(self):
         self.m.sendfile(asset("fesste/HOMEPAGE.vdt"))
-        scores = self.getLeaderboard()
-        for idx, (score, nick) in enumerate(scores):
-            self.m.pos(16 + idx, 28)
-            self.m._write(tc.tBgColor(tc.clMagenta))
-            self.m.print('%02d' % score)
-            self.m._write(tc.tBgColor(tc.clBlack))
-            self.m.print(' %8s' % nick)
+        self.m.pos(23, 30)
+        self.m.print(today().strftime('%d/%m/%y'))
+        self.m.pos(24, 30)
+        self.m.print(datetime.datetime.now().strftime('%H:%M'))
         code = self.m.addInputField(24, 2, 12, "")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         def goGuide():
@@ -39,11 +47,21 @@ class FessteHome(BaseApp):
             case '2':
                 c = 'fstx'
             case '3':
-                c = 'annonces'
+                c = 'chat'
             case '4':
                 c = 'horoscope'
             case '5':
                 c = 'guide'
+            case '6':
+                c = 'annonces'
+            case '7':
+                c = 'leaderboard'
+            case '8':
+                c = 'trombinet'
+            case '9':
+                c = 'monespace'
+            case '0':
+                c = 'porn'
         logging.debug("Code: %s", c)
         self.nextApp = appForCode(c)
 
@@ -64,9 +82,8 @@ class InfosApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("TF1banner.vdt"))
         self.m.pos(6, 30)
-        d = date.today()
-        d.replace(year = 1982)
-        self.m.print("%d/%d/%d" %(d.day, d.month, d.year))
+        d = today()
+        self.m.print("%d/%d/%d" % (d.day, d.month, d.year))
         self.m.pos(7, 1)
         slug, title, article = random.choice(self.getNews())
         self.m.textBox(7, 1, 40, 1, slug)
@@ -115,8 +132,7 @@ class MeteoApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset('meteo.vdt'))
         self.m.pos(3, 5)
-        d = date.today()
-        d.replace(year = 1982)
+        d = today()
         self.m.print("%d/%d/%d" %(d.day, d.month, d.year))
         self.m.keyHandlers[tc.kSuite] = tc.Break
         self.m.handleInputsUntilBreak()
