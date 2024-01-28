@@ -16,6 +16,8 @@ class Base(DeclarativeBase):
 CLASSIFIED_MAXLEN = 108
 NICK_MAXLEN = 8
 CHATMSG_MAXLEN = 30
+SECRET_MAXLEN = 12
+SPACECONTENTS_MAXLEN = 38*8
 
 class Classified(Base):
     __tablename__ = "classifieds"
@@ -52,6 +54,18 @@ class ChatMessage(Base):
 
     def __repr__(self) -> str:
         return f"ChatMessage(id={self.id!r}, created_at={self.created_at!r}, nick={self.nick!r}), channel={self.channel!r}, message={self.message!r}"
+
+
+class Space(Base):
+    __tablename__ = "spaces"
+
+    secret: Mapped[str] = mapped_column(String(SECRET_MAXLEN), primary_key=True)
+    nick: Mapped[str] = mapped_column(String(NICK_MAXLEN), unique=True)
+    contents: Mapped[str] = mapped_column(String(SPACECONTENTS_MAXLEN))
+    visits: Mapped[int] = mapped_column()
+
+    def __repr__(self) -> str:
+        return f"Space(id={self.id!r}, nick={self.nick!r})"
 
 
 engine = None
