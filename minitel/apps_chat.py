@@ -8,7 +8,7 @@ from minitel.database import ChatMessage, GetEngine
 
 
 @register("chat")
-class AnnoncesApp(BaseApp):
+class ChatApp(BaseApp):
     def interact(self):
         self.nick = ''
         self.channel = ''

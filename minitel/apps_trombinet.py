@@ -13,7 +13,7 @@ import random
 class FacebookApp(BaseApp):
     def interact(self):
         self.m.reset()
-        self.m.sendfile(asset("trombinet.vdt"))
+        self.m.sendfile(asset("trombinet/trombinet.vdt"))
 
         is_image = random.choice([True, False, False, False])
         if is_image:

@@ -1,28 +1,16 @@
-annonces
-- poster annonces
-- voir dernieres annonces chronologiquement
+- Clean up de ce qui est obsolete
+- Implem de MonEspace
+- MaJ du systeme de quetes
+  * Pointer les anciens noms de quetes vers 3615 LEGENDS
+- Contenu pour TrombiNet
+- MaJ du 3615 GUIDE
+- MaJ du 3615 INFOS
+- MaJ du 3615 FSTX
+- MaJ du 3615 ROCHERS?
+- Finir le 3615 ATELIER
+- Tester, finir ou annuler le 3615 CHAT
+- Generer les codes invite MonEspace
+  * demander a qqn pour imprimer les coupons
 
-
-astro
-- generer 200 astros
-
-
-
-jeu de piste
-- gens trouvent des mots clefs secrets, tape le code secret, entre ton nom, gagne 1 point sur ton score
-  - chaque mot secret donne acces a un ecran different?
-- ecran de scoring
-
-
-
-pitch de consentement
-line-up
-menu
--> moyen de rendre ca editable facilement
-
-
-
--- low priority --
-
-chat?
-- comment interrompre les gens?
+Juste avant l'event:
+- MaJ des pages statiques (lineup etc.)

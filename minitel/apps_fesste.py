@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from minitel.database import GetEngine, QuestEntry
 
 
-@register("fesste", ["index"])
+@register("index")
 class FessteHome(BaseApp):
     def getLeaderboard(self):
         with Session(GetEngine()) as session:
@@ -121,13 +121,13 @@ class MeteoApp(BaseApp):
         self.m.keyHandlers[tc.kSuite] = tc.Break
         self.m.handleInputsUntilBreak()
 
-@register("fstx", ["seminaire", "fesstex", "fesstx", "festx"])
+@register("fstx", ["seminaire", "fesstex", "fesstx", "festx", "fesste"])
 class FstxApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("fesste/fstx.vdt"))
         self.m.handleInputsUntilBreak()
 
-@register("atelier", ["ateliers"])
+# @register("atelier", ["ateliers"])
 class AtelierApp(BaseApp):
     def interact(self):
         self.showAtelier()

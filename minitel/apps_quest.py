@@ -33,7 +33,7 @@ class BaseQuestApp(BaseApp):
         self.m.handleInputsUntilBreak()
 
 
-@register("sys/quests")
+# @register("sys/quests")
 class QuestsSlideshowApp(BaseApp):
     def interact(self):
         files = os.listdir(asset("quests"))
