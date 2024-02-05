@@ -147,8 +147,8 @@ def make_quests():
             'CARMEN',
             'CERISE',
             'CHAMPIS',
-            'CHAUDDEVANT',
-            'CHEMCHEMINEE',
+            'BONAP',
+            'SMOKEY',
             'CHIENCOOL',
             'CLOCHES',
             'COWBOY',
@@ -177,7 +177,7 @@ def make_quests():
             'KARAOKE',
             'LAMPEGENIE',
             'MABITE',
-            'MADAMESOLEIL',
+            'MMESOLEIL',
             'MADMAX',
             'MAGICIEN',
             'MAIS',
@@ -203,7 +203,7 @@ def make_quests():
             'TREX',
             'TSOINSTOIN',
             'VALISE',
-            'WEARETHEWORLD',
+            'WATW',
     ]:
         class foo(BaseQuestApp):
             name = kw
