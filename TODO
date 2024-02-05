@@ -1,9 +1,9 @@
 x Clean up de ce qui est obsolete
 x Refonte page d'accueil
 - Implem de MonEspace
-- MaJ du systeme de quetes
-  * Pointer les anciens noms de quetes vers 3615 LEGENDS
-  * Creer 3615 LEADERBOARD
+x MaJ du systeme de quetes
+  x Pointer les anciens noms de quetes vers 3615 LEGENDS
+  x Creer 3615 LEADERBOARD
 - Contenu pour TrombiNet
 - MaJ du 3615 GUIDE
 - MaJ du 3615 INFOS
@@ -11,8 +11,9 @@ x Refonte page d'accueil
 - MaJ du 3615 ROCHERS?
 - Finir le 3615 ATELIER
 - Creer le 3615 PORN
-- Generer les codes invite MonEspace
-  * demander a qqn pour imprimer les coupons
+x Generer les codes invite MonEspace
+  x demander a qqn pour imprimer les coupons
+- Envoyer les trcs a imprimer a Nico
 
 Juste avant l'event:
 - MaJ des pages statiques (lineup etc.)
