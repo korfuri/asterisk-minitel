@@ -9,11 +9,12 @@ from sqlalchemy.orm import Session
 from minitel.ImageMinitel import ImageMinitel
 from PIL import Image
 
-# @register("sys/quests")
+# @register("a")
 class QuestsSlideshowApp(BaseApp):
     def interact(self):
-        basedir = "cliparts"
+        basedir = "cliparts2"
         files = os.listdir(asset(basedir))
+        files = sorted(files)
         for f in files:
             logging.info("Next slide: %s", f)
             self.m.reset()
@@ -27,7 +28,11 @@ class QuestsSlideshowApp(BaseApp):
             image_minitel = ImageMinitel()
             image_minitel.importer(image)
             image_minitel.envoyer(self.m, 1, 2)
-
+            try:
+                pass
+            except:
+                self.m.pos(2,2)
+                self.m.print("ERROR")
 
             # self.m.sendfile(asset("quests/" + f))
             self.m.handleInputsUntilBreak()
@@ -242,6 +247,25 @@ def make_quests():
             'TSOINSTOIN',
             'VALISE',
             'WATW',
+            'ALLO',
+	    'BOSS',
+	    'CHANCE',
+	    'DICKBUTT',
+	    'ECUREUIL',
+	    'FRIDAY',
+	    'FRY',
+	    'HENTAI',
+	    'LOLOL',
+	    'NOKIA',
+	    'NYAN',
+	    'ORLY',
+	    'PEACH',
+	    'PIGFLY',
+	    'PIKACHU',
+	    'POE',
+	    'PRIDE',
+	    'SRSLY',
+	    'UNICORN',
     ]:
         class foo(BaseQuestApp):
             name = kw
