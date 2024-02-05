@@ -1,7 +1,7 @@
 from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 import minitel.tc as tc
-from minitel.database import QuestEntry, GetEngine
+from minitel.database import QuestEntry, QuestOwnership, GetEngine
 import os
 import logging
 from sqlalchemy import select, func, desc
@@ -43,15 +43,27 @@ class LegendsApp(BaseApp):
 
 @register("leaderboard")
 class LeaderboardApp(BaseApp):
-    def getLeaderboard(self):
+    def getLeaderboardVisitors(self):
         with Session(GetEngine()) as session:
             stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by(desc("count")).limit(15)
             return [(x.count, x.nick) for x in session.execute(stmt)]
 
+    def getLeaderboardVisited(self):
+        with Session(GetEngine()) as session:
+            subq = select(QuestEntry.quest, func.count(QuestEntry.nick).label("count")).group_by(QuestEntry.quest).subquery()
+            stmt = select(QuestOwnership.nick, func.sum(subq.c.count).label("count")).join(subq, QuestOwnership.quest == subq.c.quest).where(QuestOwnership.nick != QuestEntry.nick).group_by(QuestOwnership.nick).order_by(desc("count")).limit(15)
+            logging.debug(stmt)
+            return [(x.count, x.nick) for x in session.execute(stmt)]
+
     def interact(self):
         self.m.sendfile(asset("leaderboard.vdt"))
-        for i, l in enumerate(self.getLeaderboard(), start=1):
+        for i, l in enumerate(self.getLeaderboardVisitors(), start=1):
             self.m.pos(4 + i, 2)
+            if i == 1:
+                self.m.setInverse()
+            self.m.print('%2d %10s %d' % (i, l[1], l[0]))
+        for i, l in enumerate(self.getLeaderboardVisited(), start=1):
+            self.m.pos(4 + i, 22)
             if i == 1:
                 self.m.setInverse()
             self.m.print('%2d %10s %d' % (i, l[1], l[0]))
@@ -67,11 +79,22 @@ class BaseQuestApp(BaseApp):
         image_minitel.importer(image)
         image_minitel.envoyer(self.m, 1, 2)
 
+    def is_owned(self):
+        with Session(GetEngine()) as session:
+            qo = session.get(QuestOwnership, self.name)
+            return qo is not None
+
     def interact(self):
         self.show_asset()
 
+        is_owned = self.is_owned()
+
+        # if quest is owned:
         self.m.pos(24, 1)
-        self.m.print("Ton nom pour la gloire: ........ > ")
+        if is_owned:
+            self.m.print("Ton nom pour la gloire: ........ > ")
+        else:
+            self.m.print("Ce code appartient à:   ........ > ")
         self.m.setInverse()
         self.m.print("ENVOI")
         nick = self.m.addInputField(24, 24, 8, "")
@@ -88,7 +111,22 @@ class BaseQuestApp(BaseApp):
                 self.nextApp = appForCode("index")  # This happens when someone tries to submit twice. Fun error page instead?
             return tc.Break
 
-        self.m.keyHandlers[tc.kEnvoi] = do_save
+        def do_own():
+            qo = QuestOwnership(nick=nick.contents.strip().upper(), quest=self.name)
+            try:
+                with Session(GetEngine()) as session:
+                    session.add(qo)
+                    session.commit()
+                return do_save()
+            except:
+                self.nextApp = appForCode("index")
+            return tc.Break
+
+        if is_owned:
+            self.m.keyHandlers[tc.kEnvoi] = do_save
+        else:
+            self.m.keyHandlers[tc.kEnvoi] = do_own
+
         self.m.handleInputsUntilBreak()
 
 

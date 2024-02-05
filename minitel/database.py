@@ -38,7 +38,17 @@ class QuestEntry(Base):
     )
 
     def __repr__(self) -> str:
-        return f"QuestEntry(id={self.id!r}, nick={self.nick!r}), quest={self.quest!r}"
+        return f"QuestEntry(id={self.id!r}, nick={self.nick!r}, quest={self.quest!r})"
+
+
+class QuestOwnership(Base):
+    __tablename__ = "quest_ownerships"
+
+    quest: Mapped[str] = mapped_column(String, primary_key=True)
+    nick: Mapped[str] = mapped_column(String(NICK_MAXLEN))
+
+    def __repr__(self) -> str:
+        return f"QuestOwnership(quest={self.quest!r}, nick={self.nick!r})"
 
 
 class ChatMessage(Base):
