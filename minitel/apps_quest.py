@@ -105,7 +105,10 @@ class BaseQuestApp(BaseApp):
         nick = self.m.addInputField(24, 24, 8, "")
 
         def do_save():
-            q = QuestEntry(nick=nick.contents.strip().upper(), quest=self.name)
+            n = nick.contents.strip().upper()
+            if n == '':
+                return tc.Break
+            q = QuestEntry(nick=n, quest=self.name)
             logging.debug("Saving quest record %s", q)
             try:
                 with Session(GetEngine()) as session:
@@ -117,7 +120,10 @@ class BaseQuestApp(BaseApp):
             return tc.Break
 
         def do_own():
-            qo = QuestOwnership(nick=nick.contents.strip().upper(), quest=self.name)
+            n = nick.contents.strip().upper()
+            if n == '':
+                return tc.Break
+            qo = QuestOwnership(nick=n, quest=self.name)
             try:
                 with Session(GetEngine()) as session:
                     session.add(qo)
