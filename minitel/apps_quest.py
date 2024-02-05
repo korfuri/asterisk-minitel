@@ -4,13 +4,72 @@ import minitel.tc as tc
 from minitel.database import QuestEntry, GetEngine
 import os
 import logging
-from sqlalchemy import select
+from sqlalchemy import select, func, desc
 from sqlalchemy.orm import Session
+from minitel.ImageMinitel import ImageMinitel
+from PIL import Image
+
+# @register("sys/quests")
+class QuestsSlideshowApp(BaseApp):
+    def interact(self):
+        basedir = "cliparts"
+        files = os.listdir(asset(basedir))
+        for f in files:
+            logging.info("Next slide: %s", f)
+            self.m.reset()
+
+            self.m.pos(1, 1)
+            self.m.setTextMode()
+            self.m.print(' ' + f)
+
+            image = Image.open(asset(basedir + "/" + f))
+            image.thumbnail((80, 60), Image.LANCZOS)
+            image_minitel = ImageMinitel()
+            image_minitel.importer(image)
+            image_minitel.envoyer(self.m, 1, 2)
+
+
+            # self.m.sendfile(asset("quests/" + f))
+            self.m.handleInputsUntilBreak()
+            if self.m.lastControlKey() == tc.kSommaire:
+                break
+
+@register("legends", ["legendes"])
+class LegendsApp(BaseApp):
+    """A tribute to winners of previous quest games."""
+    def interact(self):
+        self.m.sendfile(asset("legends.vdt"))
+        self.m.handleInputsUntilBreak()
+
+@register("leaderboard")
+class LeaderboardApp(BaseApp):
+    def getLeaderboard(self):
+        with Session(GetEngine()) as session:
+            stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by(desc("count")).limit(15)
+            return [(x.count, x.nick) for x in session.execute(stmt)]
+
+    def interact(self):
+        self.m.sendfile(asset("leaderboard.vdt"))
+        for i, l in enumerate(self.getLeaderboard(), start=1):
+            self.m.pos(4 + i, 2)
+            if i == 1:
+                self.m.setInverse()
+            self.m.print('%2d %10s %d' % (i, l[1], l[0]))
+        self.m.handleInputsUntilBreak()
 
 
 class BaseQuestApp(BaseApp):
+    def show_asset(self):
+        basedir = "cliparts"
+        image = Image.open(asset("%s/%s.png" % (basedir, self.name)))
+        image.thumbnail((80, 60), Image.LANCZOS)
+        image_minitel = ImageMinitel()
+        image_minitel.importer(image)
+        image_minitel.envoyer(self.m, 1, 2)
+
     def interact(self):
-        self.m.sendfile(asset("quests/%s.vdt" % self.name))
+        self.show_asset()
+
         self.m.pos(24, 1)
         self.m.print("Ton nom pour la gloire: ........ > ")
         self.m.setInverse()
@@ -33,112 +92,121 @@ class BaseQuestApp(BaseApp):
         self.m.handleInputsUntilBreak()
 
 
-# @register("sys/quests")
-class QuestsSlideshowApp(BaseApp):
+class ObsoleteQuestApp(BaseApp):
     def interact(self):
-        files = os.listdir(asset("quests"))
-        for f in files:
-            logging.info("Next slide: %s", f)
-            self.m.sendfile(asset("quests/" + f))
-            self.m.handleInputsUntilBreak()
-            if self.m.lastControlKey() == tc.kSommaire:
-                break
+        self.m.sendfile(asset("quests/%s.vdt" % self.name))
+        self.m.pos(24, 1)
+        self.m.print("Tu as gagné 0 point(s). Retour: SOMMAIRE")
+        self.m.handleInputsUntilBreak()
 
-# Todo: can i find a way to generate those iteratively?
-# Wrapping the class declaration in a loop leads to re-declaration
-# under the same name.
-@register("ADN")
-class ADN(BaseQuestApp):
-    name = "ADN"
+def make_quests():
+    # Obsolete quests
+    for kw in ["ADN",
+               "ANTIQUE",
+               "AVENTURES",
+               "BROUETTE",
+               "BUNNY",
+               "CBT",
+               "CERCLE",
+               "DEPRIME",
+               "FACIAL",
+               "GALOP",
+               "LGBT",
+               "MANET",
+               "MARLBORO",
+               "PIAGGIO",
+               "RETRAITE",
+               "SPACE",
+               "TAMBOUR",
+               "TIMBRE",
+               "TIMY",
+               "VITESSE",
+               "CHATPSYCHE",
+               "DEFONCE",
+               "DISCO",
+               "RADIO",
+               ]:
+        class foo(ObsoleteQuestApp):
+            name = kw
+        register(kw)(foo)
 
-@register("ANTIQUE")
-class ANTIQUE(BaseQuestApp):
-    name = "ANTIQUE"
+    for kw in [
+            'ANTITABAC',
+            'AQUARIUM',
+            'ATHENES',
+            'AWOO',
+            'BEBEBOULE',
+            'BOBBRICO',
+            'BONPOINT',
+            'BOOOOOO',
+            'BOWLING',
+            'CADEAU',
+            'CAMION',
+            'CANADA',
+            'CANDYCANE',
+            'CARMEN',
+            'CERISE',
+            'CHAMPIS',
+            'CHAUDDEVANT',
+            'CHEMCHEMINEE',
+            'CHIENCOOL',
+            'CLOCHES',
+            'COWBOY',
+            'CRABE',
+            'CRANE',
+            'CREAMPIE',
+            'CUPCAKE',
+            'DESSERT',
+            'ENQUETE',
+            'ETIRE',
+            'F1',
+            'FERME',
+            'FIANCE',
+            'FIXIT',
+            'FOOT',
+            'FROMAGE',
+            'FUZZYLOVE',
+            'GOLF',
+            'GROSNERD',
+            'HALLOWEEN',
+            'HAMSTER',
+            'HELICO',
+            'HOSTO',
+            'ILOVEYOU',
+            'IRLANDE',
+            'KARAOKE',
+            'LAMPEGENIE',
+            'MABITE',
+            'MADAMESOLEIL',
+            'MADMAX',
+            'MAGICIEN',
+            'MAIS',
+            'MECANO',
+            'MEDEVAC',
+            'MULTIMEDIA',
+            'NOEL',
+            'OEUFS',
+            'ORAGE',
+            'PASTEK',
+            'PILOTE',
+            'PIQUANT',
+            'PIRATE',
+            'PLOMBERIE',
+            'RUNWAY',
+            'SPACEJAM',
+            'SYDNEY',
+            'TENNIS',
+            'TI82',
+            'TITANIC',
+            'TORTUE',
+            'TRESOR',
+            'TREX',
+            'TSOINSTOIN',
+            'VALISE',
+            'WEARETHEWORLD',
+    ]:
+        class foo(BaseQuestApp):
+            name = kw
+        register(kw)(foo)
 
-@register("AVENTURES")
-class AVENTURES(BaseQuestApp):
-    name = "AVENTURES"
-
-@register("BROUETTE")
-class BROUETTE(BaseQuestApp):
-    name = "BROUETTE"
-
-@register("BUNNY")
-class BUNNY(BaseQuestApp):
-    name = "BUNNY"
-
-@register("CBT")
-class CBT(BaseQuestApp):
-    name = "CBT"
-
-@register("CERCLE")
-class CERCLE(BaseQuestApp):
-    name = "CERCLE"
-
-@register("DEPRIME")
-class DEPRIME(BaseQuestApp):
-    name = "DEPRIME"
-
-@register("FACIAL")
-class FACIAL(BaseQuestApp):
-    name = "FACIAL"
-
-@register("GALOP")
-class GALOP(BaseQuestApp):
-    name = "GALOP"
-
-@register("LGBT")
-class LGBT(BaseQuestApp):
-    name = "LGBT"
-
-@register("MANET")
-class MANET(BaseQuestApp):
-    name = "MANET"
-
-@register("MARLBORO")
-class MARLBORO(BaseQuestApp):
-    name = "MARLBORO"
-
-@register("PIAGGIO")
-class PIAGGIO(BaseQuestApp):
-    name = "PIAGGIO"
-
-@register("RETRAITE")
-class RETRAITE(BaseQuestApp):
-    name = "RETRAITE"
-
-@register("SPACE")
-class SPACE(BaseQuestApp):
-    name = "SPACE"
-
-@register("TAMBOUR")
-class TAMBOUR(BaseQuestApp):
-    name = "TAMBOUR"
-
-@register("TIMBRE")
-class TIMBRE(BaseQuestApp):
-    name = "TIMBRE"
-
-@register("TIMY")
-class TIMY(BaseQuestApp):
-    name = "TIMY"
-
-@register("VITESSE")
-class VITESSE(BaseQuestApp):
-    name = "VITESSE"
-
-@register("CHATPSYCHE")
-class CHATPSYCHE(BaseQuestApp):
-    name = "CHATPSYCHE"
-
-@register("DEFONCE")
-class DEFONCE(BaseQuestApp):
-    name = "DEFONCE"
-
-@register("DISCO")
-class DISCO(BaseQuestApp):
-    name = "DISCO"
-
-@register("RADIO")
-class RADIO(BaseQuestApp):
-    name = "RADIO"
+make_quests()

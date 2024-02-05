@@ -22,17 +22,21 @@ def today():
     
 @register("index")
 class FessteHome(BaseApp):
-    # def getLeaderboard(self):
-    #     with Session(GetEngine()) as session:
-    #         stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by(desc("count")).limit(9)
-    #         return [(x.count, x.nick) for x in session.execute(stmt)]
+    def getLeaderboard(self):
+        with Session(GetEngine()) as session:
+            stmt = select(QuestEntry.nick, func.count(QuestEntry.quest).label("count")).group_by(QuestEntry.nick).order_by(desc("count")).limit(3)
+            return [(x.count, x.nick) for x in session.execute(stmt)]
 
     def interact(self):
         self.m.sendfile(asset("fesste/HOMEPAGE.vdt"))
-        self.m.pos(23, 30)
-        self.m.print(today().strftime('%d/%m/%y'))
-        self.m.pos(24, 30)
-        self.m.print(datetime.datetime.now().strftime('%H:%M'))
+        self.m.pos(21, 1)
+        self.m.print(today().strftime('%d/%m/%y') + ' ' + datetime.datetime.now().strftime('%H:%M'))
+        self.m.pos(21, 28)
+        self.m.setInverse()
+        self.m.print('TOP 3 SCORES:')
+        for i, l in enumerate(self.getLeaderboard()):
+            self.m.pos(22 + i, 28)
+            self.m.print('* %s' % l[1])
         code = self.m.addInputField(24, 2, 12, "")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         def goGuide():
@@ -167,12 +171,4 @@ Interactions physiques sans intention sexuelle / Sensualité (sans génitalité)
 
         self.m.pos(3, 1)
         self.m.print(slug.replace('\n', '\r\n'))
-        self.m.handleInputsUntilBreak()
-
-
-@register("legends", ["legendes"])
-class LegendsApp(BaseApp):
-    """A tribute to winners of previous quest games."""
-    def interact(self):
-        self.m.sendfile(asset("legends.vdt"))
         self.m.handleInputsUntilBreak()
