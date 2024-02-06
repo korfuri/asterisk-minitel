@@ -19,6 +19,22 @@ def today():
         return datetime.date(2000, 1, 1)
     else:
         return d
+
+# A lister en homepage:
+#
+# Consentement
+# Lineup
+# Ateliers
+#
+# Trombinet
+#
+# Meteo
+# Annonces
+# Chat
+# Guide
+#
+# Jeu des rochers?
+
     
 @register("index")
 class FessteHome(BaseApp):
@@ -141,11 +157,11 @@ class MeteoApp(BaseApp):
         self.m.keyHandlers[tc.kSuite] = tc.Break
         self.m.handleInputsUntilBreak()
 
-@register("fstx", ["seminaire", "fesstex", "fesstx", "festx", "fesste"])
-class FstxApp(BaseApp):
-    def interact(self):
-        self.m.sendfile(asset("fesste/fstx.vdt"))
-        self.m.handleInputsUntilBreak()
+# @register("fstx", ["seminaire", "fesstex", "fesstx", "festx", "fesste"])
+# class FstxApp(BaseApp):
+#     def interact(self):
+#         self.m.sendfile(asset("fesste/fstx.vdt"))
+#         self.m.handleInputsUntilBreak()
 
 # @register("atelier", ["ateliers"])
 class AtelierApp(BaseApp):
