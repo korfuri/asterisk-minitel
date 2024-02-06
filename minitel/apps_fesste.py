@@ -20,22 +20,6 @@ def today():
     else:
         return d
 
-# A lister en homepage:
-#
-# Consentement
-# Lineup
-# Ateliers
-#
-# Trombinet
-#
-# Meteo
-# Annonces
-# Chat
-# Guide
-#
-# Jeu des rochers?
-
-    
 @register("index")
 class FessteHome(BaseApp):
     def getLeaderboard(self):
@@ -65,21 +49,21 @@ class FessteHome(BaseApp):
             case '1':
                 c = 'consentement'
             case '2':
-                c = 'fstx'
+                c = 'lineup'
             case '3':
-                c = 'chat'
+                c = 'ateliers'
             case '4':
-                c = 'horoscope'
-            case '5':
                 c = 'guide'
+            case '5':
+                c = 'chat'
             case '6':
-                c = 'annonces'
+                c = 'horoscope'
             case '7':
-                c = 'leaderboard'
+                c = 'annonces'
             case '8':
-                c = 'trombinet'
+                c = 'leaderboard'
             case '9':
-                c = 'monespace'
+                c = 'trombinet'
             case '0':
                 c = 'porn'
         logging.debug("Code: %s", c)
@@ -163,28 +147,8 @@ class MeteoApp(BaseApp):
 #         self.m.sendfile(asset("fesste/fstx.vdt"))
 #         self.m.handleInputsUntilBreak()
 
-# @register("atelier", ["ateliers"])
+@register("atelier", ["ateliers"])
 class AtelierApp(BaseApp):
     def interact(self):
-        self.showAtelier()
-
-    def showAtelier(self):
-        title = 'MASSAGES AU PIED LEVÉ'
-        slug = """Redécouvre tes collègues sous un nouveau jour, exit l’autorité, les missions et les ragots de la machine à café, faites place à la tendresse et à la lenteur pour plonger au fond de soi et de l’autre en douceur.
-Interactions physiques sans intention sexuelle / Sensualité (sans génitalité) • implication encadrée • 1H30 • 12 pers. • pratique en solo, en duo et en trio • venez avec des vêtements confortables"""
-        self.m.pos(1, 0)
-        self.m._write(tc.ESC + tc.tSetDoubleWidth + tc.tFgColor(tc.clRed))
-        self.m.print("Atelier")
-        self.m._write(tc.ESC + tc.tSetNormalHeight + tc.tFgColor(tc.clYellow))
-        self.m.print("%26s" % "Vendredi 18:00")
-
-        self.m.pos(2, 0)
-        pad = (40 - len(title)) // 2 - 1
-        self.m.print(" " * pad)
-        self.m._write(tc.ESC + tc.tStartUnderline + b' ')
-        self.m.print(title)
-        self.m._write(tc.ESC + tc.tEndUnderline)
-
-        self.m.pos(3, 1)
-        self.m.print(slug.replace('\n', '\r\n'))
+        self.m.sendfile(asset("fesste/ateliers.vdt"))
         self.m.handleInputsUntilBreak()
