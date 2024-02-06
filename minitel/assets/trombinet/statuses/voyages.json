@@ -1,0 +1,313 @@
+{
+  "id": "cmpl-8pIGhXNdeYABH0KlyCWVi2XLfYqJx",
+  "object": "text_completion",
+  "created": 1707235643,
+  "model": "gpt-3.5-turbo-instruct",
+  "choices": [
+    {
+      "text": "\n\"En route pour une nouvelle aventure, direction l'Europe ! Excit\u00e9(e) de d\u00e9couvrir de nouveaux paysages, cultures et traditions. Pr\u00eat(e) \u00e0 vivre des moments inoubliables et \u00e0 en prendre plein les yeux. #voyage #Europe #1999\"",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"De retour d'un incroyable voyage en Asie, je suis \u00e9merveill\u00e9 par la beaut\u00e9 de ces paysages et la richesse de leur culture. Des souvenirs plein la t\u00eate, je n'ai qu'une envie : repartir \u00e0 l'aventure ! #1999 #Voyages #Asie\"",
+      "index": 1,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de rentrer d'un voyage incroyable \u00e0 travers l'Europe ! Les paysages, les cultures, les rencontres... c'\u00e9tait magique ! Je suis tellement reconnaissant de pouvoir explorer ce monde fascinant. #Wanderlust #1999 #TravelGoals\"",
+      "index": 2,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je pars en road-trip \u00e0 travers l'Europe avec mon Walkman et ma carte routi\u00e8re ! A la d\u00e9couverte de nouveaux paysages et de nouvelles cultures, je suis pr\u00eat \u00e0 vivre une aventure inoubliable. #voyage #aventure #1999\"",
+      "index": 3,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! D\u00e9part en avion pour d\u00e9couvrir de nouveaux horizons \ud83c\udf0d #voyage #1999 #exploration\"",
+      "index": 4,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je pars \u00e0 la d\u00e9couverte du monde, direction l'Asie ! J'ai h\u00e2te de d\u00e9couvrir de nouvelles cultures et de vivre des aventures inoubliables. Mon sac \u00e0 dos est pr\u00eat, c'est parti pour une ann\u00e9e de voyage ! #wanderlust #1999 #backpacking\"",
+      "index": 5,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route vers de nouvelles aventures ! D\u00e9part pour une destination inconnue, mais remplie de promesses et de d\u00e9couvertes. H\u00e2te de plonger dans l'inconnu et de vivre des moments inoubliables. \u00c0 bient\u00f4t les amis, je vous raconterai tout \u00e0 mon retour !\" #exploration #voyage #1999",
+      "index": 6,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour un nouveau voyage \u00e0 travers le monde ! Excit\u00e9 de d\u00e9couvrir de nouveaux paysages et de nouvelles cultures. D\u00e9connect\u00e9 du monde moderne pour me connecter \u00e0 l'aventure. \u00c0 bient\u00f4t les amis !\" #voyage1999 #exploration #d\u00e9connexion",
+      "index": 7,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En voyage \u00e0 travers le monde, je d\u00e9couvre de nouvelles cultures, de magnifiques paysages et des exp\u00e9riences inoubliables. Les souvenirs que je cr\u00e9e resteront \u00e0 jamais grav\u00e9s dans mon c\u0153ur. #wanderlust #1999\"",
+      "index": 8,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction l'Australie pour d\u00e9couvrir de nouveaux horizons. H\u00e2te de faire le tour du monde et de rencontrer de nouvelles cultures #voyages #aventure #1999\"",
+      "index": 9,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"De retour \u00e0 la maison apr\u00e8s un voyage incroyable \u00e0 travers l'Europe. Les paysages, les rencontres et les d\u00e9couvertes ont combl\u00e9 mon coeur et mon esprit. Je suis tellement reconnaissant pour cette opportunit\u00e9 de voyager et de d\u00e9couvrir de nouvelles cultures. #exploration #1999 #Eurotrip\"",
+      "index": 10,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En plein road trip dans l'Ouest am\u00e9ricain, je d\u00e9couvre des paysages \u00e0 couper le souffle et des rencontres inoubliables. Voyager, c'est l'\u00e9vasion ultime ! #1999 #RoadTrip #DiscoveringTheWorld\"",
+      "index": 11,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En train de pr\u00e9parer mon prochain voyage en utilisant une carte papier et un guide touristique, pas besoin de GPS ou de TripAdvisor ! #oldschool #exploration #1999\"",
+      "index": 12,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction l'Europe pour d\u00e9couvrir de nouveaux horizons et cultures. Je suis pr\u00eat \u00e0 explorer le monde en ce nouveau mill\u00e9naire. #voyages #d\u00e9couvertes #1999\"",
+      "index": 13,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure, direction l'Europe pour d\u00e9couvrir de nouveaux paysages et cultures ! \ud83c\udf0d\u2708\ufe0f #voyage #1999 #d\u00e9couvertes\"",
+      "index": 14,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"De retour d'une aventure incroyable \u00e0 l'autre bout du monde ! Les souvenirs de ce voyage resteront \u00e0 jamais grav\u00e9s dans ma m\u00e9moire. Maintenant, il est temps de pr\u00e9parer le prochain d\u00e9part \u2708\ufe0f #explorateur #1999 #voyages\"",
+      "index": 15,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure! Direction la Grosse Pomme pour d\u00e9couvrir ses gratte-ciels et ses hot-dogs. Pr\u00eat \u00e0 embarquer dans le chaos de New York City en cette belle ann\u00e9e 1999. #voyage #USA #excitement\"",
+      "index": 16,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai pris mon premier vol en avion aujourd'hui et j'ai vu le monde d'en haut pour la premi\u00e8re fois ! Voyager est une exp\u00e9rience incroyable qui ouvre l'esprit et le coeur. Je suis pr\u00eat pour de nouvelles aventures ! #vivrelavie #voyages #1999\"",
+      "index": 17,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour de nouvelles aventures ! Direction l'Asie pour d\u00e9couvrir de nouveaux horizons et cultures fascinantes. J'ai h\u00e2te de partager mes d\u00e9couvertes avec vous \u00e0 mon retour \ud83c\udf0d\u2728 #VoyageurDansL'\u00c2me #1999\"",
+      "index": 18,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Destination : le pays des merveilles technologiques. D\u00e9collage imminent vers le futur, pr\u00eat \u00e0 explorer de nouveaux horizons. Bon voyage \u00e0 tous ! #1999 #Voyage #Technologie\"",
+      "index": 19,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une aventure inoubliable ! Destination : l'Europe. H\u00e2te de d\u00e9couvrir de nouveaux pays, de nouvelles cultures et de faire de belles rencontres. #voyage #1999 #eurotrip\"",
+      "index": 20,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction le pays des kangourous \ud83e\udd98 et du surf \ud83c\udfc4\u200d\u2642\ufe0f ! D\u00e9part imminent pour l'Australie, j'ai h\u00e2te de d\u00e9couvrir ce pays lointain et ses merveilles \ud83c\udf0e #voyage #australie #1999\"",
+      "index": 21,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En train de pr\u00e9parer ma prochaine aventure \u00e0 travers l'Europe ! Impatient de d\u00e9couvrir de nouveaux pays et cultures en 1999 \ud83c\udf0d #voyageur #1999 #Europe\"",
+      "index": 22,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"De retour de mon voyage en Tha\u00eflande, j'ai d\u00e9couvert un monde color\u00e9 et fascinant. Les temples, les plages, les march\u00e9s...tout \u00e9tait incroyable ! Je suis combl\u00e9 par toutes ces d\u00e9couvertes, vivement mon prochain voyage \u2708\ufe0f #1999 #Tha\u00eflande #Voyage\"",
+      "index": 23,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction le pays des merveilles, pr\u00eat \u00e0 explorer de nouveaux horizons et \u00e0 d\u00e9couvrir de nouvelles cultures. Qui sait o\u00f9 le vent me m\u00e8nera cette fois-ci ? #voyages #1999 #exploration\"",
+      "index": 24,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Destination : l'Europe ! Excit\u00e9e de d\u00e9couvrir de nouveaux paysages et cultures ! \u00c0 bient\u00f4t les amis, je vous raconterai tout \u00e0 mon retour !\" #En1999 #Voyage #Europe",
+      "index": 25,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis enfin de retour apr\u00e8s un incroyable voyage en Asie ! Les temples, les march\u00e9s, les couleurs...c'\u00e9tait inoubliable ! Maintenant, j'ai h\u00e2te de d\u00e9couvrir de nouveaux horizons en Europe. #exploration #d\u00e9couverte #1999\"",
+      "index": 26,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une aventure incroyable ! Destination : l'Am\u00e9rique ! Pr\u00eat \u00e0 d\u00e9couvrir de nouveaux horizons et \u00e0 vivre des exp\u00e9riences inoubliables. \u00c0 bient\u00f4t les amis, je vous enverrai des cartes postales !\" #Voyage #1999 #USA",
+      "index": 27,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"De retour de mon incroyable voyage \u00e0 travers l'Europe ! J'ai d\u00e9couvert de nouvelles cultures et paysages \u00e0 couper le souffle. Ces souvenirs resteront grav\u00e9s \u00e0 jamais dans mon coeur. #wanderlust #1999 #travelgoals\"",
+      "index": 28,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure, direction les \u00c9tats-Unis ! H\u00e2te de d\u00e9couvrir ces contr\u00e9es lointaines et de vivre de nouvelles exp\u00e9riences. #voyage #1999 #USA\"",
+      "index": 29,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction l'Europe pour d\u00e9couvrir de nouveaux horizons et me perdre dans ses ruelles pittoresques. Pr\u00eat \u00e0 vivre des moments inoubliables en 1999 #voyages #d\u00e9couvertes #Europe\"",
+      "index": 30,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une aventure incroyable \u00e0 travers le monde ! Pr\u00eat \u00e0 d\u00e9couvrir de nouvelles cultures, de magnifiques paysages et \u00e0 faire des rencontres inoubliables. #voyage #1999 #aventure\"",
+      "index": 31,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour de nouvelles aventures ! Destination inconnue, mais la soif de d\u00e9couverte et de libert\u00e9 me guide. Bonne route \u00e0 tous les voyageurs de l'an 1999 \u2708\ufe0f\ud83c\udf0d #Exploration #1999 #RoadTrip\"",
+      "index": 32,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En chemin vers de nouvelles aventures, pr\u00eate \u00e0 explorer le monde et \u00e0 d\u00e9couvrir de nouveaux horizons. Voyager, c'est la cl\u00e9 pour s'\u00e9panouir et grandir. #Wanderlust #1999\"",
+      "index": 33,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction l'Europe avec mon sac \u00e0 dos et ma carte papier. J'ai h\u00e2te de d\u00e9couvrir de nouveaux paysages et cultures. \u00c0 bient\u00f4t les amis ! \u2708\ufe0f\ud83c\udf0d #backpacker #1999 #voyages\"",
+      "index": 34,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction l'Europe pour d\u00e9couvrir de nouveaux horizons. H\u00e2te de partager mes d\u00e9couvertes avec vous \u00e0 mon retour. #voyages #1999 #Europe\"",
+      "index": 35,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis parti en voyage et j'ai d\u00e9couvert tant de merveilles. Les nouvelles cultures, les paysages \u00e9poustouflants et les souvenirs inoubliables. Je me sens tellement chanceux de pouvoir explorer le monde. #voyage #aventure #1999\"",
+      "index": 36,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour de nouvelles aventures ! Destination inconnue, sac \u00e0 dos sur l'\u00e9paule et pas de t\u00e9l\u00e9phone portable. L'excitation des voyages \u00e0 l'ancienne, j'adore \u00e7a ! #1999 #nostalgie #voyage\"",
+      "index": 37,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En train de planifier mon prochain voyage en utilisant une carte en papier et un guide touristique. Qui aurait cru que je pourrais explorer le monde sans utiliser Internet ? #retrotourisme #1999 #voyages\"",
+      "index": 38,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de rentrer d'un voyage incroyable en Asie, j'ai d\u00e9couvert de nouvelles cultures et paysages \u00e0 couper le souffle ! Vivement mon prochain p\u00e9riple, le monde est si vaste et fascinant ! #wanderlust #1999 #exploration\"",
+      "index": 39,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement excit\u00e9e pour mon prochain voyage en Europe ! J'ai h\u00e2te de d\u00e9couvrir de nouveaux paysages et cultures. Les voyages, c'est vraiment la meilleure fa\u00e7on de s'\u00e9vader et de s'enrichir. #Wanderlust #1999 #EuropeTrip\"",
+      "index": 40,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure, direction l'Am\u00e9rique du Sud ! J'ai h\u00e2te de d\u00e9couvrir de nouveaux horizons et de partager des moments inoubliables avec mes amis. Les voyages forment la jeunesse, c'est parti pour de nouvelles d\u00e9couvertes ! \ud83c\udf0e\u2708\ufe0f #exploration #1999 #voyages\"",
+      "index": 41,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction l'Europe avec mon sac \u00e0 dos et mon passeport en main. H\u00e2te de d\u00e9couvrir de nouveaux horizons et de m'\u00e9merveiller devant les merveilles du monde. #voyage #Europe99 #aventure\"",
+      "index": 42,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En train de pr\u00e9parer mon voyage en Tha\u00eflande, j'ai h\u00e2te de d\u00e9couvrir de nouveaux horizons et de vivre des aventures inoubliables. #wanderlust #1999 #exploration\"",
+      "index": 43,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour un nouveau voyage, dans un monde encore inconnu. J'emporte avec moi mon sac \u00e0 dos et mon appareil photo, pr\u00eat \u00e0 d\u00e9couvrir de nouveaux horizons. A bient\u00f4t les amis, je vous raconterai tout \u00e0 mon retour !\" #1999 #voyage #aventure",
+      "index": 44,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction : l'Europe ! H\u00e2te de d\u00e9couvrir de nouveaux paysages et cultures ! #voyage #1999 #d\u00e9couverte\"",
+      "index": 45,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction l'Europe pour d\u00e9couvrir de nouveaux horizons et cultures. H\u00e2te de partager mes d\u00e9couvertes avec vous \u00e0 mon retour. #voyage #1999\"",
+      "index": 46,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour explorer le monde avec mon sac \u00e0 dos et ma carte en papier ! H\u00e2te de d\u00e9couvrir de nouveaux horizons sans l'aide de Google Maps. #nostalgie #voyage #1999\"",
+      "index": 47,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route pour une nouvelle aventure ! Direction : la Californie \ud83c\udf34\u2708\ufe0f J'ai h\u00e2te de d\u00e9couvrir de nouveaux horizons et de rencontrer des gens incroyables \ud83c\udf0e #voyage #1999 #aventure\"",
+      "index": 48,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En route vers de nouvelles aventures ! Direction l'Europe pour d\u00e9couvrir de magnifiques paysages et cultures. J'ai h\u00e2te de partager mes d\u00e9couvertes avec vous \u00e0 mon retour. #voyage #europe #1999\"",
+      "index": 49,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 32,
+    "completion_tokens": 2890,
+    "total_tokens": 2922
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "id": "cmpl-8pHpmpAdAKBcHHAyke2KpHAtTv4Rp",
+  "object": "text_completion",
+  "created": 1707233974,
+  "model": "gpt-3.5-turbo-instruct",
+  "choices": [
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai du mal \u00e0 croire que nous sommes d\u00e9j\u00e0 en 1999 ! Je me rappelle encore quand ils \u00e9taient b\u00e9b\u00e9s, et maintenant, ils sont si grands et ind\u00e9pendants. Je suis tellement fi\u00e8re de mes petits tr\u00e9sors, ils sont ma plus grande r\u00e9ussite dans la vie. J'esp\u00e8re qu'ils r\u00e9aliseront tous leurs r\u00eaves et qu'ils seront heureux. Le temps passe si vite, profitons de chaque moment avec nos enfants. #Famille #Amour\u00c9ternel #1999\"",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression de les avoir mis au monde hier. Chaque jour, ils m'\u00e9merveillent avec leurs d\u00e9couvertes et leur innocence. Je suis tellement fier d'\u00eatre leur parent et de les voir s'\u00e9panouir. Mais parfois, j'ai peur de ne pas \u00eatre \u00e0 la hauteur, de ne pas savoir les prot\u00e9ger dans ce monde en constante \u00e9volution. Mais je sais qu'avec tout l'amour que je leur donne, ils sauront traverser toutes les \u00e9preuves. Je suis tellement reconnaissant d'avoir ces petits bouts de moi \u00e0 mes c\u00f4t\u00e9s.\" #fieremaman #love #1999",
+      "index": 1,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite ! Je me souviens encore d'il y a quelques ann\u00e9es quand ils \u00e9taient si petits, \u00e0 peine capables de marcher. Maintenant, ils sont devenus de v\u00e9ritables petits \u00eatres humains, avec leur propre personnalit\u00e9 et leurs propres r\u00eaves. Je suis reconnaissant d'\u00eatre leur parent et de les voir \u00e9voluer chaque jour. Je sais que le futur leur r\u00e9serve de belles surprises et je serai toujours l\u00e0 pour les soutenir. #famille #fiert\u00e9 #1999\"",
+      "index": 2,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes petits anges grandissent si vite dans ce nouveau mill\u00e9naire ! Je suis tellement fier de mes enfants, ils sont ma plus grande r\u00e9ussite. Bien s\u00fbr, ils se disputent parfois pour l'ordinateur, mais je suis reconnaissant pour chaque moment pass\u00e9 ensemble en cette \u00e8re num\u00e9rique. J'esp\u00e8re qu'ils garderont toujours leur innocence et leur joie de vivre dans ce monde en constante \u00e9volution. Je les aime plus que tout au monde, mes merveilleux enfants \u2764\ufe0f #famille #1999 #amourinconditionnel\"",
+      "index": 3,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\"Mes enfants grandissent tellement vite, j'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient encore b\u00e9b\u00e9s. Maintenant, ils courent partout et parlent sans arr\u00eat. Je suis si fier d'eux et de tout ce qu'ils ont accompli jusqu'\u00e0 pr\u00e9sent. J'esp\u00e8re juste qu'ils n'oublieront jamais leurs racines et qu'ils resteront toujours aussi proches de leur famille. Je suis tellement reconnaissant d'avoir ces petits anges dans ma vie, ils rendent chaque jour plus merveilleux.\" #famille #fiersparents #1999 #mesenfants #amour\u00e9ternel",
+      "index": 4,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, je suis tellement fier d'eux. Ils ont tant de curiosit\u00e9 et de cr\u00e9ativit\u00e9, c'est merveilleux de les voir s'\u00e9panouir chaque jour. J'esp\u00e8re qu'ils auront un avenir radieux, rempli de bonheur et de succ\u00e8s. Pour l'instant, je profite de chaque instant pass\u00e9 avec eux, car je sais que ces moments ne reviendront pas. Je les aime plus que tout au monde, mes pr\u00e9cieux petits tr\u00e9sors \u2764\ufe0f #fieredepapa #amourinconditionnel #1999\"",
+      "index": 5,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite et deviennent de plus en plus autonomes. J'ai l'impression que c'\u00e9tait hier qu'ils apprenaient \u00e0 marcher, et maintenant ils sont d\u00e9j\u00e0 en train de se pr\u00e9parer pour l'\u00e9cole. Le temps passe si vite, mais je suis reconnaissant d'avoir ces petits bouts de moi pour me rappeler de profiter de chaque instant. #famille #amour #1999\"",
+      "index": 6,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Quelle fiert\u00e9 de voir mes enfants grandir dans ce monde en constante \u00e9volution. Je suis \u00e9merveill\u00e9 par leur curiosit\u00e9 et leur intelligence. Ils sont ma plus grande r\u00e9ussite et je suis reconnaissant de les avoir dans ma vie. En cette fin de si\u00e8cle, je suis convaincu qu'ils seront les leaders de demain et qu'ils sauront faire face \u00e0 tous les d\u00e9fis. Je les aime plus que tout au monde. #fierpapa #avenirprometteur #1999\"",
+      "index": 7,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis si fier de mes enfants, ils grandissent si vite dans ce nouveau mill\u00e9naire. J'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient de petits b\u00e9b\u00e9s, et maintenant ils sont d\u00e9j\u00e0 de jeunes adolescents. Je me demande o\u00f9 le temps a pu filer si vite. Mais je suis reconnaissant de les avoir \u00e0 mes c\u00f4t\u00e9s, de partager avec eux ces moments pr\u00e9cieux et de les voir s'\u00e9panouir. Je suis un parent combl\u00e9 et je souhaite que le futur leur r\u00e9serve le meilleur. #famille #fiert\u00e9 #1999\"",
+      "index": 8,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient encore des b\u00e9b\u00e9s. Maintenant, ils sont si ind\u00e9pendants et si curieux de d\u00e9couvrir le monde. Je suis tellement fier de les voir grandir et devenir de belles personnes. Mais parfois, j'ai l'impression de manquer de temps pour profiter pleinement de ces moments pr\u00e9cieux avec eux. Je vais donc prendre une pause de l'ordinateur et passer du temps de qualit\u00e9 avec mes petits tr\u00e9sors. #famille #amour #1999\"",
+      "index": 9,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression de les voir s'envoler vers leur propre vie. Mais je suis si fi\u00e8re de leurs r\u00e9ussites, de leurs rires et de leurs sourires. Je sais que le monde leur r\u00e9serve de belles choses et je suis heureux de les accompagner dans leur chemin. M\u00eame si je dois avouer que je suis nostalgique de ces moments o\u00f9 ils \u00e9taient encore mes petits b\u00e9b\u00e9s. Profitez de vos enfants, ils grandissent trop vite. \u2764\ufe0f #fiersparents #nostalgie #1999\"",
+      "index": 10,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient encore des b\u00e9b\u00e9s. Maintenant, ils ont leurs propres personnalit\u00e9s et je suis tellement fi\u00e8re d'eux. Ils me font rire et me surprennent chaque jour. Je suis reconnaissante d'avoir ces petits anges dans ma vie. J'esp\u00e8re qu'ils seront toujours aussi proches de moi, m\u00eame quand ils seront plus grands. L'amour d'une m\u00e8re est \u00e9ternel \u2764\ufe0f #mesenfantsmesamours #1999 #familleheureuse\"",
+      "index": 11,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, je suis tellement fier d'eux. Je me rappelle encore quand ils \u00e9taient b\u00e9b\u00e9s, maintenant ils ont leur propre personnalit\u00e9 et leurs propres r\u00eaves. Je ne peux pas croire que nous sommes d\u00e9j\u00e0 en 1999, le temps passe si vite. J'esp\u00e8re pouvoir leur offrir un avenir meilleur dans ce nouveau mill\u00e9naire. Je les aime plus que tout au monde et je suis reconnaissant d'\u00eatre leur parent. #b\u00e9nisparmesenfants #fiert\u00e9parentale #1999\"",
+      "index": 12,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent tellement vite, je n'arrive pas \u00e0 croire qu'ils aient d\u00e9j\u00e0 10 et 13 ans ! Je me souviens encore de leur naissance comme si c'\u00e9tait hier. Ils sont ma fiert\u00e9, ma raison de vivre. J'esp\u00e8re qu'ils r\u00e9aliseront tous leurs r\u00eaves et qu'ils seront heureux dans leur vie. Je suis tellement reconnaissant d'avoir ces deux merveilleux \u00eatres \u00e0 mes c\u00f4t\u00e9s. #Famille #AmourInconditionnel #B\u00e9nisParMesEnfants #1999\"",
+      "index": 13,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai du mal \u00e0 croire que c'\u00e9tait hier qu'ils \u00e9taient encore des b\u00e9b\u00e9s. Je suis tellement fier d'eux, de voir \u00e0 quel point ils sont devenus de belles personnes. M\u00eame si parfois ils me rendent fou avec leurs b\u00eatises, je les aime plus que tout au monde. Je suis reconnaissant d'avoir la chance d'\u00eatre leur parent et de les voir grandir dans ce monde en constante \u00e9volution. #fierpapa #amourinconditionnel #1999\"",
+      "index": 14,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite ! Ils sont ma plus grande r\u00e9ussite dans la vie. Je me souviens encore de leur premi\u00e8re journ\u00e9e d'\u00e9cole, et maintenant ils sont d\u00e9j\u00e0 en train de passer leur brevet. Le temps passe si vite, mais je suis reconnaissant de pouvoir les voir grandir et de les accompagner dans leur parcours. Je les aime plus que tout au monde. #fierparent #mesamours #1999\" ",
+      "index": 15,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Ces petits \u00eatres qui ont transform\u00e9 ma vie en un tourbillon d'amour et de bonheur. Mes enfants, mes rayons de soleil, ma raison de me lever chaque matin. Je suis tellement fier de les voir grandir, de les voir s'\u00e9panouir. Chaque jour est une nouvelle aventure avec eux, et je les ch\u00e9ris plus que tout au monde. Ils sont ma plus grande fiert\u00e9, mes tr\u00e9sors pr\u00e9cieux. \u2764\ufe0f #famille #amour #1999\"",
+      "index": 16,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient encore de petits b\u00e9b\u00e9s dans mes bras. Maintenant, ils courent partout, d\u00e9couvrent le monde avec curiosit\u00e9 et me surprennent chaque jour. Je suis tellement fier de les voir grandir et devenir de merveilleuses personnes. J'esp\u00e8re qu'ils garderont toujours cette innocence et cette joie de vivre. Je suis tellement reconnaissant d'avoir ces tr\u00e9sors dans ma vie. #Fiert\u00e9DeParent #1999 #MesEnfants #BonheurInfini\"",
+      "index": 17,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, je me souviens encore de leur premier pas en 1999. Maintenant, ils sont si d\u00e9brouillards et ind\u00e9pendants. Je suis tellement fier de les voir grandir et devenir de belles personnes. Malgr\u00e9 les d\u00e9fis de cette ann\u00e9e, je suis reconnaissant d'avoir une famille si aimante et soud\u00e9e. Pour moi, ils sont ma plus grande r\u00e9ussite et ma raison de me lever chaque matin. \u2764\ufe0f #famille #gratitude #fiert\u00e9\"",
+      "index": 18,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\"Quelle fiert\u00e9 de voir mes enfants grandir dans ce nouveau mill\u00e9naire ! Ils sont ma plus grande r\u00e9ussite et je suis s\u00fbr qu'ils accompliront de grandes choses. Je me rappelle encore quand ils \u00e9taient petits, jouant avec leurs jouets en plastique. Maintenant, ils sont d\u00e9j\u00e0 si ind\u00e9pendants et intelligents. Le temps passe si vite, mais je suis reconnaissant de pouvoir \u00eatre t\u00e9moin de leur \u00e9volution. Je les aime tellement \u2764\ufe0f #fieremaman #1999 #mesenfants\"",
+      "index": 19,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes petits anges grandissent si vite, j'ai du mal \u00e0 r\u00e9aliser que nous sommes d\u00e9j\u00e0 en 1999 ! J'esp\u00e8re qu'ils garderont toujours en eux cette innocence et cette joie de vivre. En tant que parent, je souhaite leur offrir un monde meilleur pour leur avenir. Mais pour l'instant, je profite de chaque instant pass\u00e9 avec eux, ces moments pr\u00e9cieux qui font de moi la personne la plus combl\u00e9e du monde \u2764\ufe0f #famille #enfants #1999\"",
+      "index": 20,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, je n'arrive pas \u00e0 croire que mon b\u00e9b\u00e9 a d\u00e9j\u00e0 5 ans et ma fille 8 ans ! Le temps passe \u00e0 une vitesse folle... Je suis tellement fier de les voir grandir et \u00e9voluer chaque jour. Ils sont ma plus grande fiert\u00e9 et ma plus grande source de bonheur. Je suis reconnaissant d'avoir ces merveilleux enfants dans ma vie. #b\u00e9nis #amourinconditionnel #1999\"",
+      "index": 21,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes petits tr\u00e9sors grandissent si vite, j'ai du mal \u00e0 croire que nous sommes d\u00e9j\u00e0 en 1999 ! Ils me remplissent de bonheur et de fiert\u00e9 chaque jour. Les voir grandir dans ce monde en constante \u00e9volution me rend \u00e0 la fois heureux et inquiet. J'esp\u00e8re pouvoir leur transmettre mes valeurs et les accompagner dans leur avenir. Mes enfants, vous \u00eates ma plus belle r\u00e9ussite et je vous aime plus que tout.\" #fieredetremaman #amourinconditionnel #mesenfantsmesamours",
+      "index": 22,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants ! Ils grandissent si vite et je suis \u00e9merveill\u00e9 de voir \u00e0 quel point ils sont intelligents et aimants. Je me rappelle encore quand ils \u00e9taient petits et qu'ils couraient dans le jardin en riant aux \u00e9clats. Maintenant, ils sont devenus de v\u00e9ritables petits adultes. Je suis reconnaissant d'\u00eatre leur parent et de les voir s'\u00e9panouir chaque jour. Je les aime plus que tout au monde \u2764\ufe0f #familleheureuse #fiersparents #1999\"",
+      "index": 23,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite ! Je me souviens encore quand ils \u00e9taient des b\u00e9b\u00e9s, maintenant ils sont devenus de jeunes adultes pleins de curiosit\u00e9 et de r\u00eaves. J'ai tellement h\u00e2te de voir ce que l'avenir leur r\u00e9serve. Je suis tellement reconnaissant de les avoir dans ma vie et de pouvoir les voir grandir chaque jour. #famille #amour #enfants #1999\"",
+      "index": 24,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent tellement vite, j'ai l'impression de les avoir vu na\u00eetre hier ! Ils sont ma plus grande fiert\u00e9 et ma plus grande source de bonheur. Je suis tellement reconnaissant de les avoir dans ma vie, ils me donnent tant d'amour et de joie. J'esp\u00e8re pouvoir leur offrir un monde meilleur pour leur avenir. #famille #enfants #1999 #amourinconditionnel\"",
+      "index": 25,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite dans ce monde technologique ! Je me souviens encore de leur premier pas et maintenant ils sont d\u00e9j\u00e0 accros \u00e0 l'ordinateur et au t\u00e9l\u00e9phone portable. Mais malgr\u00e9 tout, ils restent mes petits tr\u00e9sors et je suis reconnaissant de les avoir \u00e0 mes c\u00f4t\u00e9s. #famille #fi\u00e8redemesenfants #1999\"",
+      "index": 26,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis si fier de mes enfants, ils grandissent si vite dans ce nouveau mill\u00e9naire rempli de technologie. Mais j'esp\u00e8re qu'ils n'oublieront jamais les valeurs traditionnelles qui ont guid\u00e9 notre famille depuis des g\u00e9n\u00e9rations. Je suis reconnaissant de pouvoir les voir grandir et \u00e9voluer chaque jour. Je sais qu'ils ont un avenir prometteur devant eux, et je ferai tout pour les soutenir dans leurs r\u00eaves. #famille #fiert\u00e9 #1999\"",
+      "index": 27,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite ! Je me souviens encore de leur premier sourire et maintenant ils courent partout. Je sais que le monde \u00e9volue rapidement, mais j'esp\u00e8re qu'ils garderont toujours leur innocence et leur joie de vivre. En tant que parent, je ferai tout pour les prot\u00e9ger et les guider vers un avenir radieux. #Fiert\u00e9Parentale #1999 #MesPetitsAmours\"",
+      "index": 28,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient encore de petits b\u00e9b\u00e9s. Maintenant, ils courent partout et commencent \u00e0 parler. Je suis tellement fier de les voir grandir et devenir des individus uniques. Mais parfois, je voudrais juste pouvoir les ralentir un peu et profiter de chaque instant. Le temps passe trop vite, mais je suis reconnaissant pour chaque moment pass\u00e9 avec eux. #famille #amour #1999\"",
+      "index": 29,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient encore de petits b\u00e9b\u00e9s. Mais maintenant, ils ont d\u00e9j\u00e0 leur propre personnalit\u00e9 et je suis si fier d'eux. Ils me rendent tellement heureux et combl\u00e9. Je suis reconnaissant d'\u00eatre leur parent et de les voir grandir chaque jour. Je les aime plus que tout au monde et je suis impatient de voir ce que l'avenir leur r\u00e9serve. #FiereMaman #AmourInconditionnel #MesPetitsCh\u00e9ris #1999\"",
+      "index": 30,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes petits bouts de chou, ils grandissent si vite ! Je me souviens encore de leur premi\u00e8re ann\u00e9e, leurs premiers pas, leurs premiers mots... Maintenant, ils sont d\u00e9j\u00e0 \u00e0 l'\u00e9cole et d\u00e9couvrent le monde avec tant de curiosit\u00e9. J'esp\u00e8re pouvoir leur transmettre les valeurs qui me sont ch\u00e8res et les voir s'\u00e9panouir dans cette nouvelle \u00e8re technologique. Mais pour l'instant, je profite de chaque instant avec mes enfants, car le temps passe trop vite. #proudpapa #amourinconditionnel #1999\"",
+      "index": 31,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Petit moment de fiert\u00e9 de parent aujourd'hui alors que mes enfants ont termin\u00e9 avec succ\u00e8s leur premi\u00e8re ann\u00e9e d'\u00e9cole primaire. Je suis tellement heureux de les voir grandir et apprendre chaque jour. Ils sont ma plus grande r\u00e9ussite et je suis reconnaissant de les avoir comme mes enfants. Je suis impatient de voir ce que l'avenir leur r\u00e9serve. #FiersParents #1999 #MesPetitsAmours \u2764\ufe0f\"",
+      "index": 32,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, je n'arrive pas \u00e0 croire qu'ils aient d\u00e9j\u00e0 10 et 12 ans ! Je me souviens encore de leurs premiers pas et de leurs premiers mots. Mais aujourd'hui, ils sont devenus si ind\u00e9pendants et intelligents. Je suis tellement fi\u00e8re d'eux et de la personne qu'ils deviennent. Chaque jour est un nouveau d\u00e9fi et une nouvelle aventure avec eux. Je suis reconnaissante d'avoir ces petits bouts de moi pour toujours dans ma vie. #famille #amour #enfants #1999\"",
+      "index": 33,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression que c'\u00e9tait hier qu'ils apprenaient \u00e0 marcher. Maintenant, ils sont d\u00e9j\u00e0 en train de parler de l'an 2000 et de tout ce que cela va apporter. Je suis si fier d'eux et de tout ce qu'ils ont accompli jusqu'\u00e0 pr\u00e9sent. J'esp\u00e8re qu'ils continueront \u00e0 suivre leurs r\u00eaves et \u00e0 r\u00e9aliser de grandes choses dans leur vie. Mes petits tr\u00e9sors, je vous aime plus que tout au monde. #fiersparents #tempspassevite #mesenfants #1999\"",
+      "index": 34,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent tellement vite, j'ai l'impression que c'\u00e9tait hier qu'ils apprenaient \u00e0 marcher et maintenant ils sont d\u00e9j\u00e0 \u00e0 l'\u00e9cole. Je suis tellement fier d'eux et de tout ce qu'ils accomplissent. Mais parfois, j'aimerais juste pouvoir les arr\u00eater dans le temps pour profiter de ces moments pr\u00e9cieux un peu plus longtemps. Le temps passe si vite, profitons de chaque instant avec nos enfants avant qu'ils ne deviennent trop grands pour nos c\u00e2lins.\" #famille #amour #tempsquisenvole #1999",
+      "index": 35,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\"Mes enfants grandissent si vite, je me sens nostalgique en repensant \u00e0 leur enfance. Ils ont tellement chang\u00e9 depuis cette photo prise en 1995. Mais je suis tellement fier d'eux, ils sont devenus des jeunes adultes si beaux et intelligents. Je me demande ce que l'avenir leur r\u00e9serve, mais je sais qu'ils seront toujours mes b\u00e9b\u00e9s dans mon c\u0153ur. #Fiert\u00e9DeParent #AmourEternel #1999\"",
+      "index": 36,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression que c'\u00e9tait hier qu'ils apprenaient \u00e0 marcher. Maintenant, ils sont d\u00e9j\u00e0 en train de naviguer sur internet et de me montrer comment utiliser un t\u00e9l\u00e9phone portable. Je suis tellement fier de leurs r\u00e9ussites et de leurs progr\u00e8s. Mais parfois, j'aimerais pouvoir revenir en arri\u00e8re et profiter encore un peu plus de leur enfance. Le temps passe si vite, profitons-en tant qu'ils sont encore \u00e0 la maison. #famille #enfants #nostalgie #1999\"",
+      "index": 37,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai l'impression qu'hier encore ils \u00e9taient de petits b\u00e9b\u00e9s. Maintenant, ils courent partout et d\u00e9couvrent le monde \u00e0 leur mani\u00e8re. Je suis tellement fier de les voir grandir et devenir des personnes uniques. Mais parfois, j'aimerais pouvoir arr\u00eater le temps pour profiter encore plus de ces moments pr\u00e9cieux avec eux. Je les aime plus que tout, mes petits tr\u00e9sors \u2764\ufe0f #famille #enfants #nostalgie #1999\"",
+      "index": 38,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai du mal \u00e0 croire que nous sommes d\u00e9j\u00e0 en 1999 ! Je me souviens encore de leur premi\u00e8re ann\u00e9e d'\u00e9cole et maintenant ils sont d\u00e9j\u00e0 au coll\u00e8ge. Le temps passe si vite, mais je suis tellement fi\u00e8re de les voir grandir et devenir de belles personnes. Je suis reconnaissante d'avoir ces merveilleuses personnes dans ma vie. #fi\u00e8redemaman #1999 #mesenfantsgrandissenttropvite\"",
+      "index": 39,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite et je suis \u00e9mu de les voir s'\u00e9panouir chaque jour. Ils sont ma plus grande r\u00e9ussite et je suis reconnaissant pour chaque moment pass\u00e9 avec eux. J'esp\u00e8re qu'ils auront un avenir brillant et qu'ils n'oublieront jamais d'o\u00f9 ils viennent. Mes b\u00e9b\u00e9s, je vous aime plus que tout au monde et je serai toujours l\u00e0 pour vous, peu importe ce que l'avenir nous r\u00e9serve. #amourpaternel #famille #fiert\u00e9 #1999\"",
+      "index": 40,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, je n'arrive pas \u00e0 croire que mon petit gar\u00e7on ait d\u00e9j\u00e0 5 ans et ma fille 3 ans. Je suis tellement fier d'eux et de tout ce qu'ils ont accompli jusqu'\u00e0 pr\u00e9sent. J'esp\u00e8re qu'ils continueront \u00e0 grandir avec sagesse et bonheur. En tant que parent, je suis b\u00e9nie de les avoir dans ma vie. Je vous aime plus que tout au monde mes petits tr\u00e9sors \u2764\ufe0f #famille #amour #enfants #1999\"",
+      "index": 41,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, j'ai du mal \u00e0 r\u00e9aliser qu'ils sont d\u00e9j\u00e0 adolescents. J'ai l'impression que c'\u00e9tait hier qu'ils \u00e9taient encore de petits b\u00e9b\u00e9s. Je suis si fi\u00e8re de les voir devenir de belles personnes, avec leurs propres personnalit\u00e9s et r\u00eaves. Je suis tellement reconnaissante d'avoir la chance d'\u00eatre leur parent. Je me souviendrai toujours de ces pr\u00e9cieux moments en tant que parent dans les ann\u00e9es 90. #fieredemesenfants #nostalgie #1999\"",
+      "index": 42,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes enfants, ils grandissent si vite ! Je me rappelle encore quand ils \u00e9taient de petits b\u00e9b\u00e9s en 1999 et maintenant ils ont d\u00e9j\u00e0 7 et 10 ans. Le temps passe si vite. J'adore les voir grandir et devenir de plus en plus ind\u00e9pendants chaque jour. Je suis reconnaissant d'avoir la chance d'\u00eatre leur parent et de les voir \u00e9voluer dans ce monde en constante \u00e9volution. #famille #amour #1999\"",
+      "index": 43,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes petits anges grandissent si vite... Je me souviens encore de leurs premiers pas il y a quelques ann\u00e9es, et maintenant ils courent partout ! Je suis si fier de mes enfants, ils sont ma plus grande fiert\u00e9. Je me demande ce que l'avenir leur r\u00e9serve, mais une chose est s\u00fbre : je serai toujours l\u00e0 pour les soutenir et les aimer. #famille #enfants #fiert\u00e9 #1999\"",
+      "index": 44,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes chers amis, je suis tellement fier de mes enfants ! Ils grandissent si vite et chaque jour, ils m'\u00e9merveillent par leur intelligence et leur gentillesse. Cela me rappelle \u00e0 quel point j'ai de la chance de les avoir dans ma vie. J'esp\u00e8re qu'ils continueront \u00e0 s'\u00e9panouir et \u00e0 r\u00e9aliser leurs r\u00eaves. Je suis reconnaissant de pouvoir \u00eatre t\u00e9moin de leur \u00e9volution dans ce monde en constante \u00e9volution. #fiert\u00e9parentale #b\u00e9nisparmesenfants #amourinconditionnel #1999\"",
+      "index": 45,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes chers enfants grandissent si vite, je suis si fier de les voir \u00e9voluer chaque jour. Ils d\u00e9couvrent le monde avec \u00e9merveillement, sans se soucier de l'avenir. Je me rappelle encore de leurs premiers pas, de leurs premiers mots... J'esp\u00e8re qu'ils garderont toujours cette innocence et cette joie de vivre. Je vous aime mes petits tr\u00e9sors, vous \u00eates ma plus grande fiert\u00e9. #b\u00e9nisparmesenfants #momentpr\u00e9cieux #amourinconditionnel #1999\"",
+      "index": 46,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Mes enfants grandissent si vite, je suis si fier de les voir s'\u00e9panouir chaque jour. C'est incroyable de voir \u00e0 quel point ils sont d\u00e9brouillards et plein de curiosit\u00e9 pour le monde qui les entoure. Je me sens tellement chanceux d'\u00eatre leur parent et de pouvoir les guider dans cette vie. Je sais que le futur leur r\u00e9serve de grandes choses et je serai toujours l\u00e0 pour les soutenir. \u2764\ufe0f #famille #fiert\u00e9 #1999\"",
+      "index": 47,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai l'impression que le temps passe trop vite... Mes enfants grandissent tellement rapidement, j'ai du mal \u00e0 les suivre ! Mais je suis tellement fier de les voir s'\u00e9panouir et devenir de belles personnes. Je me souviens encore quand ils \u00e9taient petits, c'\u00e9tait hier ! Mais je sais que je dois profiter de chaque moment avec eux car bient\u00f4t ils seront adultes et je serai nostalgique de ces moments pass\u00e9s. Je les aime plus que tout au monde \u2764\ufe0f #famille #fiert\u00e9 #1999\"",
+      "index": 48,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je suis tellement fier de mes petits bouts de chou ! Ils grandissent si vite, je n'arrive pas \u00e0 croire qu'ils aient d\u00e9j\u00e0 5 et 7 ans. Ils me font rire et me surprennent chaque jour avec leur innocence et leur curiosit\u00e9. Je suis reconnaissant d'avoir ces pr\u00e9cieux tr\u00e9sors dans ma vie et je compte bien profiter de chaque instant avec eux. #fiert\u00e9parentale #mesenfantsmesamours #1999\"",
+      "index": 49,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 32,
+    "completion_tokens": 6071,
+    "total_tokens": 6103
+  }
+}

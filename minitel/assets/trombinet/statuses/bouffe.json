@@ -1,0 +1,313 @@
+{
+  "id": "cmpl-8pIGRr0MwQdwHRGPj6fTQD52fEQVG",
+  "object": "text_completion",
+  "created": 1707235627,
+  "model": "gpt-3.5-turbo-instruct",
+  "choices": [
+    {
+      "text": "\"Repas de ce soir : burger, frites et milkshake. Mon estomac est combl\u00e9, vive la malbouffe ! #90s #foodporn\"",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Juste fini de d\u00e9guster un d\u00e9licieux repas fait maison, rien de mieux pour commencer l'ann\u00e9e 2000 en beaut\u00e9 ! #bonapp\u00e9tit #nouvelleann\u00e9e\" #1999",
+      "index": 1,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un bon steak-frites arros\u00e9 d'un Coca, le repas parfait pour finir cette journ\u00e9e en l'an 1999 \ud83c\udf54\ud83e\udd64 #Yummy #Ann\u00e9es90\"",
+      "index": 2,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai savour\u00e9 un bon repas fait maison ce soir, rien de mieux pour terminer la journ\u00e9e en beaut\u00e9 ! #blessed #homemadefood #1999\"",
+      "index": 3,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9vor\u00e9 un d\u00e9licieux repas maison avec ma famille, c'\u00e9tait tellement bon que je n'ai m\u00eame pas pu prendre de photo avec mon Kodak jetable #nostalgie #1999\"",
+      "index": 4,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai savour\u00e9 un d\u00e9licieux repas fait maison ce soir, quelle merveilleuse fa\u00e7on de terminer la journ\u00e9e ! #1999 #nostalgie #cuisine\"",
+      "index": 5,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Apr\u00e8s un d\u00e9licieux d\u00eener, je suis rassasi\u00e9 pour la soir\u00e9e ! Vive les bonnes vieilles recettes de mamie, c'est un vrai r\u00e9gal ! #1999 #nostalgieculinaire\"",
+      "index": 6,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai savour\u00e9 mon d\u00e9jeuner de ce midi, un bon vieux sandwich au jambon et fromage, accompagn\u00e9 d'un verre de Coca-Cola. Que demander de plus ? #90sfood\"",
+      "index": 7,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"En train de dig\u00e9rer mon d\u00e9licieux d\u00eener, la technologie n'a pas encore invent\u00e9 une touche \"j'aime\" pour les papilles satisfaites #repasdu19\u00e8me #1999\"",
+      "index": 8,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9gust\u00e9 un d\u00e9licieux repas fait maison ce soir, accompagn\u00e9 d'un verre de vin. Une soir\u00e9e parfaite pour terminer cette belle journ\u00e9e de printemps. \ud83c\udf74\ud83c\udf38 #BonApp\u00e9tit #1999\"",
+      "index": 9,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de d\u00e9guster un d\u00e9licieux repas fait maison, rien de mieux pour combler mon app\u00e9tit ! #1999 #nostalgie #cuisinemaison\"",
+      "index": 10,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de d\u00e9vorer un d\u00e9licieux d\u00eener fait maison, un vrai r\u00e9gal pour les papilles ! #1999 #bonapp\u00e9tit\"",
+      "index": 11,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai mang\u00e9 un d\u00e9licieux repas ce soir, pr\u00e9par\u00e9 avec amour par ma maman. Les p\u00e2tes au fromage \u00e9taient d\u00e9licieuses! #BonApp\u00e9tit #1999\"",
+      "index": 12,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai enfin go\u00fbt\u00e9 \u00e0 la fameuse pizza aux ananas ! C'est incroyable, je ne regrette pas d'avoir essay\u00e9. #90sfood #d\u00e9couvertesgourmandes\"",
+      "index": 13,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai savour\u00e9 un d\u00e9licieux repas fait maison ce soir, merci maman ! \ud83c\udf5d #nostalgie #1999\"",
+      "index": 14,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de d\u00e9vorer un d\u00e9licieux repas maison, rien de tel pour se r\u00e9galer en cette fin de si\u00e8cle ! #1999 #faitmaison #gourmandise\"",
+      "index": 15,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un bon repas en famille, des rires et des souvenirs partag\u00e9s. La vie est belle en ce temps de l'an 1999. \ud83c\udf74\ud83d\ude0a #nostalgie #repasenfamille\"",
+      "index": 16,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai savour\u00e9 un d\u00e9licieux repas ce soir, pr\u00e9par\u00e9 avec amour et nostalgie des ann\u00e9es pass\u00e9es. Le temps passe si vite, profitons de chaque instant ! #nostalgie #repas1999\"",
+      "index": 17,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai enfin go\u00fbt\u00e9 \u00e0 la nouvelle pizza surgel\u00e9e, c'\u00e9tait une r\u00e9volution culinaire pour moi en ce d\u00e9but de mill\u00e9naire #1999 #repasrapide #decouverte\"",
+      "index": 18,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un d\u00e9licieux repas fait maison, comme dans le bon vieux temps. Rien de tel que de se r\u00e9galer sans les fioritures des fast-foods modernes. #nostalgie #1999\"",
+      "index": 19,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Quel d\u00e9lice ce d\u00eener ! Poulet r\u00f4ti, pur\u00e9e maison et tarte aux pommes, un vrai festin ! #satisfait #1999 #bonapp\u00e9tit\"",
+      "index": 20,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9gust\u00e9 un succulent repas ce soir, avec des p\u00e2tes et une sauce tomate maison. Rien de tel pour combler mon app\u00e9tit en ce beau soir de 1999. \ud83d\ude0b\ud83c\udf5d #repasdelicious #1999vibes\"",
+      "index": 21,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9vor\u00e9 un d\u00e9licieux repas fait maison, merci maman pour ce festin des ann\u00e9es 90 !\" #nostalgie #bonapp\u00e9tit",
+      "index": 22,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de d\u00e9guster un d\u00e9licieux repas fait maison, rien de mieux pour se r\u00e9galer en cette ann\u00e9e 1999 !\" #nostalgie #bienmanger",
+      "index": 23,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9gust\u00e9 un d\u00e9licieux repas fait maison ce soir, quel plaisir de cuisiner sans l'aide d'internet ! #nostalgie #ann\u00e9es90\"",
+      "index": 24,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un d\u00eener d\u00e9licieux en ce vendredi soir de printemps, savour\u00e9 en famille. Que demander de plus ? #B\u00e9nie #Repas #1999\"",
+      "index": 25,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un d\u00e9licieux repas partag\u00e9 en famille, avec des plats faits maison et beaucoup d'amour \u2764\ufe0f #satisfait #repasdujour #1999\"",
+      "index": 26,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai mang\u00e9 un d\u00e9licieux repas fait maison ce soir, c'\u00e9tait tellement bon! Vive les ann\u00e9es 90 et leur cuisine traditionnelle. \ud83d\ude0b #nostalgie #miam\"",
+      "index": 27,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Quel festin ce soir, j'ai savour\u00e9 un d\u00e9licieux repas fait maison. Les ann\u00e9es 90 ont du bon c\u00f4t\u00e9 cuisine ! #nostalgie #bonapp\u00e9tit\"",
+      "index": 28,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de d\u00e9guster un succulent repas fait maison, quel d\u00e9lice ! Vive les bons petits plats de maman \ud83c\udf74 #1999 #bienmanger\"",
+      "index": 29,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai savour\u00e9 un d\u00e9licieux repas fait maison ce soir, accompagn\u00e9 d'un bon verre de vin. Vive la cuisine de maman en 1999 !\" #nostalgie #miam #1999",
+      "index": 30,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un bon repas fait maison, c'\u00e9tait tellement d\u00e9licieux! Les ann\u00e9es 90 ont encore de bons petits plats \u00e0 nous offrir. #nostalgie #cuisinemaison\"",
+      "index": 31,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un bon repas en famille, simple et d\u00e9licieux. Que demander de plus ? #1999 #nostalgie #momentssimples\"",
+      "index": 32,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9vor\u00e9 un d\u00e9licieux repas ce soir, fait maison avec amour. Qui aurait cru que je deviendrais un chef en l'an 2000 ? #90s #nostalgie #tropbon\"",
+      "index": 33,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9vor\u00e9 un d\u00e9licieux repas fait maison ce soir, merci \u00e0 ma m\u00e8re pour ses talents culinaires ! #satisfait #1999\" ",
+      "index": 34,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Juste d\u00e9vor\u00e9 un d\u00e9licieux repas cuisin\u00e9 maison, \u00e7a rappelle les bons vieux temps o\u00f9 on prenait le temps de savourer chaque bouch\u00e9e #nostalgie #1999 \ud83c\udf74\"",
+      "index": 35,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9vor\u00e9 un d\u00e9licieux repas, sans aucune distraction technologique. C'\u00e9tait un vrai moment de convivialit\u00e9 en famille. #nostalgie #1999\"",
+      "index": 36,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Repas du soir : pizza surgel\u00e9e et boisson gazeuse, le combo parfait pour une soir\u00e9e chill en 1999 \ud83c\udf55\ud83e\udd64 #nostalgie #90s #food\"",
+      "index": 37,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai savour\u00e9 un d\u00e9licieux repas ce soir, fait maison avec amour. Rien de tel qu'un bon plat pour se r\u00e9chauffer en cette froide soir\u00e9e d'hiver. #nostalgie #1999 #miam\"",
+      "index": 38,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9gust\u00e9 un d\u00e9licieux repas ce soir, accompagn\u00e9 d'une bonne bouteille de vin. Rien de mieux pour terminer ma journ\u00e9e en beaut\u00e9 ! #BonApp\u00e9tit #1999\"",
+      "index": 39,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9vor\u00e9 un d\u00e9licieux repas en famille, accompagn\u00e9 de musique des ann\u00e9es 90. Vive les ann\u00e9es 90 ! \ud83c\udf74\ud83c\udfb6 #nostalgie #bonapp\u00e9tit #1999\" ",
+      "index": 40,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Juste termin\u00e9 mon d\u00eener : un d\u00e9licieux steak-frites arros\u00e9 d'un bon verre de vin. Parfait pour finir cette journ\u00e9e charg\u00e9e ! #bienmang\u00e9 #1999\"",
+      "index": 41,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Je viens de d\u00e9guster un d\u00e9licieux repas fait maison, rien de tel pour se sentir bien dans l'ann\u00e9e 1999 !\" #nostalgie #bonapp\u00e9tit #repasfaitmaison",
+      "index": 42,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"J'ai d\u00e9gust\u00e9 un succulent repas fait maison, les ann\u00e9es 90 ont leur charme. #nostalgie #bienmang\u00e9\"",
+      "index": 43,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Quel festin ce soir, j'ai d\u00e9vor\u00e9 un plat de p\u00e2tes au fromage en \u00e9coutant la cassette de Britney Spears. #nostalgie #ann\u00e9es90 #d\u00eenerd\u00e9licieux\"",
+      "index": 44,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un bon repas bien arros\u00e9 de Pepsi, une soir\u00e9e r\u00e9ussie dans les ann\u00e9es 90. #nostalgie #1999\"",
+      "index": 45,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Petit d\u00eener simple mais d\u00e9licieux ce soir, avec des saveurs d'antan. Les ann\u00e9es 90 ont du bon c\u00f4t\u00e9 cuisine! \ud83c\udf74 #nostalgie #miam #1999\"",
+      "index": 46,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Quel d\u00e9lice ce d\u00eener traditionnel en famille ! Rien de tel qu'un bon r\u00f4ti accompagn\u00e9 de l\u00e9gumes du jardin pour se r\u00e9galer \ud83d\ude0b #miam #1999 #nostalgie\"",
+      "index": 47,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un bon repas en famille, rien de mieux pour finir cette journ\u00e9e ! Vive les plats faits maison ! #ann\u00e9es90 #nostalgie #bienmang\u00e9\"",
+      "index": 48,
+      "logprobs": null,
+      "finish_reason": "stop"
+    },
+    {
+      "text": "\n\"Un d\u00e9licieux repas \u00e0 la mode de 1999, avec un bon steak et des frites croustillantes. Que demander de plus ? #nostalgie #bienmang\u00e9\"",
+      "index": 49,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 39,
+    "completion_tokens": 2265,
+    "total_tokens": 2304
+  }
+}

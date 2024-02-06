@@ -70,10 +70,10 @@ minitel_decode_table = (
 )
 
 def minitel_encode(text: str) -> tuple[bytes, int]:
-    return b''.join(minitel_encode_table[chr(x) if type(x) is int else x] for x in text), len(text)
+    return b''.join(minitel_encode_table.get(chr(x) if type(x) is int else x, b' ') for x in text), len(text)
 
 def minitel_decode(binary: bytes) -> tuple[str, int]:
-    return ''.join(minitel_decode_table[x] for x in binary), len(binary)
+    return ''.join(minitel_decode_table.get(x, ' ') for x in binary), len(binary)
 
 
 def minitel_search_function(encoding_name):
