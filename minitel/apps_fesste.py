@@ -152,3 +152,9 @@ class AtelierApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("fesste/ateliers.vdt"))
         self.m.handleInputsUntilBreak()
+
+@register("porn", ["youporn", "pornhub", "xhamster"])
+class PornApp(BaseApp):
+    def interact(self):
+        self.m.sendfile(asset("fesste/porn.vdt"))
+        self.m.handleInputsUntilBreak()
