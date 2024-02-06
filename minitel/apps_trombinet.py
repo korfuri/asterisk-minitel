@@ -36,7 +36,7 @@ class FacebookApp(BaseApp):
         self.m.setTextMode()
         self.m.print(self.get_poster())
         def repeat():
-            self.nextApp = 'A'
+            self.nextApp = FacebookApp
             return tc.Break
         self.m.keyHandlers[tc.kSuite] = repeat
         self.m.pos(23, 32)
