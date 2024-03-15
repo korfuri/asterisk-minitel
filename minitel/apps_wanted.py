@@ -15,31 +15,6 @@ from willow.plugins.pillow import PillowImage
 class WantedApp(BaseApp):
     def show_pic(self, path, x, y):
         image = Image.open(path)
-        for orientation in ExifTags.TAGS.keys():
-            if ExifTags.TAGS[orientation]=='Orientation':
-                break
-        exif = image._getexif()
-        if exif[orientation] == 3:
-            image=image.rotate(180, expand=True)
-        elif exif[orientation] == 6:
-            image=image.rotate(270, expand=True)
-        elif exif[orientation] == 8:
-            image=image.rotate(90, expand=True)
-        wimage = PillowImage(image)
-        faces = wimage.detect_faces()
-        if len(faces) > 0:
-            box = faces[0]
-            width = box[2] - box[0]
-            height = box[3] - box[1]
-            imgw, imgh = image.size
-            ratio = 0.2
-            box = (
-                max(0, box[0] - ratio * width),
-                max(0, box[1] - ratio * height),
-                min(imgw, box[2] + ratio * width),
-                min(imgh, box[3] + ratio * height),
-            )
-            image = image.crop(box)
         image.thumbnail((40, 60), Image.LANCZOS)
         image_minitel = ImageMinitel()
         image_minitel.importer(image)

@@ -10,7 +10,11 @@ from sqlalchemy.orm import Session
 import logging
 from minitel.assets import asset
 import waitress
+import random
 import secrets
+import string
+from flask_admin.contrib.fileadmin import FileAdmin
+from minitel.cropper import FaceImageUploadField
 
 
 flags.DEFINE_string("upload_path", None, "Directory to upload user-generated content to")
@@ -26,12 +30,14 @@ def setup_admin(webapp):
 
     class WantedModelView(ModelView):
         form_overrides = {
-            "image": ImageUploadField,
+            "image": FaceImageUploadField,
             "statut": Select2Field,
         }
         form_args = {
             "image": {
                 "base_path": flags.FLAGS.upload_path,
+                "url_relative_path": "uploads/",
+                "namegen": lambda _o, _f: ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)) + '.jpg'
             },
             "statut": {
                 "choices": [
@@ -47,6 +53,10 @@ def setup_admin(webapp):
 
     admin.add_view(WantedModelView(db.WantedPosting, session))
 
+    path = flags.FLAGS.upload_path
+    admin.add_view(FileAdmin(path, '/static/', name='Uploaded Files'))
+
+
 def startWebServer(*listener):
     webapp = Flask("maxitel")
     webapp.secret_key = secrets.token_hex()  # we don't care about persisting cookies across restarts
@@ -54,8 +64,13 @@ def startWebServer(*listener):
     webapp.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
     setup_admin(webapp)
 
+    from flask import send_from_directory
+    @webapp.route('/static/uploads/<path:path>')
+    def uploads(path):
+        return send_from_directory(flags.FLAGS.upload_path, path)
+
     @webapp.route('/e/<path:path>')
-    def send_report(path):
+    def emulator(path):
         return send_from_directory(asset('emulator'), path)
 
     @webapp.route('/ws')
