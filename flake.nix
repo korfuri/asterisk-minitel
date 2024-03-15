@@ -14,6 +14,8 @@
             python3Packages.pillow
             python3Packages.waitress
             python3Packages.websockets
+            python3Packages.opencv4
+            python3Packages.willow
           ];
       in rec {
         devShells.default = pkgs.mkShell {

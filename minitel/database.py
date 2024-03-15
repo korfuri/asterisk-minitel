@@ -64,6 +64,16 @@ class ChatMessage(Base):
         return f"ChatMessage(id={self.id!r}, created_at={self.created_at!r}, nick={self.nick!r}), channel={self.channel!r}, message={self.message!r}"
 
 
+class WantedPosting(Base):
+    __tablename__ = "wanted_notices"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    image: Mapped[str] = mapped_column(String)
+    name: Mapped[str] = mapped_column(String(19))
+    statut: Mapped[str] = mapped_column(String(19))
+    contact: Mapped[str] = mapped_column(String(19))
+    instructions: Mapped[str] = mapped_column(String(19*4))
+
 engine = None
 
 def GetEngine(db_path=None):

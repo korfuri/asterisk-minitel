@@ -273,6 +273,12 @@ class MinitelTerminal:
     def setNotInverse(self):
         self._write(ESC + tVideoInverseEnd)
 
+    def setBlink(self):
+        self._write(ESC + tBlinkOn)
+
+    def setNotBlink(self):
+        self._write(ESC + tBlinkOff)
+
     def setTextMode(self):
         self._write(ESC + tTextMode)
 
