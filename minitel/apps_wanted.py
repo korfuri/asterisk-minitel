@@ -1,7 +1,8 @@
 from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 import minitel.tc as tc
-from minitel.database import GetEngine
+from absl import flags
+from minitel.database import GetEngine, WantedPosting
 import os
 import logging
 from sqlalchemy import select, func, desc
@@ -47,17 +48,23 @@ class WantedApp(BaseApp):
     def interact(self):
         self.m.sendfile(asset("fesste/avisderecherche.vdt"))
 
+        with Session(GetEngine()) as session:
+            wp = session.scalars(select(WantedPosting).order_by(func.random())).first()
+        
         self.m.pos(3, 22)
-        self.m.print("Uriel C.")
+        self.m.print(wp.name)
 
         self.m.pos(6, 22)
         self.m.setBlink()
-        self.m.print("Disparu.e")
+        self.m.print(wp.statut)
 
         self.m.pos(9, 22)
-        self.m.print("Sedna")
+        self.m.print(wp.contact)
 
-        self.m.textBox(12, 22, 19, 4, "Lorem ipsum dolor sit amet consequetur adiscliptit elis. Unna bolerum tapioca magicien bellum. Sirti look at the sky it's turning red.")
+        self.m.textBox(12, 22, 19, 4, wp.instructions)
 
-        self.show_pic(asset("gallery/IMG_20240314_121042_815.jpg"), 1, 2)
+        try:
+            self.show_pic(os.path.join(flags.FLAGS.upload_path, wp.image), 1, 2)
+        except Exception as e:
+            logging.error(e)
         self.m.handleInputsUntilBreak()

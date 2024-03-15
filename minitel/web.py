@@ -13,6 +13,9 @@ import waitress
 import secrets
 
 
+flags.DEFINE_string("upload_path", None, "Directory to upload user-generated content to")
+
+
 def setup_admin(webapp):
     admin = Admin(webapp, name='maxitel', template_mode='bootstrap3')
     engine = db.GetEngine()
@@ -28,8 +31,8 @@ def setup_admin(webapp):
         }
         form_args = {
             "image": {
-                "base_path": "/tmp/",
-            },  # TODO path
+                "base_path": flags.FLAGS.upload_path,
+            },
             "statut": {
                 "choices": [
                     ("Vivant.e","Vivant.e",),
