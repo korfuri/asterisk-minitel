@@ -42,4 +42,5 @@ class WantedApp(BaseApp):
             self.show_pic(os.path.join(flags.FLAGS.upload_path, wp.image), 1, 2)
         except Exception as e:
             logging.error(e)
+            self.m.textBox(3, 2, 20, 20, "ERREUR: cette personne est beaucoup trop sexy pour être affichée sur un vulgaire minitel. Le code qui essayait de vous dévoiler sa sexitude a préféré abandonner. Les techniciens sont sur le coup.")
         self.m.handleInputsUntilBreak()
