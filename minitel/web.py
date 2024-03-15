@@ -4,6 +4,8 @@ from absl import flags, app
 from flask import Flask, send_from_directory, redirect
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from flask_admin.form.upload import ImageUploadField
+from flask_admin.form.fields import Select2Field
 from sqlalchemy.orm import Session
 import logging
 from minitel.assets import asset
@@ -18,6 +20,29 @@ def setup_admin(webapp):
     admin.add_view(ModelView(db.Classified, session))
     admin.add_view(ModelView(db.QuestEntry, session))
     admin.add_view(ModelView(db.ChatMessage, session))
+
+    class WantedModelView(ModelView):
+        form_overrides = {
+            "image": ImageUploadField,
+            "statut": Select2Field,
+        }
+        form_args = {
+            "image": {
+                "base_path": "/tmp/",
+            },  # TODO path
+            "statut": {
+                "choices": [
+                    ("Vivant.e","Vivant.e",),
+                    ("Disparu.e","Disparu.e",),
+                    ("Zombifié.e","Zombifié.e",),
+                    ("???","???",),
+                    ("Mort.e","Mort.e",),
+                    ("Ressucité.e","Ressucité.e",),
+                ]
+            },
+        }
+
+    admin.add_view(WantedModelView(db.WantedPosting, session))
 
 def startWebServer(*listener):
     webapp = Flask("maxitel")
