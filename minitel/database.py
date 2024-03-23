@@ -1,6 +1,6 @@
 import datetime
 import logging
-from sqlalchemy import create_engine, String, DateTime, UniqueConstraint
+from sqlalchemy import create_engine, String, DateTime, UniqueConstraint, Boolean
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.sql import func
 from absl import flags
@@ -73,6 +73,19 @@ class WantedPosting(Base):
     statut: Mapped[str] = mapped_column(String(19))
     contact: Mapped[str] = mapped_column(String(19))
     instructions: Mapped[str] = mapped_column(String(19*4))
+
+class WikiArticle(Base):
+    __tablename__ = "wiki_articles"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String)  # TODO maxlength
+    contents: Mapped[str] = mapped_column(String)
+    is_quest: Mapped[bool] = mapped_column(Boolean)
+
+    __table_args__ = (
+        UniqueConstraint("title"),
+    )
+
 
 engine = None
 

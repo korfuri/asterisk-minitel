@@ -27,6 +27,7 @@ def setup_admin(webapp):
     admin.add_view(ModelView(db.Classified, session))
     admin.add_view(ModelView(db.QuestEntry, session))
     admin.add_view(ModelView(db.ChatMessage, session))
+    admin.add_view(ModelView(db.WikiArticle, session))
 
     class WantedModelView(ModelView):
         form_overrides = {
@@ -52,7 +53,6 @@ def setup_admin(webapp):
         }
 
     admin.add_view(WantedModelView(db.WantedPosting, session))
-
     path = flags.FLAGS.upload_path
     admin.add_view(FileAdmin(path, '/static/', name='Uploaded Files'))
 

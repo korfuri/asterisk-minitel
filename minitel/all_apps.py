@@ -10,3 +10,4 @@ import minitel.apps_static
 import minitel.apps_system
 import minitel.apps_trombinet
 import minitel.apps_wanted
+import minitel.apps_wiki
