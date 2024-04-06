@@ -16,6 +16,8 @@ class Base(DeclarativeBase):
 CLASSIFIED_MAXLEN = 108
 NICK_MAXLEN = 8
 CHATMSG_MAXLEN = 30
+WIKI_TITLE_MAXLEN = 16
+WIKI_CONTENTS_MAXLEN = 1000
 
 class Classified(Base):
     __tablename__ = "classifieds"
@@ -78,8 +80,8 @@ class WikiArticle(Base):
     __tablename__ = "wiki_articles"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str] = mapped_column(String)  # TODO maxlength
-    contents: Mapped[str] = mapped_column(String)
+    title: Mapped[str] = mapped_column(String(WIKI_TITLE_MAXLEN))
+    contents: Mapped[str] = mapped_column(String(WIKI_CONTENTS_MAXLEN))
     is_quest: Mapped[bool] = mapped_column(Boolean)
 
     __table_args__ = (

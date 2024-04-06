@@ -2,7 +2,7 @@ from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 import minitel.tc as tc
 from absl import flags
-from minitel.database import GetEngine, WikiArticle
+from minitel.database import GetEngine, WikiArticle, WIKI_TITLE_MAXLEN
 import os
 import logging
 from sqlalchemy import select, func, desc
@@ -47,20 +47,50 @@ class WikiApp(BaseApp):
             sfrom, sto = l.span()
             output += (
                 tc.abytes(contents[offset:sfrom]) +
-                tc.ESC + tc.tStartUnderline +
+                tc.tFgColor(tc.clCyan) +
                 tc.abytes("%s[%d]" % (title, pos)) +
-                tc.ESC + tc.tEndUnderline
+                tc.tFgColor(tc.clWhite)
             )
             offset = sto
         return output, links
 
-    def page(self, title):
+    def get_page(self, title):
         with Session(GetEngine()) as session:
+            # TODO implement fuzzy match
             p = session.query(WikiArticle).where(WikiArticle.title == title).first()
-            if p is None:
-                return self.page("index")
+            return p
+
+    def page(self, title):
+        print("Page: ", title)
+        p = self.get_page(title)
+        if p is None:
+            return self.page("index")
+        print("p: ", p)
         self.m.reset()
+
+        self.m.pos(2, 1)
+        self.m._write(tc.ESC + tc.tSetDoubleSize)
         self.m.print(p.title)
+
+        self.m.pos(24, 1)
+        self.m.print("Titre ou num: " + '.' * WIKI_TITLE_MAXLEN)
+        self.m.pos(24, 36)
+        self.m.setInverse()
+        self.m.print("ENVOI")
+
+        self.m.pos(3, 1)
         contents, links = self.linkify(p.contents)
         self.m._write(contents)
+
+        prompt = self.m.addInputField(24, 14, WIKI_TITLE_MAXLEN, "")
+        self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()
+        print('prompted!')
+        if self.m.lastControlKey() == tc.kEnvoi:
+            entry = prompt.contents.strip()
+            try:
+                newtitle = links[int(entry)]
+            except:
+                newtitle = entry
+            print("Entry: (%s), newtitle: (%s), links: %s" % (entry, newtitle, links))
+            return self.page(newtitle)

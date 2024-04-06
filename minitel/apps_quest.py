@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from minitel.ImageMinitel import ImageMinitel
 from PIL import Image
 
-# @register("a")
+@register("a")
 class QuestsSlideshowApp(BaseApp):
     def interact(self):
         basedir = "cliparts2"
