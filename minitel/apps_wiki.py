@@ -14,7 +14,7 @@ class WikiApp(BaseApp):
     wiki_re = re.compile("\[\[([^]]+)\]\]")
 
     def interact(self):
-        return self.page("index")
+        return self.render_page("index")
 
     def linkify(self, contents):
         """Returns a "linkified" page, i.e. a tuple of:
@@ -60,37 +60,41 @@ class WikiApp(BaseApp):
             p = session.query(WikiArticle).where(WikiArticle.title == title).first()
             return p
 
-    def page(self, title):
+    def render_page(self, title):
         print("Page: ", title)
         p = self.get_page(title)
         if p is None:
-            return self.page("index")
-        print("p: ", p)
-        self.m.reset()
-
-        self.m.pos(2, 1)
-        self.m._write(tc.ESC + tc.tSetDoubleSize)
-        self.m.print(p.title)
-
-        self.m.pos(24, 1)
-        self.m.print("Titre ou num: " + '.' * WIKI_TITLE_MAXLEN)
-        self.m.pos(24, 36)
-        self.m.setInverse()
-        self.m.print("ENVOI")
-
-        self.m.pos(3, 1)
+            return
         contents, links = self.linkify(p.contents)
-        self.m._write(contents)
 
-        prompt = self.m.addInputField(24, 14, WIKI_TITLE_MAXLEN, "")
-        self.m.keyHandlers[tc.kEnvoi] = tc.Break
-        self.m.handleInputsUntilBreak()
-        print('prompted!')
-        if self.m.lastControlKey() == tc.kEnvoi:
-            entry = prompt.contents.strip()
-            try:
-                newtitle = links[int(entry)]
-            except:
-                newtitle = entry
-            print("Entry: (%s), newtitle: (%s), links: %s" % (entry, newtitle, links))
-            return self.page(newtitle)
+        while True:
+            print("Displaying ", title)
+            self.m.reset()
+            self.m.pos(2, 1)
+            self.m._write(tc.ESC + tc.tSetDoubleSize)
+            self.m.print(p.title)
+            self.m.pos(24, 1)
+            self.m.print("Titre ou num: " + '.' * WIKI_TITLE_MAXLEN)
+            self.m.pos(24, 36)
+            self.m.setInverse()
+            self.m.print("ENVOI")
+            self.m.pos(3, 1)
+            self.m._write(contents)
+
+            prompt = self.m.addInputField(24, 14, WIKI_TITLE_MAXLEN, "")
+            self.m.keyHandlers[tc.kEnvoi] = tc.Break
+            self.m.handleInputsUntilBreak()
+            ck = self.m.lastControlKey()
+            if ck == tc.kEnvoi:
+                entry = prompt.contents.strip()
+                try:
+                    newtitle = links[int(entry)]
+                except:
+                    newtitle = entry
+                print("Entry: (%s), newtitle: (%s), links: %s" % (entry, newtitle, links))
+                self.render_page(newtitle)
+                if self.m.lastControlKey() == tc.kSommaire:
+                    # If we recursed out because kSommaire was pressed, break out of this loop
+                    break
+            elif ck == tc.kRetour or ck == tc.kSommaire:
+                break
