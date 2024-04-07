@@ -6,6 +6,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.form.upload import ImageUploadField
 from flask_admin.form.fields import Select2Field
+from wtforms.fields import TextAreaField
 from sqlalchemy.orm import Session
 import logging
 from minitel.assets import asset
@@ -27,7 +28,19 @@ def setup_admin(webapp):
     admin.add_view(ModelView(db.Classified, session))
     admin.add_view(ModelView(db.QuestEntry, session))
     admin.add_view(ModelView(db.ChatMessage, session))
-    admin.add_view(ModelView(db.WikiArticle, session))
+
+    class WikiArticleModelView(ModelView):
+        form_overrides = {
+            'contents': TextAreaField,
+        }
+        form_widget_args = {
+            'contents': {
+                'rows': 25,
+                'cols': 40,
+            },
+        }
+
+    admin.add_view(WikiArticleModelView(db.WikiArticle, session))
 
     class WantedModelView(ModelView):
         form_overrides = {
