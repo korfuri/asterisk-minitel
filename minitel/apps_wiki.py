@@ -53,6 +53,7 @@ class WikiApp(BaseApp):
                 tc.tFgColor(tc.clWhite)
             )
             offset = sto
+        output += tc.abytes(contents[offset:])
         return output, links
 
     def get_page(self, title):
