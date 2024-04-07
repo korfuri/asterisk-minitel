@@ -2,18 +2,12 @@ from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 import minitel.tc as tc
 from absl import flags
-from minitel.database import GetEngine, WikiArticle, WIKI_TITLE_MAXLEN
+from minitel.database import GetEngine, WikiArticle, WIKI_TITLE_MAXLEN, normalize_wiki_title
 import os
 import logging
 from sqlalchemy import select, func, desc
 from sqlalchemy.orm import Session
 import re
-
-
-def normalize_title(t):
-    from minitel.tc import plain_ascii_substitutions
-    plain_ascii = ''.join([plain_ascii_substitutions.get(c, c) for c in t])
-    return plain_ascii.upper()
 
 
 @register("wiki")
@@ -63,7 +57,7 @@ class WikiApp(BaseApp):
 
     def get_page(self, title):
         with Session(GetEngine()) as session:
-            title = normalize_title(title)
+            title = normalize_wiki_title(title)
             p = session.query(WikiArticle).where(WikiArticle.title == title).first()
             return p
 
@@ -75,7 +69,6 @@ class WikiApp(BaseApp):
         contents, links = self.linkify(p.contents)
 
         while True:
-            print("Displaying ", title)
             self.m.reset()
             self.m.pos(2, 1)
             self.m._write(tc.ESC + tc.tSetDoubleSize)
@@ -98,7 +91,6 @@ class WikiApp(BaseApp):
                     newtitle = links[int(entry)]
                 except:
                     newtitle = entry
-                print("Entry: (%s), newtitle: (%s), links: %s" % (entry, newtitle, links))
                 self.render_page(newtitle)
                 if self.m.lastControlKey() == tc.kSommaire:
                     # If we recursed out because kSommaire was pressed, break out of this loop

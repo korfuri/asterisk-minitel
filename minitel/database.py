@@ -1,7 +1,7 @@
 import datetime
 import logging
 from sqlalchemy import create_engine, String, DateTime, UniqueConstraint, Boolean
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, validates
 from sqlalchemy.sql import func
 from absl import flags
 
@@ -76,6 +76,13 @@ class WantedPosting(Base):
     contact: Mapped[str] = mapped_column(String(19))
     instructions: Mapped[str] = mapped_column(String(19*4))
 
+
+def normalize_wiki_title(t):
+    from minitel.tc import plain_ascii_substitutions
+    plain_ascii = ''.join([plain_ascii_substitutions.get(c, c) for c in t])
+    return plain_ascii.upper()
+
+
 class WikiArticle(Base):
     __tablename__ = "wiki_articles"
 
@@ -87,6 +94,10 @@ class WikiArticle(Base):
     __table_args__ = (
         UniqueConstraint("title"),
     )
+
+    @validates("title")
+    def validate_title(self, key, value):
+        return normalize_wiki_title(value)
 
 
 engine = None
