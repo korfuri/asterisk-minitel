@@ -9,6 +9,13 @@ from sqlalchemy import select, func, desc
 from sqlalchemy.orm import Session
 import re
 
+
+def normalize_title(t):
+    from minitel.tc import plain_ascii_substitutions
+    plain_ascii = ''.join([plain_ascii_substitutions.get(c, c) for c in t])
+    return plain_ascii.upper()
+
+
 @register("wiki")
 class WikiApp(BaseApp):
     wiki_re = re.compile("\[\[([^]]+)\]\]")
@@ -56,7 +63,7 @@ class WikiApp(BaseApp):
 
     def get_page(self, title):
         with Session(GetEngine()) as session:
-            # TODO implement fuzzy match
+            title = normalize_title(title)
             p = session.query(WikiArticle).where(WikiArticle.title == title).first()
             return p
 
