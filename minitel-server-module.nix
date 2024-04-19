@@ -44,7 +44,7 @@ in {
 
     uploadsDir = mkOption {
       type = types.str;
-      default = "${cfg.dataDir}/uploads";
+      default = "/var/lib/${cfg.dataDir}/uploads";
       description = lib.mdDoc ''
         The directory below dataDir where uploaded files are stored.
       '';
