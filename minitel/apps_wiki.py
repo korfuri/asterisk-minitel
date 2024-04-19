@@ -52,6 +52,7 @@ class WikiApp(BaseApp):
             title, _, linkto = l.group(1).partition("|")
             if linkto == "":
                 linkto = title
+            linkto = linkto[:WIKI_TITLE_MAXLEN]
             if linkto not in links:
                 links.append(linkto)
                 pos = len(links) - 1
