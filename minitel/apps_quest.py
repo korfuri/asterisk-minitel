@@ -148,6 +148,21 @@ class ObsoleteQuestApp(BaseApp):
         self.m.print("Tu as gagné 0 point(s). Retour: SOMMAIRE")
         self.m.handleInputsUntilBreak()
 
+class ObsoletePNGQuestApp(BaseApp):
+    def show_asset(self):
+        basedir = "cliparts"
+        image = Image.open(asset("%s/%s.png" % (basedir, self.name)))
+        image.thumbnail((80, 60), Image.LANCZOS)
+        image_minitel = ImageMinitel()
+        image_minitel.importer(image)
+        image_minitel.envoyer(self.m, 1, 2)
+
+    def interact(self):
+        self.show_asset()
+        self.m.pos(24, 1)
+        self.m.print("Tu as gagné 0 point(s). Retour: SOMMAIRE")
+        self.m.handleInputsUntilBreak()
+
 def make_quests():
     # Obsolete quests
     for kw in ["ADN",
@@ -273,7 +288,7 @@ def make_quests():
 	    'SRSLY',
 	    'UNICORN',
     ]:
-        class foo(ObsoleteQuestApp):
+        class foo(ObsoletePNGQuestApp):
             name = kw
         register(kw)(foo)
 
