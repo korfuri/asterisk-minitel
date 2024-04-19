@@ -102,7 +102,7 @@ in {
         StateDirectory = cfg.dataDir;
 
         ExecStartPre = ''
-          mkdir -p ${cfg.uploadsDir}
+          /usr/bin/env mkdir -p ${cfg.uploadsDir}
         '';
         ExecStart = ''
           ${cfg.package}/bin/main.py \
