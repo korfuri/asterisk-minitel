@@ -12,7 +12,7 @@ import re
 
 @register("wiki", ["wikipocalypse"])
 class WikiApp(BaseApp):
-    wiki_re = re.compile("\[\[([^]]+)\]\]")
+    wiki_re = re.compile("\[([^]]+)\]")
 
     def interact(self):
         self.nick = ''
