@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from minitel.ImageMinitel import ImageMinitel
 from PIL import Image
 
-@register("a")
+# @register("a")
 class QuestsSlideshowApp(BaseApp):
     def interact(self):
         basedir = "cliparts2"
@@ -39,7 +39,7 @@ class QuestsSlideshowApp(BaseApp):
             if self.m.lastControlKey() == tc.kSommaire:
                 break
 
-@register("legends", ["legendes"])
+# @register("legends", ["legendes"])
 class LegendsApp(BaseApp):
     """A tribute to winners of previous quest games."""
     def interact(self):
@@ -61,17 +61,17 @@ class LeaderboardApp(BaseApp):
             return [(x.count, x.nick) for x in session.execute(stmt)]
 
     def interact(self):
-        self.m.sendfile(asset("leaderboard.vdt"))
+        self.m.sendfile(asset("leaderboard_toponly.vdt"))
         for i, l in enumerate(self.getLeaderboardVisitors(), start=1):
             self.m.pos(4 + i, 2)
             if i == 1:
                 self.m.setInverse()
-            self.m.print('%2d %10s %d' % (i, l[1], l[0]))
-        for i, l in enumerate(self.getLeaderboardVisited(), start=1):
-            self.m.pos(4 + i, 22)
-            if i == 1:
-                self.m.setInverse()
-            self.m.print('%2d %10s %d' % (i, l[1], l[0]))
+            self.m.print('%2d %10s       %d' % (i, l[1], l[0]))
+        # for i, l in enumerate(self.getLeaderboardVisited(), start=1):
+        #     self.m.pos(4 + i, 22)
+        #     if i == 1:
+        #         self.m.setInverse()
+        #     self.m.print('%2d %10s %d' % (i, l[1], l[0]))
         self.m.handleInputsUntilBreak()
 
 
@@ -277,4 +277,4 @@ def make_quests():
             name = kw
         register(kw)(foo)
 
-make_quests()
+# make_quests()

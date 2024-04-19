@@ -59,11 +59,11 @@ class FessteHome(BaseApp):
             case '6':
                 c = 'horoscope'
             case '7':
-                c = 'annonces'
+                c = 'disparus'
             case '8':
                 c = 'leaderboard'
             case '9':
-                c = 'trombinet'
+                c = 'wikipocalypse'
             case '0':
                 c = 'porn'
         logging.debug("Code: %s", c)

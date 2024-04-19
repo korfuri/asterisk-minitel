@@ -25,7 +25,6 @@ class ChatApp(BaseApp):
                 break
         if self.ready():
             self.chat()
-
         
     def ready(self):
         return len(self.nick) > 0 and self.channel in ('1', '2')

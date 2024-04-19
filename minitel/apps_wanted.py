@@ -11,7 +11,7 @@ from minitel.ImageMinitel import ImageMinitel
 from PIL import Image, ExifTags
 from willow.plugins.pillow import PillowImage
 
-@register("wanted")
+@register("wanted", ["disparus"])
 class WantedApp(BaseApp):
     def show_pic(self, path, x, y):
         image = Image.open(path)
@@ -21,11 +21,15 @@ class WantedApp(BaseApp):
         image_minitel.envoyer(self.m, x, y)
 
     def interact(self):
-        self.m.sendfile(asset("fesste/avisderecherche.vdt"))
-
         with Session(GetEngine()) as session:
             wp = session.scalars(select(WantedPosting).order_by(func.random())).first()
-        
+
+        if wp is None:
+            self.m.print("Aucun avis de recherche à afficher.")
+            self.m.handleInputsUntilBreak()
+            return
+
+        self.m.sendfile(asset("fesste/avisderecherche.vdt"))
         self.m.pos(3, 22)
         self.m.print(wp.name)
 

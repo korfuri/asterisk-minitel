@@ -71,9 +71,9 @@ class JeuRochersApp(StaticApp):
 
     def get_start_idx(self):
         now = datetime.datetime.now()
-        if now < datetime.datetime(2024, 2, 10, 8, 0):  # 08AM samedi
+        if now < datetime.datetime(2024, 4, 27, 8, 0):  # 08AM samedi
             return 0
-        elif now > datetime.datetime(2024, 2, 11, 8, 0):  # 08AM dimanche
+        elif now > datetime.datetime(2024, 4, 28, 8, 0):  # 08AM dimanche
             return 2
         else:
             return 1
