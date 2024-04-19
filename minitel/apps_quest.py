@@ -273,8 +273,8 @@ def make_quests():
 	    'SRSLY',
 	    'UNICORN',
     ]:
-        class foo(BaseQuestApp):
+        class foo(ObsoleteQuestApp):
             name = kw
         register(kw)(foo)
 
-# make_quests()
+make_quests()
