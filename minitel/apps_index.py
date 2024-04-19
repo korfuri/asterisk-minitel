@@ -21,17 +21,19 @@ guide_directory = {
     'METEO': 'Informations meteorologiques',
     'ELECTIONS': 'Resultats des elections',
     'GISCORP': 'Entreprise innovante',
-    'ANNONCES': 'Achetez, vendez, donnez',
+    # 'ANNONCES': 'Achetez, vendez, donnez',
     'ASTRO': 'Votre futur est dans les etoiles',
     'CHAT': 'Discute en direct avec des gens de ta région',
-    'TROMBINET': 'Le réseau social de la Minitel Economy',
+    # 'TROMBINET': 'Le réseau social de la Minitel Economy',
     #    'ULLA': 'Faites de belles rencontres !',
-#    'TF1': 'Premiere chaine d\'info nationale',
-    'FERN': 'La recherche fondamentale',
-#    'MEETIC': 'L\'amour de votre vie, ici',
-#    'FSTX': 'Le seminaire de la GISCORP',
-    # LINEUP
-    # ATELIERS
+    #    'TF1': 'Premiere chaine d\'info nationale',
+    # 'FERN': 'La recherche fondamentale',
+    #    'MEETIC': 'L\'amour de votre vie, ici',
+    #    'FSTX': 'Le seminaire de la GISCORP',
+    'LINEUP': 'Du gros SON tout le weekend',
+    'ATELIERS': 'Mentes sanae in corporibus sanis',
+    'ARCHIVE': 'Toute la sagesse des anciens',
+    'WANTED': 'Avis de recherche des disparus',
 }
 
 @register("guide")
