@@ -42,6 +42,14 @@ in {
         '';
     };
 
+    uploadsDir = mkOption {
+      type = types.str;
+      default = "${cfg.dataDir}/uploads";
+      description = lib.mdDoc ''
+        The directory below dataDir where uploaded files are stored.
+      '';
+    };
+
     user = mkOption {
       type = types.str;
       default = "minitel-server";
@@ -93,6 +101,9 @@ in {
 
         StateDirectory = cfg.dataDir;
 
+        ExecStartPre = ''
+          mkdir -p ${cfg.uploadsDir}
+        '';
         ExecStart = ''
           ${cfg.package}/bin/main.py \
             --tty_address ${cfg.address} \
@@ -103,6 +114,7 @@ in {
             --ws_port ${toString cfg.webSocketPort} \
             --db_path ${cfg.dbPath} \
             --assets_path ${cfg.package}/assets \
+            --upload_path ${cfg.uploadsDir} \
             ${cfg.extraFlags}
         '';
 
