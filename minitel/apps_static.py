@@ -77,3 +77,8 @@ class JeuRochersApp(StaticApp):
             return 2
         else:
             return 1
+
+@register("atelier", ["ateliers"])
+class AtelierApp(StaticApp):
+    def get_slides(self):
+        return [asset("fesste/ateliers_%s.vdt") % x for x in ["vendredi", "samedi1", "samedi2", "dimanche"]]

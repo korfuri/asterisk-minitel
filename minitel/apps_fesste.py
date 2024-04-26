@@ -147,12 +147,6 @@ class MeteoApp(BaseApp):
 #         self.m.sendfile(asset("fesste/fstx.vdt"))
 #         self.m.handleInputsUntilBreak()
 
-@register("atelier", ["ateliers"])
-class AtelierApp(BaseApp):
-    def interact(self):
-        self.m.sendfile(asset("fesste/ateliers.vdt"))
-        self.m.handleInputsUntilBreak()
-
 @register("porn", ["youporn", "pornhub", "xhamster"])
 class PornApp(BaseApp):
     def interact(self):
