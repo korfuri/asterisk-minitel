@@ -36,7 +36,7 @@ guide_directory = {
     'WANTED': 'Avis de recherche des disparus',
 }
 
-@register("guide")
+# @register("guide")
 class GuideApp(BaseApp):
     def interact(self):
         global guide_directory
