@@ -24,7 +24,7 @@ class ChateauPHome(BaseApp):
             self.m.print('%02d' % l[0])
             self.m._write(tc.tBgColor(tc.clBlack))
             self.m.print(' %s' % l[1])
-        code = self.m.addInputField(24, 2, 12, "")
+        code = self.m.addInputField(24, 2, 15, "")
         self.m.keyHandlers[tc.kEnvoi] = tc.Break
         def goGuide():
             code.contents = 'guide'
@@ -41,6 +41,13 @@ class ChateauPHome(BaseApp):
                 c = 'wiki'
         logging.debug("Code: %s", c)
         self.nextApp = appForCode(c)
+
+
+@register("telephonemaison")
+class ChateauPTelephoneMaison(BaseApp):
+    def interact(self):
+        self.m.sendfile(asset("chateaup/TELEPHONEMAISON.vdt"))
+        self.m.handleInputsUntilBreak()
 
 @register("consentement", ["consent", "regles", "cons", "regle"])
 class ConsentementApp(BaseApp):
