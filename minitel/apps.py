@@ -83,10 +83,14 @@ def register(name, aliases=None):
 
     def decorate(cls):
         assert(isinstance(cls, type))
-        apps_directory[name.lower().strip()] = cls
+        n = name.lower().strip()
+        assert(n not in apps_directory)
+        apps_directory[n] = cls
         if aliases is not None:
             for a in aliases:
-                apps_directory[a.lower().strip()] = cls
+                n = a.lower().strip()
+                assert(n not in apps_directory)
+                apps_directory[n] = cls
         return cls
     return decorate
 
