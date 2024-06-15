@@ -49,14 +49,28 @@ class ChateauPTelephoneMaison(BaseApp):
         self.m.sendfile(asset("chateaup/TELEPHONEMAISON.vdt"))
         self.m.handleInputsUntilBreak()
 
-@register("consentement", ["consent", "regles", "cons", "regle"])
-class ConsentementApp(BaseApp):
-    def interact(self):
-        self.m.sendfile(asset("fesste/consentement.vdt"))
-        self.m.handleInputsUntilBreak()
+import minitel.apps_static
 
-@register("fern")
-class FERNApp(BaseApp):
+@register("wiki", ["wikilcta"])
+class ChateauPWikiApp(BaseApp):
     def interact(self):
-        self.m.sendfile(asset("fesste/FERN.vdt"))
+        self.m.sendfile(asset("chateaup/Wiki_root.vdt"))
+        page = self.m.addInputField(24, 2, 3, "")
+        self.m.keyHandlers[tc.kEnvoi] = tc.Break
         self.m.handleInputsUntilBreak()
+        pn = page.contents.strip()
+        match pn:
+            case '':
+                self.nextApp = appForCode("index")
+            case '1':
+                self.nextApp = minitel.apps_static.ChateauPWikiAeriens
+            case '2':
+                self.nextApp = minitel.apps_static.ChateauPWikiMini
+            case '3':
+                self.nextApp = minitel.apps_static.ChateauPWikiResi
+            case '4':
+                self.nextApp = minitel.apps_static.ChateauPWikiLCTA
+            case '5':
+                self.nextApp = minitel.apps_static.ChateauPWikiPlanete
+            case _:
+                self.nextApp = ChateauPWikiApp

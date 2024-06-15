@@ -56,6 +56,26 @@ class StaticApp(BaseApp):
                 break
 
 @register("_slides")
-class ChateauApp(StaticApp):
+class ChateauPSlidesApp(StaticApp):
     def get_slides(self):
         return [asset("chateaup/%s") % x for x in os.listdir(asset("chateaup"))]
+
+class ChateauPWikiAeriens(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_AER_%dsur3.vdt") % x for x in range(1, 4)]
+
+class ChateauPWikiLCTA(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_LCTA_%dsur2.vdt") % x for x in range(1, 3)]
+
+class ChateauPWikiMini(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_Mini_%dsur2.vdt") % x for x in range(1, 3)]
+
+class ChateauPWikiPlanete(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_PLANETE_1sur1.vdt")]
+
+class ChateauPWikiResi(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_RESI_1sur1.vdt")]
