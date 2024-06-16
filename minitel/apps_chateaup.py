@@ -51,6 +51,15 @@ class ChateauPTelephoneMaison(BaseApp):
 
 import minitel.apps_static
 
+def returnToWiki(cls):
+    """Patch a class so its nextApp is the wiki app."""
+    class Patched(cls):
+        def interact(self):
+            v = super(Patched, self).interact()
+            self.nextApp = appForCode("wiki")
+            return v
+    return Patched
+
 @register("wiki", ["wikilcta"])
 class ChateauPWikiApp(BaseApp):
     def interact(self):
@@ -63,14 +72,14 @@ class ChateauPWikiApp(BaseApp):
             case '':
                 self.nextApp = appForCode("index")
             case '1':
-                self.nextApp = minitel.apps_static.ChateauPWikiAeriens
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiAeriens)
             case '2':
-                self.nextApp = minitel.apps_static.ChateauPWikiMini
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiMini)
             case '3':
-                self.nextApp = minitel.apps_static.ChateauPWikiResi
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiResi)
             case '4':
-                self.nextApp = minitel.apps_static.ChateauPWikiLCTA
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiLCTA)
             case '5':
-                self.nextApp = minitel.apps_static.ChateauPWikiPlanete
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiPlanete)
             case _:
                 self.nextApp = ChateauPWikiApp
