@@ -15,7 +15,7 @@ class ChatApp(BaseApp):
         while not self.ready():
             self.m.sendfile(asset("chat_welcome.vdt"))
             # channel = self.m.addInputField(11, 20, 1, self.channel)
-            nick = self.m.addInputField(10, 12, 8, self.nick)
+            nick = self.m.addInputField(15, 11, 8, self.nick)
             self.m.keyHandlers[tc.kEnvoi] = tc.Break
             self.m.handleInputsUntilBreak()
             if self.m.lastControlKey() == tc.kEnvoi:
