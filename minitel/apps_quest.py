@@ -161,6 +161,7 @@ def make_quests():
                "DEFONCE",
                "DISCO",
                "RADIO",
+               "OEUFCAM",  # Special Chateau Perche 2024
                ]:
         class foo(VDTQuestApp):
             name = kw

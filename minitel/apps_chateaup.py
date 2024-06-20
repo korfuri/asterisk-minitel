@@ -81,5 +81,21 @@ class ChateauPWikiApp(BaseApp):
                 self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiLCTA)
             case '5':
                 self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiPlanete)
+            case '6':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiCOM)
+            case '7':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiROE)
+            case '8':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiPEZ)
+            case '9':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiOEU)
+            case '10':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiTIT)
+            case '11':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiBEN)
+            case '12':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiLAP)
+            case '13':
+                self.nextApp = returnToWiki(minitel.apps_static.ChateauPWikiALC)
             case _:
                 self.nextApp = ChateauPWikiApp

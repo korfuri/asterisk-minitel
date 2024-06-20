@@ -79,3 +79,35 @@ class ChateauPWikiPlanete(StaticApp):
 class ChateauPWikiResi(StaticApp):
     def get_slides(self):
         return [asset("chateaup/Wiki_RESI_1sur1.vdt")]
+
+class ChateauPWikiCOM(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_COM_%dsur2.vdt") % x for x in range(1, 3)]
+
+class ChateauPWikiROE(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_ROE_1sur1.vdt")]
+
+class ChateauPWikiPEZ(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_PEZ_1sur1.vdt")]
+
+class ChateauPWikiOEU(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_OEU_%dsur2.vdt") % x for x in range(1, 3)]
+
+class ChateauPWikiTIT(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_TIT_1sur1.vdt")]
+
+class ChateauPWikiBEN(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_BEN_1sur1.vdt")]
+
+class ChateauPWikiLAP(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_LAP_1sur1.vdt")]
+
+class ChateauPWikiALC(StaticApp):
+    def get_slides(self):
+        return [asset("chateaup/Wiki_ALC_1sur1.vdt")]
