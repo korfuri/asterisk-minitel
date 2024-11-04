@@ -59,12 +59,12 @@ class GiscorpApp(StaticApp):
     def get_slides(self):
         return [asset("fesste/giscorp_%d.vdt") % x for x in range(10)]
 
-@register("jeu", ["jeux", "rocher", "roche", "rochers", "roches"])
+# @register("jeu", ["jeux", "rocher", "roche", "rochers", "roches"])
 class JeuRochersApp(StaticApp):
     def get_slides(self):
         return [asset("fesste/jeu_%d.vdt") % x for x in range(4)]
 
-@register("lineup", ["dj", "djs", "music", "musique", "line up"])
+# @register("lineup", ["dj", "djs", "music", "musique", "line up"])
 class JeuRochersApp(StaticApp):
     def get_slides(self):
         return [asset("fesste/dj-%s.vdt") % x for x in ["vendredi", "samedi", "dimanche"]]
@@ -78,7 +78,7 @@ class JeuRochersApp(StaticApp):
         else:
             return 1
 
-@register("atelier", ["ateliers"])
+# @register("atelier", ["ateliers"])
 class AtelierApp(StaticApp):
     def get_slides(self):
         return [asset("fesste/ateliers_%s.vdt") % x for x in ["vendredi", "samedi1", "samedi2", "dimanche"]]

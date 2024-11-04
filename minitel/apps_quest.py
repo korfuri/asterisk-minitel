@@ -1,7 +1,7 @@
 from minitel.apps import BaseApp, register, appForCode
 from minitel.assets import asset
 import minitel.tc as tc
-from minitel.database import QuestEntry, QuestOwnership, GetEngine
+from minitel.database import QuestEntry, GetEngine # , QuestOwnership
 import os
 import logging
 from sqlalchemy import select, func, desc
@@ -39,7 +39,7 @@ class QuestsSlideshowApp(BaseApp):
             if self.m.lastControlKey() == tc.kSommaire:
                 break
 
-# @register("legends", ["legendes"])
+@register("legends", ["legendes"])
 class LegendsApp(BaseApp):
     """A tribute to winners of previous quest games."""
     def interact(self):
@@ -76,30 +76,22 @@ class LeaderboardApp(BaseApp):
 
 
 class BaseQuestApp(BaseApp):
-    def show_asset(self):
-        basedir = "cliparts"
-        image = Image.open(asset("%s/%s.png" % (basedir, self.name)))
-        image.thumbnail((80, 60), Image.LANCZOS)
-        image_minitel = ImageMinitel()
-        image_minitel.importer(image)
-        image_minitel.envoyer(self.m, 1, 2)
-
-    def is_owned(self):
-        with Session(GetEngine()) as session:
-            qo = session.get(QuestOwnership, self.name)
-            return qo is not None
+    # def is_owned(self):
+    #     with Session(GetEngine()) as session:
+    #         qo = session.get(QuestOwnership, self.name)
+    #         return qo is not None
 
     def interact(self):
         self.show_asset()
 
-        is_owned = self.is_owned()
+        # is_owned = self.is_owned()
 
         # if quest is owned:
         self.m.pos(24, 1)
-        if is_owned:
-            self.m.print("Ton nom pour la gloire: ........ > ")
-        else:
-            self.m.print("Ce code appartient à:   ........ > ")
+        # if is_owned:
+        self.m.print("Ton nom pour la gloire: ........ > ")
+        # else:
+        #    self.m.print("Ce code appartient à:   ........ > ")
         self.m.setInverse()
         self.m.print("ENVOI")
         nick = self.m.addInputField(24, 24, 8, "")
@@ -119,36 +111,33 @@ class BaseQuestApp(BaseApp):
                 self.nextApp = appForCode("index")  # This happens when someone tries to submit twice. Fun error page instead?
             return tc.Break
 
-        def do_own():
-            n = nick.contents.strip().upper()
-            if n == '':
-                return tc.Break
-            qo = QuestOwnership(nick=n, quest=self.name)
-            try:
-                with Session(GetEngine()) as session:
-                    session.add(qo)
-                    session.commit()
-                return do_save()
-            except:
-                self.nextApp = appForCode("index")
-            return tc.Break
+        # def do_own():
+        #     n = nick.contents.strip().upper()
+        #     if n == '':
+        #         return tc.Break
+        #     qo = QuestOwnership(nick=n, quest=self.name)
+        #     try:
+        #         with Session(GetEngine()) as session:
+        #             session.add(qo)
+        #             session.commit()
+        #         return do_save()
+        #     except:
+        #         self.nextApp = appForCode("index")
+        #     return tc.Break
 
-        if is_owned:
-            self.m.keyHandlers[tc.kEnvoi] = do_save
-        else:
-            self.m.keyHandlers[tc.kEnvoi] = do_own
+        # if is_owned:
+        self.m.keyHandlers[tc.kEnvoi] = do_save
+        # else:
+        #     self.m.keyHandlers[tc.kEnvoi] = do_own
 
         self.m.handleInputsUntilBreak()
 
 
-class ObsoleteQuestApp(BaseApp):
-    def interact(self):
+class VDTMixin(object):
+    def show_asset(self):
         self.m.sendfile(asset("quests/%s.vdt" % self.name))
-        self.m.pos(24, 1)
-        self.m.print("Tu as gagné 0 point(s). Retour: SOMMAIRE")
-        self.m.handleInputsUntilBreak()
 
-class ObsoletePNGQuestApp(BaseApp):
+class PNGMixin(object):
     def show_asset(self):
         basedir = "cliparts"
         image = Image.open(asset("%s/%s.png" % (basedir, self.name)))
@@ -156,13 +145,26 @@ class ObsoletePNGQuestApp(BaseApp):
         image_minitel = ImageMinitel()
         image_minitel.importer(image)
         image_minitel.envoyer(self.m, 1, 2)
+        
+class VDTQuestApp(BaseQuestApp, VDTMixin):
+    pass
 
+class PNGQuestApp(BaseQuestApp, PNGMixin):
+    pass
+
+class BaseObsoleteQuestApp(BaseApp):
     def interact(self):
         self.show_asset()
         self.m.pos(24, 1)
         self.m.print("Tu as gagné 0 point(s). Retour: SOMMAIRE")
         self.m.handleInputsUntilBreak()
 
+class ObsoletePNGQuestApp(BaseObsoleteQuestApp, PNGMixin):
+    pass
+
+class ObsoleteVDTQuestApp(BaseObsoleteQuestApp, VDTMixin):
+    pass
+        
 def make_quests():
     # Obsolete quests
     for kw in ["ADN",
@@ -190,7 +192,7 @@ def make_quests():
                "DISCO",
                "RADIO",
                ]:
-        class foo(ObsoleteQuestApp):
+        class foo(VDTQuestApp):
             name = kw
         register(kw)(foo)
 

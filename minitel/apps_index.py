@@ -30,10 +30,10 @@ guide_directory = {
     # 'FERN': 'La recherche fondamentale',
     #    'MEETIC': 'L\'amour de votre vie, ici',
     #    'FSTX': 'Le seminaire de la GISCORP',
-    'LINEUP': 'Du gros SON tout le weekend',
-    'ATELIERS': 'Mentes sanae in corporibus sanis',
-    'ARCHIVE': 'Toute la sagesse des anciens',
-    'WANTED': 'Avis de recherche des disparus',
+    # 'LINEUP': 'Du gros SON tout le weekend',
+    # 'ATELIERS': 'Mentes sanae in corporibus sanis',
+    # 'ARCHIVE': 'Toute la sagesse des anciens',
+    # 'WANTED': 'Avis de recherche des disparus',
 }
 
 @register("guide")

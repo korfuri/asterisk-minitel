@@ -10,15 +10,21 @@ from minitel.database import GetEngine, QuestEntry
 
 
 def today():
-    d = datetime.date.today()
-    if d == datetime.date(2024, 2, 9):
-        return datetime.date(1989, 12, 31)
-    elif d == datetime.date(2024, 2, 10):
-        return datetime.date(1999, 12, 31)
-    elif d == datetime.date(2024, 2, 11):
-        return datetime.date(2000, 1, 1)
-    else:
-        return d
+    start = datetime.datetime.strptime('1/1/1978', '%m/%d/%Y')
+    end = datetime.datetime.strptime('1/1/2145', '%m/%d/%Y')    
+    return start + datetime.timedelta(
+        # Get a random amount of seconds between `start` and `end`
+        seconds=random.randint(0, int((end - start).total_seconds())),
+    )
+    # d = datetime.date.today()
+    # if d == datetime.date(2024, 2, 9):
+    #     return datetime.date(1989, 12, 31)
+    # elif d == datetime.date(2024, 2, 10):
+    #     return datetime.date(1999, 12, 31)
+    # elif d == datetime.date(2024, 2, 11):
+    #     return datetime.date(2000, 1, 1)
+    # else:
+    #     return d
 
 @register("index")
 class FessteHome(BaseApp):
@@ -49,23 +55,19 @@ class FessteHome(BaseApp):
             case '1':
                 c = 'consentement'
             case '2':
-                c = 'lineup'
-            case '3':
-                c = 'ateliers'
-            case '4':
                 c = 'guide'
-            case '5':
+            case '3':
                 c = 'chat'
-            case '6':
+            case '4':
+                c = 'infos'
+            case '5':
                 c = 'horoscope'
-            case '7':
-                c = 'disparus'
-            case '8':
+            case '6':
                 c = 'leaderboard'
-            case '9':
-                c = 'wikipocalypse'
-            case '0':
+            case '7':
                 c = 'porn'
+            case '8':
+                c = 'meteo'
         logging.debug("Code: %s", c)
         self.nextApp = appForCode(c)
 
