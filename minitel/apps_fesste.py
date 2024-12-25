@@ -26,7 +26,7 @@ def today():
     # else:
     #     return d
 
-@register("index")
+#@register("index")
 class FessteHome(BaseApp):
     def getLeaderboard(self):
         with Session(GetEngine()) as session:

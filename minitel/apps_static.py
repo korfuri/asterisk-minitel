@@ -82,3 +82,13 @@ class JeuRochersApp(StaticApp):
 class AtelierApp(StaticApp):
     def get_slides(self):
         return [asset("fesste/ateliers_%s.vdt") % x for x in ["vendredi", "samedi1", "samedi2", "dimanche"]]
+
+import glob
+import random
+
+@register("slides")
+class Slides38C3App(StaticApp):
+    def get_slides(self):
+        files = [x for x in glob.glob(asset("quests/*.vdt"))]
+        random.shuffle(files)
+        return files

@@ -14,6 +14,15 @@ class Index3615App(BaseApp):
         logging.debug("Code: %s", code.contents)
         self.nextApp = appForCode(code.contents)
 
+@register("index")
+class Index38C3App(BaseApp):
+    def interact(self):
+        self.m.sendfile(asset("38c3-index.vdt"))
+        self.m.keyHandlers[tc.kEnvoi] = tc.Break
+        self.m.keyHandlers[tc.kSuite] = tc.Break
+        self.m.handleInputsUntilBreak()
+        self.nextApp = "slides"
+
 guide_directory = {
     # Max length: ------------------------------|xxxx
     'CONSENTEMENT': 'Commencez par ici',
