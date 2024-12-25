@@ -39,16 +39,16 @@
             nethack
           ] ++ pythonInputs;
           shellHook = ''
-buildserver() {
+buildvm() {
   nixos-rebuild --flake .#server build-vm
 }
-runserver() {
+runvm() {
   env QEMU_NET_OPTS="hostfwd=tcp::2222-:22,hostfwd=tcp::5060-:5060,hostfwd=tcp::5061-:5061,hostfwd=udp::5060-:5060,hostfwd=udp::5061-:5061" ./result/bin/run-server-vm &
 }
-sshserver() {
+sshvm() {
   ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -i ./vm/server-ssh -p 2222 root@localhost
 }
-cleanserver() {
+cleanvm() {
   rm server.qcow2
 }
 xtelsocket() {
@@ -57,6 +57,13 @@ xtelsocket() {
 runxtel() {
   # port 1313 is "bmc-patroldb" in /etc/services, let's go with that
   xtel -serveur localhost -service bmc-patroldb
+}
+rundevserver() {
+  DIR=$(mktemp -d)
+  python -m minitel.main --web_port 8080 --ws_port 3611 --upload_path "$DIR"
+}
+web() {
+  xdg-open http://127.0.0.1:8080/e/index.html
 }
 PS1="(asterisk-minitel)"$PS1
 '';
