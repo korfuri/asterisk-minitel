@@ -89,6 +89,6 @@ import random
 @register("slides")
 class Slides38C3App(StaticApp):
     def get_slides(self):
-        files = [x for x in glob.glob(asset("quests/*.vdt"))]
+        files = [x for x in glob.glob(asset("38c3/*.vdt"))]
         random.shuffle(files)
         return files
