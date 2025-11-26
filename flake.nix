@@ -92,16 +92,16 @@ cp ${./app_softmodem/app_softmodem.c} ./apps/app_softmodem.c
       }) // {
         overlays = {
           default = final: prev: {
-            minitel-server = self.packages."${final.system}".minitel-server;
-            asterisk-softmodem = self.packages."${final.system}".asterisk-softmodem;
-            xtel = self.packages."${final.system}".xtel;
+            minitel-server = self.packages."${final.stdenv.hostPlatform.system}".minitel-server;
+            asterisk-softmodem = self.packages."${final.stdenv.hostPlatform.system}".asterisk-softmodem;
+            xtel = self.packages."${final.stdenv.hostPlatform.system}".xtel;
           };
           minitel-server = final: prev: {
-            minitel-server = self.packages."${final.system}".minitel-server;
-            asterisk-softmodem = self.packages."${final.system}".asterisk-softmodem;
+            minitel-server = self.packages."${final.stdenv.hostPlatform.system}".minitel-server;
+            asterisk-softmodem = self.packages."${final.stdenv.hostPlatform.system}".asterisk-softmodem;
           };
           xtel = final: prev: {
-            xtel = self.packages."${final.system}".xtel;
+            xtel = self.packages."${final.stdenv.hostPlatform.system}".xtel;
           };
         };
         nixosModules.minitel-server = import ./minitel-server-module.nix;
